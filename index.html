@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Huella Digital — Llevamos tu negocio al mapa digital. Landing pages profesionales y automatizaciones para emprendimientos argentinos.">
+<title>Huella Digital — Existís offline. Ahora existís online.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ===========================
+   RESET & BASE
+=========================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red: #D62828;
+  --red-dark: #A81F1F;
+  --black: #0A0A0A;
+  --dark: #111111;
+  --card: #161616;
+  --border: rgba(255,255,255,0.07);
+  --white: #FFFFFF;
+  --gray: rgba(255,255,255,0.55);
+  --gray-dim: rgba(255,255,255,0.25);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--red); color: white; }
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+/* ===========================
+   UTILITIES
+=========================== */
+.container { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+.red { color: var(--red); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ===========================
+   NAV
+=========================== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  transition: background 0.4s ease, padding 0.4s ease, border-bottom 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 3px;
+  color: var(--white);
+  line-height: 1;
+}
+.nav-logo-text span { color: var(--red); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--red);
+  color: white !important;
+  padding: 10px 22px;
+  border-radius: 3px;
+  font-weight: 700 !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--red-dark) !important; color: white !important; }
+
+/* Mobile nav */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-hamburger span {
+  width: 22px; height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* ===========================
+   HERO
+=========================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 80px;
+}
+
+/* Grain texture */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glow */
+.hero-glow {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214,40,40,0.12) 0%, transparent 65%);
+  top: -100px; right: -200px;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-glow-2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214,40,40,0.06) 0%, transparent 65%);
+  bottom: 0; left: -100px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grid overlay */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-content { }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(214,40,40,0.1);
+  border: 1px solid rgba(214,40,40,0.25);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 7.5vw, 96px);
+  line-height: 0.92;
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.35s forwards;
+}
+.hero-title .line-red { color: var(--red); display: block; }
+.hero-title .line-white { color: var(--white); display: block; }
+.hero-title .line-dim { color: rgba(255,255,255,0.35); display: block; }
+
+.hero-desc {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--gray);
+  max-width: 440px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+.hero-desc strong { color: var(--white); }
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.65s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 16px 28px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.btn-secondary:hover { color: var(--white); }
+.btn-secondary svg { transition: transform 0.2s; }
+.btn-secondary:hover svg { transform: translateX(3px); }
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 52px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+.stat-item { }
+.stat-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: var(--white);
+}
+.stat-number span { color: var(--red); }
+.stat-label {
+  font-size: 12px;
+  color: var(--gray-dim);
+  margin-top: 4px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Hero fingerprint */
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1.2s 0.4s forwards;
+}
+
+.hero-fp-wrap {
+  position: relative;
+  width: 420px;
+  height: 420px;
+}
+
+.hero-fp-wrap svg {
+  width: 100%;
+  height: 100%;
+  animation: slowRotate 30s linear infinite;
+}
+
+@keyframes slowRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-fp-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.hero-fp-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.3);
+  display: block;
+  margin-top: 8px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===========================
+   PROBLEM SECTION
+=========================== */
+.problem {
+  padding: 120px 0;
+  position: relative;
+  border-top: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  letter-spacing: 1px;
+  line-height: 0.95;
+  margin-bottom: 24px;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.problem-text .section-title { margin-bottom: 20px; }
+.problem-text p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--gray);
+  margin-bottom: 32px;
+}
+.problem-text p strong { color: var(--white); }
+
+.problem-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.pstat {
+  background: var(--card);
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+}
+.pstat:first-child { border-radius: 12px 0 0 0; }
+.pstat:nth-child(2) { border-radius: 0 12px 0 0; }
+.pstat:nth-child(3) { border-radius: 0 0 0 12px; }
+.pstat:last-child { border-radius: 0 0 12px 0; }
+.pstat-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: var(--red);
+}
+.pstat-desc {
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ===========================
+   SERVICES
+=========================== */
+.services {
+  padding: 120px 0;
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.services-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 64px;
+}
+.services-header p {
+  font-size: 16px;
+  color: var(--gray);
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.service-card {
+  background: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 48px 44px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.service-card:hover {
+  border-color: rgba(214,40,40,0.3);
+  transform: translateY(-4px);
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon {
+  width: 52px; height: 52px;
+  background: rgba(214,40,40,0.1);
+  border: 1px solid rgba(214,40,40,0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.service-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.service-desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--gray);
+  margin-bottom: 28px;
+}
+.service-desc strong { color: var(--white); }
+
+.service-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.service-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--gray);
+}
+.service-features li::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+/* ===========================
+   PROCESS
+=========================== */
+.process {
+  padding: 120px 0;
+  position: relative;
+}
+
+.process-header { margin-bottom: 72px; }
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+/* Connector line */
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: calc(12.5% + 16px);
+  right: calc(12.5% + 16px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--red), rgba(214,40,40,0.2));
+  z-index: 0;
+}
+
+.step {
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.step-number {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--black);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: var(--gray-dim);
+  margin-bottom: 24px;
+  position: relative;
+  transition: border-color 0.3s, color 0.3s;
+}
+.step:first-child .step-number {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+}
+
+.step-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.step-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray);
+}
+
+.step-time {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ===========================
+   WORKS
+=========================== */
+.works {
+  padding: 120px 0;
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.works-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  gap: 24px;
+}
+.works-header a {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red);
+  text-decoration: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.work-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: transform 0.3s, border-color 0.3s;
+  text-decoration: none;
+  color: var(--white);
+  display: block;
+}
+.work-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(214,40,40,0.25);
+}
+
+.work-thumb {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.work-thumb-placeholder {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.1);
+  text-align: center;
+}
+.work-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.work-card:hover .work-thumb img { transform: scale(1.03); }
+
+/* Overlay on hover */
+.work-thumb::after {
+  content: 'Ver proyecto →';
+  position: absolute;
+  inset: 0;
+  background: rgba(214,40,40,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.work-card:hover .work-thumb::after { opacity: 1; }
+
+.work-info { padding: 20px 22px; }
+.work-category {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+.work-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+.work-desc {
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 4px;
+}
+
+/* ===========================
+   CTA SECTION
+=========================== */
+.cta-section {
+  padding: 140px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214,40,40,0.15) 0%, transparent 65%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.cta-inner {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 7vw, 88px);
+  line-height: 0.93;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+.cta-title span { color: var(--red); }
+
+.cta-desc {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--gray);
+  margin-bottom: 44px;
+}
+.cta-desc strong { color: var(--white); }
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-big {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+  padding: 18px 36px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 0 rgba(214,40,40,0.4);
+}
+.btn-big:hover {
+  background: var(--red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(214,40,40,0.3);
+}
+
+.cta-note {
+  font-size: 12px;
+  color: var(--gray-dim);
+  margin-top: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--white);
+}
+.footer-logo span { color: var(--red); }
+.footer-copy {
+  font-size: 12px;
+  color: var(--gray-dim);
+}
+.footer-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+.footer-links a {
+  font-size: 12px;
+  color: var(--gray-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { display: none; }
+  .problem-grid { grid-template-columns: 1fr; gap: 48px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .process-steps::before { display: none; }
+  .works-grid { grid-template-columns: 1fr 1fr; }
+  .works-header { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 100px 0 60px; }
+  .hero-stats { gap: 20px; flex-wrap: wrap; }
+  .problem-stats { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: 1fr; }
+  .works-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+
+.auto-scenarios {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 4px;
+}
+.auto-scenario {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.auto-scenario:hover {
+  border-color: rgba(214,40,40,0.25);
+  background: rgba(214,40,40,0.04);
+}
+.auto-scenario-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.auto-scenario-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.auto-scenario-desc {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.55;
+}
+</style>
+</head>
+<body>
+
+<!-- ===========================
+   NAV
+=========================== -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <svg viewBox="0 0 32 32" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="3.5" fill="#D62828"/>
+          <ellipse cx="16" cy="16" rx="8" ry="5.8" fill="none" stroke="white" stroke-width="2.2"/>
+          <ellipse cx="16" cy="16" rx="13.5" ry="9.8" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8"/>
+        </svg>
+        <span class="nav-logo-text">HUELLA<span>DIGITAL</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proceso">Cómo trabajamos</a></li>
+        <li><a href="#trabajos">Proyectos</a></li>
+        <li><a href="#contacto" class="nav-cta">Charlemos de tu idea</a></li>
+      </ul>
+      <div class="nav-hamburger" onclick="this.classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+   HERO
+=========================== -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Presencia Digital · Argentina
+        </div>
+        <h1 class="hero-title">
+          <span class="line-dim">Existís</span>
+          <span class="line-white">offline.</span>
+          <span class="line-white">Ahora existís</span>
+          <span class="line-red">online.</span>
+        </h1>
+        <p class="hero-desc">
+          Llevamos emprendimientos y negocios argentinos al mapa digital.
+          <strong>Landing pages que convierten</strong> y automatizaciones que liberan tu tiempo.
+          En 7 días, tu negocio existe en internet.
+        </p>
+        <div class="hero-actions">
+          <a href="#contacto" class="btn-primary">
+            Charlemos de tu idea
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#trabajos" class="btn-secondary">
+            Ver proyectos
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">7<span>días</span></div>
+            <div class="stat-label">De charla a web publicada</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100<span>%</span></div>
+            <div class="stat-label">Dedicación por proyecto</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">0<span> vueltas</span></div>
+            <div class="stat-label">Sin letra chica</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-fp-wrap">
+          <!-- Fingerprint SVG - rotating outer rings -->
+          <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="fpglow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(214,40,40,0.15)"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+            </defs>
+            <circle cx="210" cy="210" r="200" fill="url(#fpglow)"/>
+
+            <!-- Fingerprint rings -->
+            <circle cx="210" cy="210" r="12" fill="#D62828"/>
+            <ellipse cx="210" cy="210" rx="28" ry="20" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="210" cy="210" rx="50" ry="36" fill="none" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="285 12" stroke-dashoffset="6"/>
+            <ellipse cx="210" cy="210" rx="74" ry="54" fill="none" stroke="#D62828" stroke-width="4" stroke-linecap="round" stroke-dasharray="424 10" stroke-dashoffset="5"/>
+            <ellipse cx="210" cy="210" rx="100" ry="73" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="573 14" stroke-dashoffset="7"/>
+            <ellipse cx="210" cy="210" rx="128" ry="93" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="3" stroke-linecap="round" stroke-dasharray="730 16" stroke-dashoffset="8"/>
+            <ellipse cx="210" cy="210" rx="158" ry="115" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="898 20" stroke-dashoffset="10"/>
+            <ellipse cx="210" cy="210" rx="190" ry="138" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" stroke-dasharray="1076 24" stroke-dashoffset="12"/>
+          </svg>
+          <div class="hero-fp-center">
+            <span class="hero-fp-label">HUELLA DIGITAL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+   PROBLEM
+=========================== -->
+<section class="problem" id="problema">
+  <div class="container">
+    <div class="problem-grid">
+      <div class="problem-text reveal">
+        <span class="section-label">El problema</span>
+        <h2 class="section-title">Tu negocio existe.<br>En internet, <span class="red">no.</span></h2>
+        <p>Alguien en tu ciudad busca ahora mismo lo que vos ofrecés. <strong>Si no tenés presencia digital, esa persona no existe para vos.</strong> Y el cliente se lo lleva tu competidor.</p>
+        <p>No es un problema de tecnología. Es un problema de visibilidad. Y tiene solución en 7 días.</p>
+        <a href="#contacto" class="btn-secondary" style="font-size:15px; font-weight:700; color:var(--red);">
+          Quiero que me encuentren
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#D62828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="problem-stats reveal reveal-delay-2">
+        <div class="pstat">
+          <div class="pstat-number">76%</div>
+          <div class="pstat-desc">de los usuarios busca online antes de comprar en un local</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-number">+40%</div>
+          <div class="pstat-desc">más consultas reciben los negocios con presencia web activa</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-number">7</div>
+          <div class="pstat-desc">segundos tarda un usuario en decidir si sigue en tu web o se va</div>
+        </div>
+        <div class="pstat">
+          <div class="pstat-number">24/7</div>
+          <div class="pstat-desc">una landing page trabaja por vos mientras dormís</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+   SERVICES
+=========================== -->
+<section class="services" id="servicios">
+  <div class="container">
+    <div class="services-header reveal">
+      <span class="section-label">Servicios</span>
+      <h2 class="section-title">Dos cosas.<br>Las dos bien.</h2>
+      <p>Sin paquetes confusos. Sin costos ocultos. Elegís lo que necesitás.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="3" width="20" height="14" rx="2" stroke="#D62828" stroke-width="1.8"/>
+            <path d="M8 21h8M12 17v4" stroke="#D62828" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="service-name">Presencia<br>Digital</div>
+        <p class="service-desc">Tu negocio en internet en 7 días. Una landing page <strong>profesional, rápida y que convierte</strong> visitantes en clientes.</p>
+        <ul class="service-features">
+          <li>Diseño moderno y adaptado a tu marca</li>
+          <li>Optimizada para aparecer en Google</li>
+          <li>Responsive — funciona en celular y escritorio</li>
+          <li>Dominio + hosting incluido</li>
+          <li>Formulario de contacto y WhatsApp integrado</li>
+        </ul>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L8 6H4v4l-2 2 2 2v4h4l4 4 4-4h4v-4l2-2-2-2V6h-4L12 2z" stroke="#D62828" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="2.5" stroke="#D62828" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <div class="service-name">Automatiza<br>ciones</div>
+        <p class="service-desc">Los procesos que hacés a mano todos los días tienen solución. <strong>Los conectamos, los automatizamos</strong> y te devolvemos el tiempo.</p>
+        <div class="auto-scenarios">
+          <div class="auto-scenario">
+            <div class="auto-scenario-icon">💬</div>
+            <div>
+              <div class="auto-scenario-title">Respuesta automática por WhatsApp</div>
+              <div class="auto-scenario-desc">Son las 11 de la noche y alguien te escribe. Vos dormís. El sistema responde al instante con tus servicios, precios y cómo contactarte. A la mañana el cliente ya está listo para arrancar.</div>
+            </div>
+          </div>
+          <div class="auto-scenario">
+            <div class="auto-scenario-icon">📅</div>
+            <div>
+              <div class="auto-scenario-title">Recordatorio de turno automático</div>
+              <div class="auto-scenario-desc">24 horas antes de cada turno, tu cliente recibe un WhatsApp automático recordándoselo. Sin que tengas que llamar a nadie. Cero ausencias.</div>
+            </div>
+          </div>
+          <div class="auto-scenario">
+            <div class="auto-scenario-icon">⚡</div>
+            <div>
+              <div class="auto-scenario-title">Consulta nueva → alerta instantánea</div>
+              <div class="auto-scenario-desc">Alguien llena el formulario de tu web a las 3pm. En ese mismo segundo recibís un WhatsApp con todos sus datos. Nunca más perder una consulta por no revisar el email.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+   PROCESS
+=========================== -->
+<section class="process" id="proceso">
+  <div class="container">
+    <div class="process-header reveal">
+      <span class="section-label">Cómo trabajamos</span>
+      <h2 class="section-title">De la idea<br>al aire en 7 días.</h2>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal reveal-delay-1">
+        <div class="step-number">01</div>
+        <div class="step-title">Charlemos de tu idea</div>
+        <p class="step-desc">Me contás tu negocio, tus clientes, qué querés que pase cuando alguien te encuentra online. Sin tecnicismos. Una conversación real.</p>
+        <span class="step-time">Día 1</span>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-number">02</div>
+        <div class="step-title">Diseño en 48hs</div>
+        <p class="step-desc">Con lo que me contaste armo el borrador completo. Lo ves todo antes de que salga al aire. Nada de sorpresas.</p>
+        <span class="step-time">Días 2–3</span>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-number">03</div>
+        <div class="step-title">Revisión y ajustes</div>
+        <p class="step-desc">Lo ajustamos hasta que quede exactamente como lo imaginaste. Sin costo extra. El resultado tiene que ser tuyo.</p>
+        <span class="step-time">Días 4–5</span>
+      </div>
+      <div class="step reveal reveal-delay-4">
+        <div class="step-number">04</div>
+        <div class="step-title">En el aire</div>
+        <p class="step-desc">Tu negocio tiene presencia digital real. Dominio propio, web publicada, y listo para que te encuentren.</p>
+        <span class="step-time">Día 7</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+   WORKS
+=========================== -->
+<section class="works" id="trabajos">
+  <div class="container">
+    <div class="works-header reveal">
+      <div>
+        <span class="section-label">Proyectos</span>
+        <h2 class="section-title">Lo que hacemos<br>habla solo.</h2>
+      </div>
+    </div>
+    <div class="works-grid">
+
+      <a href="http://agenciapaliza.com.ar/" target="_blank" class="work-card reveal reveal-delay-1">
+        <div class="work-thumb">
+          <img src="img/apa.png" alt="Agencia Paliza">
+        </div>
+        <div class="work-info">
+          <div class="work-category">Agencia · Marketing</div>
+          <div class="work-name">Agencia Paliza</div>
+          <div class="work-desc">Presencia digital para agencia boutique porteña</div>
+        </div>
+      </a>
+
+      <a href="https://satenclean.com.ar/" target="_blank" class="work-card reveal reveal-delay-2">
+        <div class="work-thumb">
+          <img src="img/saten.png" alt="SatenClean"> 
+        </div>
+        <div class="work-info">
+          <div class="work-category">Servicios · Limpieza</div>
+          <div class="work-name">SatenClean</div>
+          <div class="work-desc">De boca en boca a presencia digital profesional</div>
+        </div>
+      </a>
+
+      <a href="https://www.troncosotransfers.com.ar/" target="_blank" class="work-card reveal reveal-delay-3">
+        <div class="work-thumb">
+          <img src="img/troncoso.png" alt="troncoso transfers"> 
+        </div>
+        <div class="work-info">
+          <div class="work-category">Transporte · Logística</div>
+          <div class="work-name">Troncoso Transfers</div>
+          <div class="work-desc">Servicio de transfers con presencia online sólida</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+   CTA
+=========================== -->
+<section class="cta-section" id="contacto">
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="cta-inner">
+      <div class="reveal">
+        <span class="section-label" style="display:block; text-align:center; margin-bottom:20px;">¿Arrancamos?</span>
+        <h2 class="cta-title">
+          Charlemos de<br>
+          <span>tu idea.</span>
+        </h2>
+      </div>
+      <p class="cta-desc reveal reveal-delay-1">
+        Sin formularios. Sin agendar nada. Sin compromiso.<br>
+        <strong>Contame qué tenés en mente — te digo exactamente qué haría.</strong>
+      </p>
+      <div class="cta-actions reveal reveal-delay-2">
+        <a href="https://wa.me/5491164115327?text=Hola%20Aaron%2C%20quiero%20charlar%20sobre%20mi%20idea" target="_blank" class="btn-big">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9c0 1.32.35 2.56.95 3.64L1.5 16.5l3.96-.95A7.46 7.46 0 009 16.5c4.14 0 7.5-3.36 7.5-7.5S13.14 1.5 9 1.5z" stroke="white" stroke-width="1.5"/><path d="M6.5 7.5c.17.5.5 1.2 1.1 1.8.6.6 1.3.93 1.8 1.1.1.03.2.01.27-.06l.73-.73a.3.3 0 01.3-.07l2 .7a.3.3 0 01.2.28v1.48a.5.5 0 01-.5.5A8 8 0 015.5 5a.5.5 0 01.5-.5h1.48a.3.3 0 01.28.2l.7 2a.3.3 0 01-.07.3l-.73.73a.22.22 0 00-.06.27z" fill="white"/></svg>
+          Escribime por WhatsApp
+        </a>
+        <a href="https://instagram.com/huelladigital.2026" target="_blank" class="btn-secondary" style="color:rgba(255,255,255,0.6); font-size:14px;">
+          o por Instagram DM →
+        </a>
+      </div>
+      <p class="cta-note reveal reveal-delay-3">Sin presión · Sin compromiso · Las dos opciones son buenas para vos</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+   FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">HUELLA<span>DIGITAL</span></div>
+      <p class="footer-copy">© 2026 Huella Digital · Argentina</p>
+      <ul class="footer-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#trabajos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- ===========================
+   JS
+=========================== -->
+<script>
+// Navbar scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+reveals.forEach(el => observer.observe(el));
+
+// Smooth scroll for anchors
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+                                                                   
