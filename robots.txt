@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://huelladigital.ar/sitemap.xml
