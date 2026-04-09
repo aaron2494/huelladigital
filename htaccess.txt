@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Redirigir huelladigital.ar a su carpeta /huelladigital/
+RewriteCond %{HTTP_HOST} ^(www\.)?huelladigital\.ar$ [NC]
+RewriteCond %{REQUEST_URI} !^/huelladigital/
+RewriteRule ^(.*)$ /huelladigital/$1 [L]
