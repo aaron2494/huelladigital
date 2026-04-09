@@ -173,12 +173,63 @@ nav.scrolled {
   gap: 5px;
   cursor: pointer;
   padding: 4px;
+  z-index: 110;
+  position: relative;
 }
 .nav-hamburger span {
   width: 22px; height: 2px;
   background: white;
   border-radius: 2px;
   transition: all 0.3s;
+  display: block;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile menu panel */
+.nav-mobile-panel {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,10,10,0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 105;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 80px 40px 40px;
+}
+.nav-mobile-panel.open {
+  display: flex;
+}
+.nav-mobile-panel a {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  width: 100%;
+  text-align: center;
+  transition: color 0.2s;
+}
+.nav-mobile-panel a:last-child { border-bottom: none; }
+.nav-mobile-panel a:hover,
+.nav-mobile-panel a:active { color: var(--red); }
+.nav-mobile-panel .nav-cta-mobile {
+  margin-top: 24px;
+  background: var(--red);
+  color: white !important;
+  padding: 16px 40px;
+  border-radius: 3px;
+  font-size: 18px !important;
+  letter-spacing: 3px;
+  border-bottom: none !important;
+  width: auto !important;
 }
 
 /* ===========================
@@ -984,12 +1035,20 @@ footer {
         <li><a href="#trabajos">Proyectos</a></li>
         <li><a href="#contacto" class="nav-cta">Charlemos de tu idea</a></li>
       </ul>
-      <div class="nav-hamburger" onclick="this.classList.toggle('open')">
+      <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">
         <span></span><span></span><span></span>
-      </div>
+      </button>
     </div>
   </div>
 </nav>
+
+<!-- Mobile menu panel -->
+<div class="nav-mobile-panel" id="navMobilePanel">
+  <a href="#servicios" class="nav-mobile-link">Servicios</a>
+  <a href="#proceso" class="nav-mobile-link">Cómo trabajamos</a>
+  <a href="#trabajos" class="nav-mobile-link">Proyectos</a>
+  <a href="#contacto" class="nav-mobile-link nav-cta-mobile">Charlemos de tu idea</a>
+</div>
 
 <!-- ===========================
    HERO
@@ -1327,6 +1386,27 @@ footer {
    JS
 =========================== -->
 <script>
+// Navbar hamburger menu
+const navHamburger = document.getElementById('navHamburger');
+const navMobilePanel = document.getElementById('navMobilePanel');
+
+navHamburger.addEventListener('click', function() {
+  const isOpen = navMobilePanel.classList.toggle('open');
+  navHamburger.classList.toggle('open', isOpen);
+  navHamburger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-mobile-link').forEach(link => {
+  link.addEventListener('click', function() {
+    navMobilePanel.classList.remove('open');
+    navHamburger.classList.remove('open');
+    navHamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+
 // Navbar scroll
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
