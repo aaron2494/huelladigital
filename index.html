@@ -391,24 +391,34 @@ nav.scrolled {
 .btn-secondary:hover svg { transform: translateX(3px); }
 
 .btn-audit {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--red);
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  border: 1px solid rgba(214,40,40,0.45);
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--white);
   text-decoration: none;
-  border-bottom: 1px solid rgba(214,40,40,0.3);
-  padding-bottom: 2px;
-  transition: color 0.2s, border-color 0.2s;
+  background: rgba(214,40,40,0.07);
+  transition: background 0.2s, border-color 0.2s;
 }
-.btn-audit::before {
-  content: '';
-  width: 6px; height: 6px; border-radius: 50%;
+.btn-audit:hover { background: rgba(214,40,40,0.15); border-color: rgba(214,40,40,0.7); }
+.btn-audit-dot {
+  width: 7px; height: 7px; border-radius: 50%;
   background: var(--red); flex-shrink: 0;
   animation: pulse 2s infinite;
 }
-.btn-audit:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+.btn-audit-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--red);
+  border: 1px solid rgba(214,40,40,0.4);
+  border-radius: 2px; padding: 2px 7px; margin-left: auto;
+}
 
 .hero-stats {
   display: flex;
@@ -1106,7 +1116,9 @@ footer {
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="auditoria.html" class="btn-audit">
-            ¿Existís online? Descubrilo gratis
+            <span class="btn-audit-dot"></span>
+            ¿Tu negocio existe en internet? Descubrilo ahora
+            <span class="btn-audit-badge">Gratis</span>
           </a>
         </div>
         <div class="hero-stats">
