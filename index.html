@@ -390,6 +390,26 @@ nav.scrolled {
 .btn-secondary svg { transition: transform 0.2s; }
 .btn-secondary:hover svg { transform: translateX(3px); }
 
+.btn-audit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(214,40,40,0.3);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-audit::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+.btn-audit:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+
 .hero-stats {
   display: flex;
   gap: 32px;
@@ -1084,6 +1104,9 @@ footer {
           <a href="#trabajos" class="btn-secondary">
             Ver proyectos
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="auditoria.html" class="btn-audit">
+            ¿Existís online? Descubrilo gratis
           </a>
         </div>
         <div class="hero-stats">
