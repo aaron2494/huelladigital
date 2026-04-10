@@ -47,7 +47,8 @@ module.exports = async (req, res) => {
       messages: [{ role: 'user', content: PROMPT(negocio.trim(), rubro.trim(), ciudad.trim()) }]
     });
 
-    const text = message.content[0].text.trim();
+    const raw = message.content[0].text.trim();
+    const text = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
     const data = JSON.parse(text);
 
     return res.status(200).json(data);
