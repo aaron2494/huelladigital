@@ -390,34 +390,80 @@ nav.scrolled {
 .btn-secondary svg { transition: transform 0.2s; }
 .btn-secondary:hover svg { transform: translateX(3px); }
 
-.btn-audit {
+/* ===========================
+   AUDIT BANNER
+=========================== */
+.audit-banner {
+  padding: 0 0 80px;
+}
+.audit-banner-inner {
+  background: var(--card);
+  border: 1px solid rgba(214,40,40,0.25);
+  border-radius: 10px;
+  padding: 48px 56px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 14px 24px;
-  border: 1px solid rgba(214,40,40,0.45);
-  border-radius: 3px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--white);
-  text-decoration: none;
-  background: rgba(214,40,40,0.07);
-  transition: background 0.2s, border-color 0.2s;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
 }
-.btn-audit:hover { background: rgba(214,40,40,0.15); border-color: rgba(214,40,40,0.7); }
-.btn-audit-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--red); flex-shrink: 0;
-  animation: pulse 2s infinite;
+.audit-banner-inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
 }
-.btn-audit-badge {
-  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+.audit-banner-inner::after {
+  content: '';
+  position: absolute;
+  right: -60px; top: 50%; transform: translateY(-50%);
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(214,40,40,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.audit-banner-text { flex: 1; }
+.audit-banner-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
   text-transform: uppercase; color: var(--red);
-  border: 1px solid rgba(214,40,40,0.4);
-  border-radius: 2px; padding: 2px 7px; margin-left: auto;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 14px;
+}
+.audit-banner-label::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red); animation: pulse 2s infinite;
+}
+.audit-banner-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  letter-spacing: 1px; line-height: 1;
+  margin-bottom: 12px;
+}
+.audit-banner-desc {
+  font-size: 15px; color: var(--gray); line-height: 1.6;
+  max-width: 480px;
+}
+.audit-banner-action { flex-shrink: 0; text-align: center; }
+.btn-audit-main {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--red); color: white;
+  padding: 18px 32px; border-radius: 4px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 2px;
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-audit-main:hover { background: var(--red-dark); transform: translateY(-2px); }
+.btn-audit-main svg { width: 18px; height: 18px; fill: none; stroke: white; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.audit-banner-free {
+  font-size: 12px; color: var(--gray-dim);
+  margin-top: 10px; letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .audit-banner-inner { flex-direction: column; padding: 36px 28px; text-align: center; }
+  .audit-banner-label { justify-content: center; }
+  .btn-audit-main { width: 100%; justify-content: center; }
 }
 
 .hero-stats {
@@ -1115,11 +1161,6 @@ footer {
             Ver proyectos
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="auditoria.html" class="btn-audit">
-            <span class="btn-audit-dot"></span>
-            ¿Tu negocio existe en internet? Descubrilo ahora
-            <span class="btn-audit-badge">Gratis</span>
-          </a>
         </div>
         <div class="hero-stats">
           <div class="stat-item">
@@ -1201,6 +1242,30 @@ footer {
           <div class="pstat-number">24/7</div>
           <div class="pstat-desc">una landing page trabaja por vos mientras dormís</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+   AUDIT BANNER
+=========================== -->
+<section class="audit-banner">
+  <div class="container">
+    <div class="audit-banner-inner reveal">
+      <div class="audit-banner-text">
+        <div class="audit-banner-label">Análisis gratuito</div>
+        <h2 class="audit-banner-title">¿Cuántos clientes perdés<br>por no estar online?</h2>
+        <p class="audit-banner-desc">
+          Ingresá los datos de tu negocio y en 30 segundos te decimos exactamente qué está pasando — y cómo lo arreglamos.
+        </p>
+      </div>
+      <div class="audit-banner-action">
+        <a href="auditoria.html" class="btn-audit-main">
+          HACÉ TU ANÁLISIS
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="audit-banner-free">Sin registro · 100% gratis</p>
       </div>
     </div>
   </div>
