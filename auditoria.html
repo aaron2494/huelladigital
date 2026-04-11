@@ -555,8 +555,17 @@ function showResults(data) {
   // Urgencia
   document.getElementById('res-urgencia').textContent = data.urgencia;
 
-  // WhatsApp — mensaje pre-cargado alineado al diagnóstico
-  const waMsg = encodeURIComponent('Hola! Hice el diagnóstico de mi negocio en huelladigital.ar y quiero implementar el sistema que me recomendaron. ¿Podemos hablar?');
+  // WhatsApp — mensaje con el diagnóstico completo incluido
+  const rubroVal   = document.getElementById('rubro').value.trim();
+  const problemasWA = data.problemas.map(p => `• ${p.titulo}`).join('\n');
+  const pasosWA     = data.recomendacion.pasos.map(p => `• ${p}`).join('\n');
+  const waMsg = encodeURIComponent(
+    `Hola! Hice el diagnóstico en huelladigital.ar y quiero implementar el sistema.\n\n` +
+    `Mi negocio: ${rubroVal}\n\n` +
+    `Problemas detectados:\n${problemasWA}\n\n` +
+    `Me recomendaron:\n${pasosWA}\n\n` +
+    `¿Podemos hablar?`
+  );
   document.getElementById('btn-wsp').href = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
 
   // Show & animate
