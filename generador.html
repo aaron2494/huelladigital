@@ -653,6 +653,13 @@ nav.scrolled {
       </form>
 
       <div class="lead-secondary">
+        <button class="btn-download" id="btn-share">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          Copiar link para compartir
+        </button>
         <button class="btn-download" id="btn-download">
           <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
@@ -1070,6 +1077,35 @@ document.getElementById('lead-form').addEventListener('submit', (e) => {
 
 document.getElementById('btn-download').addEventListener('click', downloadCopy);
 
+// ─── Share link ─────────────────────────────────────────────────────
+function buildShareURL() {
+  const params = new URLSearchParams({
+    nombre:      document.getElementById('f-nombre').value.trim(),
+    rubro:       document.getElementById('f-rubro').value.trim(),
+    audiencia:   document.getElementById('f-audiencia').value.trim(),
+    dolor:       document.getElementById('f-dolor').value.trim(),
+    diferencial: document.getElementById('f-diferencial').value.trim(),
+    tono:        document.querySelector('input[name="tono"]:checked')?.value || 'Cercano y familiar',
+  });
+  return `${location.origin}/generador.html?${params.toString()}`;
+}
+
+document.getElementById('btn-share').addEventListener('click', () => {
+  const url = buildShareURL();
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('btn-share');
+    const original = btn.innerHTML;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><polyline points="20 6 9 17 4 12"/></svg> ¡Link copiado!`;
+    btn.style.color = '#25D366';
+    btn.style.borderColor = 'rgba(37,211,102,0.4)';
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 2500);
+  });
+});
+
 function showGenerationError(msg) {
   document.getElementById('preview-status').classList.remove('done');
   document.getElementById('status-text').textContent = 'Error al generar';
@@ -1188,6 +1224,34 @@ function doRestart() {
 
 document.getElementById('btn-restart').addEventListener('click', doRestart);
 document.getElementById('btn-otra').addEventListener('click', doRestart);
+
+// ─── Auto-load desde URL params (link compartido) ───────────────────
+(function() {
+  const p = new URLSearchParams(location.search);
+  if (!p.get('nombre')) return; // No hay params, flujo normal
+
+  // Rellenar form
+  const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+  set('f-nombre',      p.get('nombre'));
+  set('f-rubro',       p.get('rubro'));
+  set('f-audiencia',   p.get('audiencia'));
+  set('f-dolor',       p.get('dolor'));
+  set('f-diferencial', p.get('diferencial'));
+
+  const tono = p.get('tono');
+  if (tono) {
+    const radio = document.querySelector(`input[name="tono"][value="${tono}"]`);
+    if (radio) radio.checked = true;
+  }
+
+  // Limpiar URL sin recargar (queda prolija para el prospecto)
+  history.replaceState(null, '', location.pathname);
+
+  // Disparar generación automáticamente
+  setTimeout(() => {
+    document.getElementById('gen-form').dispatchEvent(new Event('submit', { bubbles: true }));
+  }, 600);
+})();
 </script>
 
 </body>
