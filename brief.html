@@ -342,26 +342,6 @@ nav {
     </div>
 
     <div class="brief-cta">
-
-    <!-- IMAGENES -->
-    <div class="brief-card" id="card-imagenes">
-      <h3>📷 Ideas de Imágenes</h3>
-      <div id="imagenes-content">
-        <div class="skeleton sk-title"></div>
-        <div class="skeleton sk-text"></div>
-        <div class="skeleton sk-text2"></div>
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="brief-card" id="card-cta">
-      <h3>📣 Texto para Contacto</h3>
-      <div id="cta-content">
-        <div class="skeleton sk-title"></div>
-      </div>
-    </div>
-
-    <div class="brief-cta">
       <p>¿Te sirve este plan? Coordinamos la web real.</p>
       <a href="https://wa.me/5491164115327?text=Hola! Quería coordinar la web para mi negocio." class="btn-wsp" id="btn-wsp">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -370,7 +350,6 @@ nav {
         HABLAR CON HUELLA DIGITAL
       </a>
     </div>
-  </div>
 </div>
 
 <script>
@@ -581,7 +560,7 @@ document.getElementById('btn-download').addEventListener('click', async () => {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
     doc.setTextColor(GRAY);
-    const lines = doc.splitTextToWidth(s.resumen.trim(), 180);
+    const lines = doc.splitTextToSize(s.resumen.trim(), 180);
     lines.slice(0, 4).forEach(line => {
       doc.text(line, 15, y);
       y += 5;
@@ -676,7 +655,7 @@ document.getElementById('btn-download').addEventListener('click', async () => {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
     doc.setTextColor(GRAY);
-    const lines = doc.splitTextToWidth(s.social.trim(), 180);
+    const lines = doc.splitTextToSize(s.social.trim(), 180);
     lines.slice(0, 6).forEach(line => {
       doc.text(line, 15, y);
       y += 5;
@@ -714,7 +693,7 @@ document.getElementById('btn-download').addEventListener('click', async () => {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
     doc.setTextColor(GRAY);
-    const lines = doc.splitTextToWidth(s.copycta.trim(), 180);
+    const lines = doc.splitTextToSize(s.copycta.trim(), 180);
     lines.slice(0, 3).forEach(line => {
       doc.text(line, 15, y);
       y += 5;
