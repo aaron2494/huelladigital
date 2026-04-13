@@ -715,6 +715,25 @@ nav.scrolled {
   margin-top: 6px;
   flex-shrink: 0;
 }
+.service-demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--red);
+  text-decoration: none;
+  border: 1px solid rgba(214,40,40,0.3);
+  border-radius: 6px;
+  padding: 10px 16px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.service-demo-btn:hover {
+  background: rgba(214,40,40,0.08);
+  border-color: rgba(214,40,40,0.6);
+}
 
 /* ===========================
    PROCESS
@@ -1296,6 +1315,10 @@ footer {
           <li>Dominio + hosting incluido</li>
           <li>Botón de WhatsApp y formulario de captura integrados</li>
         </ul>
+        <a href="generador.html" class="service-demo-btn">
+          Mirá cómo quedaría tu landing
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#D62828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
       <div class="service-card reveal reveal-delay-2">
         <div class="service-icon">
@@ -1329,6 +1352,10 @@ footer {
             </div>
           </div>
         </div>
+        <a href="simulador.html" class="service-demo-btn">
+          Probá cómo responde tu bot
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#D62828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
   </div>
