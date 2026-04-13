@@ -1,28 +1,50 @@
 const Anthropic = require('@anthropic-ai/sdk');
 
-const PROMPT = (negocio, rubro, ciudad) => `Sos un experto en marketing digital especializado en el mercado argentino.
-Tu trabajo es hacer auditorías de presencia digital para negocios que todavía no tienen internet.
+const PROMPT = (rubro, tieneWeb, canal, mensajes, respuesta) => `Sos el asesor digital de Huella Digital, una agencia argentina que instala sistemas automáticos de captación de clientes para negocios.
 
-Negocio: ${negocio}
-Rubro: ${rubro}
-Ciudad: ${ciudad}
+Tu trabajo es analizar los datos reales de un negocio y prescribir exactamente qué necesita para no perder más consultas. No generalizás. No das respuestas genéricas. Sos directo y concreto.
 
-Generá una auditoría impactante en JSON con esta estructura exacta:
+Datos del negocio:
+- Rubro: ${rubro}
+- Tiene web propia: ${tieneWeb}
+- Canal principal de consultas: ${canal}
+- Consultas que recibe por semana: ${mensajes}
+- Velocidad de respuesta a consultas: ${respuesta}
+
+Analizá estos datos y generá el diagnóstico en JSON con esta estructura exacta:
+
 {
-  "titular": "Frase directa y poderosa, máximo 12 palabras. Usá el nombre del negocio y la ciudad. Ejemplo: 'Tu ferretería es invisible para 2.000 personas que buscan tornillos en Mendoza'",
-  "busquedas": ["frase exacta que usaría un cliente en Google 1", "frase 2", "frase 3"],
-  "perdida": {
-    "clientes_mes": "número estimado realista (solo el número, ej: '40-60')",
-    "descripcion": "2-3 oraciones concretas y visuales. Qué pasa cuando alguien busca este negocio en Google y no lo encuentra. Mencioná que la competencia sí aparece."
+  "titular": "Frase impactante de máximo 12 palabras basada en el problema principal detectado. Usá el rubro. Ejemplos: 'Tu peluquería pierde clientes todas las noches por no responder' / 'La ferretería está perdiendo ventas por no tener web propia'",
+  "problemas": [
+    {
+      "titulo": "Nombre corto del problema en máximo 5 palabras",
+      "descripcion": "Una oración concreta sobre qué está perdiendo por este problema. Tono argentino directo. Sin tecnicismos."
+    }
+  ],
+  "impacto": {
+    "numero": "Estimación realista del volumen perdido (ej: '15-25' o '8-15'). Solo números.",
+    "unidad": "consultas por semana o clientes por mes, según lo más impactante para este rubro",
+    "descripcion": "Dos oraciones cortas y concretas. Qué significa ese número en ingresos o clientes reales que se van a la competencia."
   },
-  "solucion": {
-    "titulo": "Título energético para la sección de solución",
-    "puntos": ["beneficio específico 1 para este rubro puntual", "beneficio 2", "beneficio 3"]
+  "recomendacion": {
+    "titulo": "Título energético de la solución en máximo 8 palabras",
+    "pasos": [
+      "Solución concreta 1 adaptada al rubro. Puede ser: web propia, respuesta automática por WhatsApp, recordatorio de turnos automático, alerta instantánea de leads nuevos",
+      "Solución 2",
+      "Solución 3"
+    ]
   },
-  "urgencia": "Una oración final potente. Tono argentino directo, sin rodeos, que genere acción inmediata."
+  "urgencia": "Una sola oración final potente. Tono argentino, sin rodeos. Sin signos de exclamación. Que genere acción inmediata."
 }
 
-Respondé ÚNICAMENTE con el JSON válido. Sin markdown, sin texto adicional, sin comentarios.`;
+Reglas importantes:
+- Detectá entre 2 y 3 problemas reales y específicos a los datos ingresados
+- Si no tiene web, el problema principal es visibilidad y dependencia de redes
+- Si responde tarde o no siempre responde, el problema principal es consultas perdidas por demora
+- Si recibe muchas consultas pero responde tarde, el impacto es alto — reflejalo en el número
+- La recomendación adapta las soluciones al rubro concreto (turnos para peluquería, presupuestos para herrería, etc.)
+- No uses palabras como: soluciones digitales, innovación, transformación digital, ecosistema
+- Respondé ÚNICAMENTE con el JSON válido. Sin markdown, sin texto adicional, sin comentarios.`;
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -32,10 +54,10 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { negocio, rubro, ciudad } = req.body || {};
+  const { rubro, tieneWeb, canal, mensajes, respuesta } = req.body || {};
 
-  if (!negocio?.trim() || !rubro?.trim() || !ciudad?.trim()) {
-    return res.status(400).json({ error: 'Faltan datos: negocio, rubro y ciudad son requeridos.' });
+  if (!rubro?.trim() || !tieneWeb?.trim() || !canal?.trim() || !mensajes?.trim() || !respuesta?.trim()) {
+    return res.status(400).json({ error: 'Faltan datos del diagnóstico.' });
   }
 
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -44,7 +66,10 @@ module.exports = async (req, res) => {
     const message = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 1024,
-      messages: [{ role: 'user', content: PROMPT(negocio.trim(), rubro.trim(), ciudad.trim()) }]
+      messages: [{
+        role: 'user',
+        content: PROMPT(rubro.trim(), tieneWeb.trim(), canal.trim(), mensajes.trim(), respuesta.trim())
+      }]
     });
 
     const raw = message.content[0].text.trim();
@@ -53,7 +78,7 @@ module.exports = async (req, res) => {
 
     return res.status(200).json(data);
   } catch (error) {
-    console.error('Error en auditoría:', error);
-    return res.status(500).json({ error: 'No pudimos generar la auditoría. Intentá de nuevo.' });
+    console.error('Error en diagnóstico:', error);
+    return res.status(500).json({ error: 'No pudimos generar el diagnóstico. Intentá de nuevo.' });
   }
 };

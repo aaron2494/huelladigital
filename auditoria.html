@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auditoría Digital Gratis | Huella Digital</title>
-<meta name="description" content="Descubrí cuántos clientes perdés por no estar en internet. Auditoría digital gratuita para tu negocio en 30 segundos.">
+<title>Diagnóstico Gratis | Huella Digital</title>
+<meta name="description" content="Respondé 5 preguntas y descubrí exactamente qué está frenando tu negocio. Diagnóstico personalizado en 30 segundos — sin registro, sin generalizaciones.">
 <meta name="robots" content="noindex">
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='47' r='7' fill='%23D62828'/%3E%3Cellipse cx='50' cy='47' rx='17' ry='12' fill='none' stroke='white' stroke-width='5'/%3E%3Cellipse cx='50' cy='47' rx='29' ry='21' fill='none' stroke='white' stroke-width='4' stroke-dasharray='165 8'/%3E%3Cellipse cx='50' cy='47' rx='42' ry='31' fill='none' stroke='%23D62828' stroke-width='3.5' stroke-dasharray='240 10'/%3E%3C/svg%3E">
@@ -73,8 +73,8 @@ nav.scrolled {
 
 .hero h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(52px, 8vw, 96px);
-  line-height: 0.92; letter-spacing: 1px;
+  font-size: clamp(44px, 7vw, 84px);
+  line-height: 0.95; letter-spacing: 1px;
   text-align: center; margin-bottom: 24px;
 }
 .hero h1 .red { color: var(--red); }
@@ -94,14 +94,22 @@ nav.scrolled {
   content: ''; position: absolute; top: 0; left: 40px; right: 40px; height: 1px;
   background: linear-gradient(90deg, transparent, var(--red), transparent);
 }
-.form-fields { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+
+.form-hint {
+  font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--gray-dim);
+  margin-bottom: 20px;
+}
+
+.form-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.field-full { grid-column: 1 / -1; }
 
 .field label {
   display: block; font-size: 11px; font-weight: 700;
   letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--gray-dim); margin-bottom: 10px;
 }
-.field input {
+.field input, .field select {
   width: 100%; background: rgba(255,255,255,0.04);
   border: 1px solid var(--border); border-radius: 6px;
   padding: 14px 16px; font-family: 'Inter', sans-serif;
@@ -109,15 +117,25 @@ nav.scrolled {
   transition: border-color 0.2s, background 0.2s;
 }
 .field input::placeholder { color: var(--gray-dim); }
-.field input:focus {
+.field input:focus, .field select:focus {
   border-color: rgba(214,40,40,0.5);
   background: rgba(214,40,40,0.04);
 }
+.field select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-color: rgba(255,255,255,0.04);
+  padding-right: 40px;
+}
+.field select option { background: #161616; color: white; }
+.field select option[disabled] { color: var(--gray-dim); }
 
 .btn-submit {
   width: 100%; padding: 18px; background: var(--red);
   border: none; border-radius: 6px; cursor: pointer;
-  font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
   letter-spacing: 2px; color: white;
   transition: background 0.2s, transform 0.1s;
 }
@@ -159,9 +177,9 @@ nav.scrolled {
 
 .results-titular {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(36px, 5vw, 60px);
-  line-height: 1; text-align: center;
-  margin-bottom: 16px; color: var(--red);
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.05; text-align: center;
+  margin-bottom: 12px; color: var(--red);
 }
 .results-sub {
   text-align: center; font-size: 15px; color: var(--gray);
@@ -187,30 +205,32 @@ nav.scrolled {
 }
 .card-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px; letter-spacing: 1px;
-  margin-bottom: 12px; line-height: 1;
+  font-size: 26px; letter-spacing: 1px;
+  margin-bottom: 16px; line-height: 1;
 }
 .card-body { font-size: 14px; line-height: 1.7; color: var(--gray); }
 .card-body strong { color: var(--white); }
 
-.busquedas-list { display: flex; flex-direction: column; gap: 10px; }
-.busqueda-item {
-  display: flex; align-items: center; gap: 10px;
+/* Problemas list */
+.problemas-list { display: flex; flex-direction: column; gap: 12px; }
+.problema-item {
+  display: flex; gap: 14px; align-items: flex-start;
   background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-  border-radius: 6px; padding: 10px 14px;
-  font-size: 14px; color: var(--gray);
+  border-radius: 8px; padding: 14px 16px;
 }
-.busqueda-item::before {
-  content: '🔍'; font-size: 13px; flex-shrink: 0;
-}
+.problema-icon { font-size: 15px; flex-shrink: 0; line-height: 1.5; }
+.problema-titulo { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+.problema-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
 
-.perdida-numero {
+/* Impacto */
+.impacto-numero {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 72px; line-height: 1; color: var(--red);
   margin-bottom: 4px;
 }
-.perdida-label { font-size: 12px; color: var(--gray-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+.impacto-label { font-size: 12px; color: var(--gray-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
 
+/* Solución */
 .solucion-puntos { display: flex; flex-direction: column; gap: 12px; }
 .solucion-punto {
   display: flex; gap: 12px; align-items: flex-start;
@@ -223,7 +243,7 @@ nav.scrolled {
 
 .urgencia-text {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px; line-height: 1.15; letter-spacing: 0.5px;
+  font-size: 26px; line-height: 1.2; letter-spacing: 0.5px;
   color: var(--white); margin-bottom: 32px; text-align: center;
 }
 
@@ -273,9 +293,10 @@ nav.scrolled {
 /* MOBILE */
 @media (max-width: 700px) {
   .form-fields { grid-template-columns: 1fr; }
+  .field-full { grid-column: 1; }
   .results-grid { grid-template-columns: 1fr; }
   .result-card.card-full { grid-column: 1; }
-  .hero h1 { font-size: 52px; }
+  .hero h1 { font-size: 44px; }
   .form-card { padding: 28px 20px; }
 }
 </style>
@@ -300,38 +321,79 @@ nav.scrolled {
 <section class="hero" id="form-section">
   <div class="hero-glow"></div>
   <div class="container">
-    <div class="hero-label">Auditoría gratuita</div>
-    <h1>¿TU NEGOCIO<br>EXISTE <span class="red">ONLINE?</span></h1>
+    <div class="hero-label">Diagnóstico gratuito</div>
+    <h1>DESCUBRÍ POR QUÉ<br>PERDÉS CONSULTAS <span class="red">TODOS LOS DÍAS.</span></h1>
     <p class="hero-sub">
-      Ingresá los datos de tu negocio y en <strong>30 segundos</strong>
-      te decimos cuántos clientes estás perdiendo por no tener presencia digital.
+      Respondé 5 preguntas y te decimos exactamente qué está frenando tu negocio
+      — <strong>sin generalizaciones, sin rodeos.</strong>
     </p>
 
     <div class="form-card">
       <form id="auditoria-form">
+        <p class="form-hint">Completá los datos de tu negocio:</p>
         <div class="form-fields">
-          <div class="field">
-            <label for="negocio">Nombre del negocio</label>
-            <input type="text" id="negocio" name="negocio" placeholder="Ej: Panadería Don Carlos" required maxlength="80">
+
+          <div class="field field-full">
+            <label for="rubro">¿A qué se dedica tu negocio?</label>
+            <input type="text" id="rubro" name="rubro" placeholder="Ej: Peluquería, Ferretería, Consultorio dental..." required maxlength="80">
           </div>
+
           <div class="field">
-            <label for="rubro">Rubro</label>
-            <input type="text" id="rubro" name="rubro" placeholder="Ej: Panadería, Ferretería..." required maxlength="60">
+            <label for="tieneWeb">¿Tenés página web propia?</label>
+            <select id="tieneWeb" name="tieneWeb" required>
+              <option value="" disabled selected>Elegí una opción</option>
+              <option value="No tengo web">No tengo web</option>
+              <option value="Solo tengo redes sociales">Solo tengo redes sociales</option>
+              <option value="Tengo web pero está desactualizada">Tengo web desactualizada</option>
+              <option value="Tengo web actualizada">Tengo web actualizada</option>
+            </select>
           </div>
+
           <div class="field">
-            <label for="ciudad">Ciudad</label>
-            <input type="text" id="ciudad" name="ciudad" placeholder="Ej: Rosario, Córdoba..." required maxlength="60">
+            <label for="canal">¿Por dónde te escriben los clientes?</label>
+            <select id="canal" name="canal" required>
+              <option value="" disabled selected>Elegí una opción</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Instagram o redes sociales">Instagram / redes sociales</option>
+              <option value="Llamadas telefónicas">Llamadas</option>
+              <option value="Por recomendación o boca en boca">Boca en boca</option>
+              <option value="Varios canales distintos">Varios canales</option>
+            </select>
           </div>
+
+          <div class="field">
+            <label for="mensajes">¿Cuántas consultas recibís por semana?</label>
+            <select id="mensajes" name="mensajes" required>
+              <option value="" disabled selected>Elegí una opción</option>
+              <option value="pocas (1 a 5 por semana)">Pocas (1 a 5)</option>
+              <option value="algunas (5 a 20 por semana)">Algunas (5 a 20)</option>
+              <option value="bastantes (20 a 50 por semana)">Bastantes (20 a 50)</option>
+              <option value="muchas (más de 50 por semana)">Muchas (más de 50)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="respuesta">¿Qué tan rápido respondés?</label>
+            <select id="respuesta" name="respuesta" required>
+              <option value="" disabled selected>Elegí una opción</option>
+              <option value="casi siempre al instante">Al instante</option>
+              <option value="en algunas horas">En algunas horas</option>
+              <option value="al día siguiente o más">Al día siguiente o más</option>
+              <option value="a veces me olvido de responder">A veces me olvido</option>
+              <option value="no siempre tengo tiempo de responder">No siempre tengo tiempo</option>
+            </select>
+          </div>
+
         </div>
         <button type="submit" class="btn-submit" id="btn-submit">
-          GENERÁ MI AUDITORÍA GRATIS
+          DESCUBRÍ QUÉ ESTÁ PERDIENDO TU NEGOCIO
         </button>
         <p class="form-disclaimer">Sin registro. Sin tarjeta. 100% gratuito.</p>
       </form>
 
       <div id="error-msg">
         <strong>Algo salió mal</strong>
-        <span id="error-text">No pudimos generar la auditoría. Intentá de nuevo.</span>
+        <span id="error-text">No pudimos generar el diagnóstico. Intentá de nuevo.</span>
       </div>
     </div>
 
@@ -341,19 +403,19 @@ nav.scrolled {
       <div class="loading-steps">
         <div class="loading-step" id="step-1">
           <div class="loading-step-dot"></div>
-          Analizando el rubro...
+          Analizando tu negocio...
         </div>
         <div class="loading-step" id="step-2">
           <div class="loading-step-dot"></div>
-          Estimando tu mercado digital...
+          Detectando consultas perdidas...
         </div>
         <div class="loading-step" id="step-3">
           <div class="loading-step-dot"></div>
-          Calculando clientes que perdés por mes...
+          Calculando el impacto en tu negocio...
         </div>
         <div class="loading-step" id="step-4">
           <div class="loading-step-dot"></div>
-          Preparando tu propuesta personalizada...
+          Armando tu recomendación...
         </div>
       </div>
     </div>
@@ -365,30 +427,30 @@ nav.scrolled {
   <div class="container">
 
     <div class="results-titular" id="res-titular"></div>
-    <p class="results-sub">Así está tu negocio hoy en internet. Esto es lo que encontramos.</p>
+    <p class="results-sub">Esto es lo que encontramos. Sin vueltas.</p>
 
     <div class="results-grid">
 
-      <!-- Búsquedas -->
-      <div class="result-card" id="card-busquedas">
-        <div class="card-eyebrow">Así te buscan tus clientes</div>
-        <div class="card-title">Estas son las búsquedas que hacen en Google</div>
-        <div class="busquedas-list" id="res-busquedas"></div>
+      <!-- Problemas detectados -->
+      <div class="result-card card-full" id="card-problemas">
+        <div class="card-eyebrow">Problemas detectados</div>
+        <div class="card-title">Esto es lo que está frenando tu crecimiento</div>
+        <div class="problemas-list" id="res-problemas"></div>
       </div>
 
-      <!-- Pérdida -->
-      <div class="result-card card-accent" id="card-perdida">
+      <!-- Impacto -->
+      <div class="result-card card-accent" id="card-impacto">
         <div class="card-eyebrow">Lo que estás perdiendo</div>
-        <div class="perdida-numero" id="res-clientes"></div>
-        <div class="perdida-label">clientes potenciales por mes</div>
-        <div class="card-body" id="res-perdida-desc"></div>
+        <div class="impacto-numero" id="res-impacto-numero"></div>
+        <div class="impacto-label" id="res-impacto-unidad"></div>
+        <div class="card-body" id="res-impacto-desc"></div>
       </div>
 
-      <!-- Solución -->
-      <div class="result-card card-full" id="card-solucion">
+      <!-- Recomendación -->
+      <div class="result-card" id="card-recomendacion">
         <div class="card-eyebrow">Tu solución en 7 días</div>
-        <div class="card-title" id="res-solucion-titulo"></div>
-        <div class="solucion-puntos" id="res-solucion-puntos"></div>
+        <div class="card-title" id="res-rec-titulo"></div>
+        <div class="solucion-puntos" id="res-rec-pasos"></div>
       </div>
 
     </div>
@@ -396,41 +458,36 @@ nav.scrolled {
     <!-- CTA -->
     <div class="cta-section" id="cta-section">
       <div class="urgencia-text" id="res-urgencia"></div>
-      <h3>¿ARRANCAMOS?</h3>
-      <p>Hablemos por WhatsApp y te contamos cómo llevar tu negocio online en 7 días.</p>
+      <h3>¿LO IMPLEMENTAMOS?</h3>
+      <p>Escribime por WhatsApp y te cuento exactamente cómo instalamos el sistema en tu negocio.</p>
       <a href="#" id="btn-wsp" class="btn-wsp" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
-        HABLEMOS POR WHATSAPP
+        QUIERO IMPLEMENTAR EL SISTEMA
       </a>
     </div>
 
-    <button class="btn-retry" id="btn-retry">← Hacer otra auditoría</button>
+    <button class="btn-retry" id="btn-retry">← Hacer otro diagnóstico</button>
 
   </div>
 </section>
 
 <script>
-// ─── Config ───────────────────────────────────────────────────────
-const WA_NUMBER = '5491164115327'; // ← Reemplazá con tu número de WhatsApp (sin + ni espacios)
+const WA_NUMBER = '5491164115327';
 
-// ─── Nav scroll ───────────────────────────────────────────────────
+// Nav scroll
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// ─── Loading steps animation ──────────────────────────────────────
+// Loading animation
 let loadingTimer = null;
 function startLoadingAnimation() {
   const steps = [1, 2, 3, 4];
   let current = 0;
-
-  steps.forEach(n => {
-    document.getElementById(`step-${n}`).className = 'loading-step';
-  });
-
+  steps.forEach(n => { document.getElementById(`step-${n}`).className = 'loading-step'; });
   function advance() {
     if (current > 0) {
       document.getElementById(`step-${current}`).classList.add('done');
@@ -444,34 +501,27 @@ function startLoadingAnimation() {
   }
   advance();
 }
+function stopLoadingAnimation() { if (loadingTimer) clearTimeout(loadingTimer); }
 
-function stopLoadingAnimation() {
-  if (loadingTimer) clearTimeout(loadingTimer);
-}
-
-// ─── Show / hide sections ─────────────────────────────────────────
 function showLoading() {
   document.getElementById('auditoria-form').style.display = 'none';
   document.getElementById('error-msg').style.display = 'none';
   document.getElementById('loading').style.display = 'block';
   startLoadingAnimation();
 }
-
 function hideLoading() {
   stopLoadingAnimation();
   document.getElementById('loading').style.display = 'none';
 }
-
 function showError(msg) {
   hideLoading();
   document.getElementById('auditoria-form').style.display = 'block';
   document.getElementById('btn-submit').disabled = false;
-  const errorEl = document.getElementById('error-msg');
   document.getElementById('error-text').textContent = msg;
-  errorEl.style.display = 'block';
+  document.getElementById('error-msg').style.display = 'block';
 }
 
-function showResults(data, negocio, rubro, ciudad) {
+function showResults(data) {
   hideLoading();
   document.getElementById('form-section').style.minHeight = 'auto';
   document.getElementById('form-section').style.paddingBottom = '0';
@@ -479,56 +529,64 @@ function showResults(data, negocio, rubro, ciudad) {
   // Titular
   document.getElementById('res-titular').textContent = data.titular;
 
-  // Búsquedas
-  const busquedasEl = document.getElementById('res-busquedas');
-  busquedasEl.innerHTML = data.busquedas
-    .map(b => `<div class="busqueda-item">${b}</div>`)
-    .join('');
+  // Problemas
+  const problemasEl = document.getElementById('res-problemas');
+  problemasEl.innerHTML = data.problemas.map(p => `
+    <div class="problema-item">
+      <div class="problema-icon">❌</div>
+      <div>
+        <div class="problema-titulo">${p.titulo}</div>
+        <div class="problema-desc">${p.descripcion}</div>
+      </div>
+    </div>
+  `).join('');
 
-  // Pérdida
-  document.getElementById('res-clientes').textContent = data.perdida.clientes_mes;
-  document.getElementById('res-perdida-desc').textContent = data.perdida.descripcion;
+  // Impacto
+  document.getElementById('res-impacto-numero').textContent = data.impacto.numero;
+  document.getElementById('res-impacto-unidad').textContent = data.impacto.unidad;
+  document.getElementById('res-impacto-desc').textContent = data.impacto.descripcion;
 
-  // Solución
-  document.getElementById('res-solucion-titulo').textContent = data.solucion.titulo;
-  const puntosEl = document.getElementById('res-solucion-puntos');
-  puntosEl.innerHTML = data.solucion.puntos
+  // Recomendación
+  document.getElementById('res-rec-titulo').textContent = data.recomendacion.titulo;
+  document.getElementById('res-rec-pasos').innerHTML = data.recomendacion.pasos
     .map(p => `<div class="solucion-punto">${p}</div>`)
     .join('');
 
   // Urgencia
   document.getElementById('res-urgencia').textContent = data.urgencia;
 
-  // WhatsApp CTA
+  // WhatsApp — mensaje con el diagnóstico completo incluido
+  const rubroVal   = document.getElementById('rubro').value.trim();
+  const problemasWA = data.problemas.map(p => `• ${p.titulo}`).join('\n');
+  const pasosWA     = data.recomendacion.pasos.map(p => `• ${p}`).join('\n');
   const waMsg = encodeURIComponent(
-    `Hola! Acabo de hacer la auditoría digital de "${negocio}" (${rubro} en ${ciudad}) en huelladigital.ar y me interesa saber más sobre llevar mi negocio online. ¿Podemos hablar?`
+    `Hola! Hice el diagnóstico en huelladigital.ar y quiero implementar el sistema.\n\n` +
+    `Mi negocio: ${rubroVal}\n\n` +
+    `Problemas detectados:\n${problemasWA}\n\n` +
+    `Me recomendaron:\n${pasosWA}\n\n` +
+    `¿Podemos hablar?`
   );
   document.getElementById('btn-wsp').href = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
 
-  // Show results section
+  // Show & animate
   document.getElementById('results').style.display = 'block';
-
-  // Animate cards
-  const cards = ['card-busquedas', 'card-perdida', 'card-solucion', 'cta-section'];
+  const cards = ['card-problemas', 'card-impacto', 'card-recomendacion', 'cta-section'];
   cards.forEach((id, i) => {
-    setTimeout(() => {
-      document.getElementById(id).classList.add('visible');
-    }, 100 + i * 150);
+    setTimeout(() => document.getElementById(id).classList.add('visible'), 100 + i * 150);
   });
-
-  // Scroll to results
   setTimeout(() => {
     document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 200);
 }
 
-// ─── Form submit ──────────────────────────────────────────────────
+// Form submit
 document.getElementById('auditoria-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-
-  const negocio = document.getElementById('negocio').value.trim();
-  const rubro = document.getElementById('rubro').value.trim();
-  const ciudad = document.getElementById('ciudad').value.trim();
+  const rubro    = document.getElementById('rubro').value.trim();
+  const tieneWeb = document.getElementById('tieneWeb').value;
+  const canal    = document.getElementById('canal').value;
+  const mensajes = document.getElementById('mensajes').value;
+  const respuesta = document.getElementById('respuesta').value;
 
   document.getElementById('btn-submit').disabled = true;
   showLoading();
@@ -537,35 +595,28 @@ document.getElementById('auditoria-form').addEventListener('submit', async (e) =
     const res = await fetch('/api/auditoria', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ negocio, rubro, ciudad })
+      body: JSON.stringify({ rubro, tieneWeb, canal, mensajes, respuesta })
     });
-
     const data = await res.json();
-
     if (!res.ok) {
-      showError(data.error || 'No pudimos generar la auditoría. Intentá de nuevo.');
+      showError(data.error || 'No pudimos generar el diagnóstico. Intentá de nuevo.');
       return;
     }
-
-    showResults(data, negocio, rubro, ciudad);
-
+    showResults(data);
   } catch {
     showError('Error de conexión. Verificá tu internet e intentá de nuevo.');
   }
 });
 
-// ─── Retry button ─────────────────────────────────────────────────
+// Retry
 document.getElementById('btn-retry').addEventListener('click', () => {
   document.getElementById('results').style.display = 'none';
   document.getElementById('auditoria-form').style.display = 'block';
   document.getElementById('btn-submit').disabled = false;
   document.getElementById('form-section').style.minHeight = '100vh';
-
-  // Reset card animations
-  ['card-busquedas', 'card-perdida', 'card-solucion', 'cta-section'].forEach(id => {
+  ['card-problemas', 'card-impacto', 'card-recomendacion', 'cta-section'].forEach(id => {
     document.getElementById(id).classList.remove('visible');
   });
-
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 </script>
