@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Landing en Vivo | Huella Digital</title>
+<meta name="description" content="Mirá cómo quedaría tu landing page antes de contratar. Gratis, en segundos.">
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='47' r='7' fill='%23D62828'/%3E%3Cellipse cx='50' cy='47' rx='17' ry='12' fill='none' stroke='white' stroke-width='5'/%3E%3Cellipse cx='50' cy='47' rx='29' ry='21' fill='none' stroke='white' stroke-width='4' stroke-dasharray='165 8'/%3E%3Cellipse cx='50' cy='47' rx='42' ry='31' fill='none' stroke='%23D62828' stroke-width='3.5' stroke-dasharray='240 10'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red: #D62828; --red-dark: #A81F1F;
+  --black: #0A0A0A; --dark: #111111; --card: #161616;
+  --border: rgba(255,255,255,0.07); --white: #FFFFFF;
+  --gray: rgba(255,255,255,0.55); --gray-dim: rgba(255,255,255,0.25);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--red); color: white; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+/* ─── NAV ───────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 0; transition: background 0.4s, padding 0.4s;
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.95); backdrop-filter: blur(12px);
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; color: var(--white); line-height: 1; }
+.nav-logo-text span { color: var(--red); }
+.nav-back { font-size: 13px; font-weight: 600; letter-spacing: 1px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--white); }
+
+/* ─── PHASE 1: FORM ─────────────────────────────────────────── */
+#phase-form {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 120px 32px 80px; position: relative; overflow: hidden;
+  transition: opacity 0.4s ease;
+}
+#phase-form.fade-out { opacity: 0; pointer-events: none; }
+
+.hero-glow {
+  position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(214,40,40,0.11) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--red); border: 1px solid rgba(214,40,40,0.3);
+  border-radius: 2px; padding: 6px 14px; margin-bottom: 32px;
+}
+.hero-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero-h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 88px);
+  line-height: 0.92; letter-spacing: 1px; text-align: center; margin-bottom: 24px;
+}
+.hero-h1 .red { color: var(--red); }
+.hero-sub {
+  font-size: 17px; line-height: 1.65; color: var(--gray);
+  text-align: center; max-width: 500px; margin-bottom: 48px;
+}
+.hero-sub strong { color: var(--white); }
+
+.form-card {
+  width: 100%; max-width: 680px; background: var(--card);
+  border: 1px solid var(--border); border-radius: 12px; padding: 40px;
+  position: relative;
+}
+.form-card::before {
+  content: ''; position: absolute; top: 0; left: 40px; right: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.field { display: flex; flex-direction: column; }
+.field + .field { margin-bottom: 0; }
+.field-mb { margin-bottom: 16px; }
+
+.field label {
+  display: block; font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gray-dim); margin-bottom: 10px;
+}
+.field input {
+  width: 100%; background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 13px 16px; font-family: 'Inter', sans-serif;
+  font-size: 15px; color: var(--white); outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.field input::placeholder { color: var(--gray-dim); }
+.field input:focus {
+  border-color: rgba(214,40,40,0.5);
+  background: rgba(214,40,40,0.04);
+}
+
+/* Tono */
+.tono-wrap { margin-bottom: 28px; }
+.tono-label-text {
+  display: block; font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gray-dim); margin-bottom: 12px;
+}
+.tono-pills { display: flex; gap: 8px; }
+.tono-pill { flex: 1; }
+.tono-pill input[type="radio"] { display: none; }
+.tono-pill span {
+  display: block; text-align: center; padding: 11px 8px;
+  border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; font-weight: 600; color: var(--gray);
+  cursor: pointer; transition: all 0.2s; user-select: none;
+}
+.tono-pill input:checked + span {
+  border-color: rgba(214,40,40,0.6); color: var(--white);
+  background: rgba(214,40,40,0.1);
+}
+.tono-pill span:hover { border-color: rgba(255,255,255,0.2); color: var(--white); }
+
+.btn-submit {
+  width: 100%; padding: 18px; background: var(--red);
+  border: none; border-radius: 6px; cursor: pointer;
+  font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+  letter-spacing: 2px; color: white;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-submit:hover { background: var(--red-dark); }
+.btn-submit:active { transform: scale(0.99); }
+.form-disclaimer { text-align: center; font-size: 12px; color: var(--gray-dim); margin-top: 14px; }
+
+/* ─── PHASE 2: PREVIEW ──────────────────────────────────────── */
+#phase-preview {
+  display: none; min-height: 100vh;
+  padding: 80px 24px 80px;
+  opacity: 0; transition: opacity 0.5s ease;
+}
+#phase-preview.visible { opacity: 1; }
+
+.preview-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 920px; margin: 0 auto 20px; padding: 0 4px;
+}
+.preview-status {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--red);
+}
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+  animation: pulse 1.5s infinite;
+}
+.preview-status.done .status-dot { animation: none; background: #22c55e; }
+.preview-status.done { color: #22c55e; }
+
+.btn-restart-top {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  color: var(--gray); background: none;
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 8px 16px; cursor: pointer; transition: all 0.2s;
+}
+.btn-restart-top:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+/* ─── BROWSER MOCKUP ────────────────────────────────────────── */
+.browser-wrap {
+  max-width: 920px; margin: 0 auto;
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+}
+.browser-chrome {
+  background: #1c1c1c; padding: 11px 16px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.browser-dots { display: flex; gap: 6px; flex-shrink: 0; }
+.browser-dots span { width: 11px; height: 11px; border-radius: 50%; }
+.browser-dots span:nth-child(1) { background: #ff5f57; }
+.browser-dots span:nth-child(2) { background: #febc2e; }
+.browser-dots span:nth-child(3) { background: #28c840; }
+.browser-url-bar {
+  flex: 1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px; padding: 5px 12px; font-size: 12px;
+  color: rgba(255,255,255,0.4); text-align: center; font-family: 'Inter', sans-serif;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.browser-url-bar .url-slug { color: rgba(255,255,255,0.7); }
+
+.browser-content {
+  background: #0a0a0a; overflow: hidden;
+}
+
+/* ─── LANDING PREVIEW SECTIONS ──────────────────────────────── */
+
+/* All sections start hidden */
+.lp-section {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.lp-section.visible { opacity: 1; transform: translateY(0); }
+
+/* HERO */
+.lp-hero {
+  padding: 72px 56px 64px; text-align: center;
+  background: linear-gradient(160deg, #111111 0%, #0a0a0a 100%);
+  border-bottom: 1px solid var(--border);
+}
+.lp-h1-wrap { margin-bottom: 20px; line-height: 0.95; }
+.lp-h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 4.5vw, 58px);
+  letter-spacing: 0.5px; color: var(--white);
+  display: inline;
+}
+.lp-cursor {
+  display: inline-block;
+  width: 2px; height: 0.85em;
+  background: var(--red);
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink 0.65s steps(1) infinite;
+}
+.lp-cursor.hidden { display: none; }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+.lp-h2 {
+  font-size: 15px; color: var(--gray); max-width: 440px; margin: 0 auto 28px;
+  line-height: 1.65;
+  opacity: 0; transition: opacity 0.5s ease;
+}
+.lp-h2.visible { opacity: 1; }
+
+.lp-cta-btn {
+  display: inline-block; background: var(--red);
+  padding: 13px 30px; border-radius: 4px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+  letter-spacing: 1.5px; color: white;
+  opacity: 0; transition: opacity 0.5s ease;
+  cursor: default;
+}
+.lp-cta-btn.visible { opacity: 1; }
+
+/* ABOUT */
+.lp-about {
+  padding: 56px 56px;
+  background: #111111;
+  border-bottom: 1px solid var(--border);
+}
+.lp-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--red); margin-bottom: 20px;
+}
+.lp-about-text p {
+  font-size: 14px; line-height: 1.8; color: var(--gray); margin-bottom: 14px;
+}
+.lp-about-text p:last-child { margin-bottom: 0; }
+
+/* SERVICES */
+.lp-services {
+  padding: 56px 56px;
+  background: #0d0d0d;
+  border-bottom: 1px solid var(--border);
+}
+.lp-services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px;
+}
+.lp-service-card {
+  background: #161616; border: 1px solid var(--border);
+  border-radius: 8px; padding: 22px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.lp-service-card.visible { opacity: 1; transform: translateY(0); }
+.lp-service-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+  letter-spacing: 0.5px; color: var(--white); margin-bottom: 10px;
+  min-height: 22px;
+}
+.lp-service-desc { font-size: 13px; color: var(--gray); line-height: 1.65; min-height: 40px; }
+
+/* ONE-LINER */
+.lp-oneliner {
+  padding: 64px 56px; text-align: center;
+  background: var(--red);
+}
+.lp-oneliner-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px, 3vw, 38px);
+  line-height: 1.2; letter-spacing: 0.5px; color: white;
+  max-width: 600px; margin: 0 auto;
+}
+
+/* SKELETON */
+.lp-skeleton-wrap { padding: 72px 56px; }
+.lp-skeleton {
+  background: rgba(255,255,255,0.05); border-radius: 4px;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+@keyframes shimmer { 0%,100% { opacity: 0.4; } 50% { opacity: 0.9; } }
+.sk-title { height: 56px; width: 65%; margin: 0 auto 16px; }
+.sk-sub { height: 16px; width: 45%; margin: 0 auto 12px; }
+.sk-sub2 { height: 16px; width: 35%; margin: 0 auto 28px; }
+.sk-btn { height: 46px; width: 160px; margin: 0 auto; border-radius: 4px; }
+
+/* ─── AFTER PREVIEW ─────────────────────────────────────────── */
+.after-preview {
+  max-width: 920px; margin: 32px auto 0;
+  text-align: center; padding: 0 24px;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.after-preview.visible { opacity: 1; transform: translateY(0); }
+.after-preview-title { font-size: 17px; color: var(--gray); margin-bottom: 24px; }
+.after-preview-title strong { color: var(--white); }
+
+.btn-wsp {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: #25D366; color: white;
+  padding: 16px 32px; border-radius: 6px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+  letter-spacing: 1.5px; text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-wsp:hover { background: #1ebe5d; transform: scale(1.02); }
+.btn-wsp svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+
+.btn-otra {
+  display: block; margin: 20px auto 0; background: none;
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 10px 24px; font-family: 'Inter', sans-serif;
+  font-size: 13px; color: var(--gray); cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-otra:hover { border-color: rgba(255,255,255,0.2); color: var(--white); }
+
+/* ─── MOBILE ────────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .form-row { grid-template-columns: 1fr; }
+  .form-card { padding: 28px 20px; }
+  .lp-hero { padding: 48px 28px; }
+  .lp-about { padding: 40px 28px; }
+  .lp-services { padding: 40px 28px; }
+  .lp-services-grid { grid-template-columns: 1fr; }
+  .lp-oneliner { padding: 48px 28px; }
+  .lp-skeleton-wrap { padding: 48px 28px; }
+  .tono-pills { flex-direction: column; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 32 32" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="3.5" fill="#D62828"/>
+        <ellipse cx="16" cy="16" rx="8" ry="5.8" fill="none" stroke="white" stroke-width="2.2"/>
+        <ellipse cx="16" cy="16" rx="13.5" ry="9.8" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8"/>
+      </svg>
+      <span class="nav-logo-text">HUELLA<span>DIGITAL</span></span>
+    </a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PHASE 1: FORM                                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="phase-form">
+  <div class="hero-glow"></div>
+  <div style="width:100%;max-width:680px;display:flex;flex-direction:column;align-items:center">
+    <div class="hero-label">✦ Demo en vivo — Gratis</div>
+    <h1 class="hero-h1">MIRÁ CÓMO QUEDARÍA<br>TU <span class="red">LANDING</span></h1>
+    <p class="hero-sub">
+      Contanos tu negocio en un minuto. Generamos el <strong>copy completo</strong>
+      de tu futura página web y lo ves nacer en tiempo real.
+    </p>
+
+    <div class="form-card">
+      <form id="gen-form" autocomplete="off">
+        <div class="form-row">
+          <div class="field">
+            <label for="f-nombre">Nombre del negocio</label>
+            <input type="text" id="f-nombre" placeholder="Ej: Pizzería Carlitos" required maxlength="80">
+          </div>
+          <div class="field">
+            <label for="f-rubro">Rubro</label>
+            <input type="text" id="f-rubro" placeholder="Ej: Pizzería, Peluquería…" required maxlength="60">
+          </div>
+        </div>
+        <div class="field field-mb" style="margin-top:16px">
+          <label for="f-audiencia">¿Quién es tu cliente ideal?</label>
+          <input type="text" id="f-audiencia" placeholder="Ej: Familias del barrio que quieren pizza a domicilio" required maxlength="120">
+        </div>
+        <div class="field field-mb">
+          <label for="f-dolor">¿Qué problema le resolvés?</label>
+          <input type="text" id="f-dolor" placeholder="Ej: No saben dónde pedir buena pizza sin salir de casa" required maxlength="120">
+        </div>
+        <div class="field" style="margin-bottom:24px">
+          <label for="f-diferencial">¿Por qué sos diferente?</label>
+          <input type="text" id="f-diferencial" placeholder="Ej: Masa madre propia, entrega en 30 min, sin TACC" required maxlength="120">
+        </div>
+
+        <div class="tono-wrap">
+          <span class="tono-label-text">Tono de voz</span>
+          <div class="tono-pills">
+            <label class="tono-pill">
+              <input type="radio" name="tono" value="Cercano y familiar" checked>
+              <span>Cercano</span>
+            </label>
+            <label class="tono-pill">
+              <input type="radio" name="tono" value="Profesional y confiable">
+              <span>Profesional</span>
+            </label>
+            <label class="tono-pill">
+              <input type="radio" name="tono" value="Disruptivo y audaz">
+              <span>Disruptivo</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">GENERÁ MI LANDING GRATIS</button>
+        <p class="form-disclaimer">Sin registro. Sin tarjeta. 100% gratuito.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PHASE 2: PREVIEW                                           -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="phase-preview">
+  <div class="preview-topbar">
+    <div class="preview-status" id="preview-status">
+      <div class="status-dot"></div>
+      <span id="status-text">Generando tu landing…</span>
+    </div>
+    <button class="btn-restart-top" id="btn-restart">← Empezar de nuevo</button>
+  </div>
+
+  <!-- BROWSER MOCKUP -->
+  <div class="browser-wrap">
+    <div class="browser-chrome">
+      <div class="browser-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="browser-url-bar">
+        <span id="browser-url">tu-negocio.huelladigital.ar</span>
+      </div>
+    </div>
+
+    <div class="browser-content" id="browser-content">
+      <!-- Skeleton loading -->
+      <div id="lp-skeleton" class="lp-skeleton-wrap">
+        <div class="lp-skeleton sk-title"></div>
+        <div class="lp-skeleton sk-sub"></div>
+        <div class="lp-skeleton sk-sub2"></div>
+        <div class="lp-skeleton sk-btn"></div>
+      </div>
+
+      <!-- HERO -->
+      <div class="lp-section lp-hero" id="lp-hero" style="display:none">
+        <div class="lp-h1-wrap">
+          <span class="lp-h1" id="lp-h1"></span><span class="lp-cursor" id="lp-cursor"></span>
+        </div>
+        <p class="lp-h2" id="lp-h2"></p>
+        <span class="lp-cta-btn" id="lp-cta"></span>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="lp-section lp-about" id="lp-about" style="display:none">
+        <div class="lp-eyebrow">Sobre nosotros</div>
+        <div class="lp-about-text" id="lp-about-text"></div>
+      </div>
+
+      <!-- SERVICES -->
+      <div class="lp-section lp-services" id="lp-services" style="display:none">
+        <div class="lp-eyebrow">Lo que hacemos</div>
+        <div class="lp-services-grid">
+          <div class="lp-service-card" id="lp-s1">
+            <div class="lp-service-title" id="lp-s1-titulo"></div>
+            <div class="lp-service-desc" id="lp-s1-desc"></div>
+          </div>
+          <div class="lp-service-card" id="lp-s2">
+            <div class="lp-service-title" id="lp-s2-titulo"></div>
+            <div class="lp-service-desc" id="lp-s2-desc"></div>
+          </div>
+          <div class="lp-service-card" id="lp-s3">
+            <div class="lp-service-title" id="lp-s3-titulo"></div>
+            <div class="lp-service-desc" id="lp-s3-desc"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONE-LINER -->
+      <div class="lp-section lp-oneliner" id="lp-oneliner" style="display:none">
+        <div class="lp-oneliner-text" id="lp-oneliner-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AFTER PREVIEW CTA -->
+  <div class="after-preview" id="after-preview">
+    <p class="after-preview-title">Este es el copy de tu landing. <strong>¿Querés que lo hagamos realidad?</strong></p>
+    <a href="#" id="btn-wsp-gen" class="btn-wsp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      QUIERO MI LANDING EN 7 DÍAS
+    </a>
+    <button class="btn-otra" id="btn-otra">← Generar otra landing</button>
+  </div>
+</section>
+
+<script>
+const WA_NUMBER = '5491164115327';
+
+// ─── Nav scroll ────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ─── Helpers ───────────────────────────────────────────────────────
+function toSlug(str) {
+  return str.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 30) || 'tu-negocio';
+}
+
+function escapeHtml(str) {
+  const d = document.createElement('div');
+  d.appendChild(document.createTextNode(str));
+  return d.innerHTML;
+}
+
+function reveal(id, delay) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = el.dataset.display || 'block';
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('visible')));
+  }, delay || 0);
+}
+
+function scrollBrowserToBottom() {
+  const bc = document.getElementById('browser-content');
+  setTimeout(() => bc.scrollTo({ top: bc.scrollHeight, behavior: 'smooth' }), 100);
+}
+
+// ─── Phase switch ──────────────────────────────────────────────────
+function switchToPreview(nombre) {
+  const slug = toSlug(nombre);
+  document.getElementById('browser-url').textContent = slug + '.huelladigital.ar';
+
+  const form = document.getElementById('phase-form');
+  form.classList.add('fade-out');
+  setTimeout(() => {
+    form.style.display = 'none';
+    const preview = document.getElementById('phase-preview');
+    preview.style.display = 'block';
+    requestAnimationFrame(() => requestAnimationFrame(() => preview.classList.add('visible')));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 400);
+}
+
+// ─── Typewriter ────────────────────────────────────────────────────
+let twTimer = null;
+function typewriter(text, onDone) {
+  const el = document.getElementById('lp-h1');
+  const cursor = document.getElementById('lp-cursor');
+  el.textContent = '';
+  cursor.classList.remove('hidden');
+  let i = 0;
+  twTimer = setInterval(() => {
+    if (i < text.length) {
+      el.textContent += text[i++];
+    } else {
+      clearInterval(twTimer);
+      setTimeout(() => { cursor.classList.add('hidden'); if (onDone) onDone(); }, 600);
+    }
+  }, 32);
+}
+
+// ─── State ─────────────────────────────────────────────────────────
+let state = {};
+
+function resetState() {
+  state = {
+    buffer: '',
+    currentKey: null,
+    sections: {},
+    h2Set: false,
+    ctaSet: false,
+    heroShown: false,
+    h1text: '',
+    s1t: false, s1d: false,
+    s2t: false, s2d: false,
+    s3t: false, s3d: false,
+    servicesShown: false,
+  };
+}
+
+// ─── Section rendering ─────────────────────────────────────────────
+function showHero() {
+  if (state.heroShown) return;
+  state.heroShown = true;
+
+  document.getElementById('lp-skeleton').style.display = 'none';
+
+  const hero = document.getElementById('lp-hero');
+  hero.style.display = 'block';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    hero.classList.add('visible');
+    // Start typewriter after section is visible
+    setTimeout(() => {
+      typewriter(state.h1text, () => {
+        // H1 done → reveal H2 and CTA
+        document.getElementById('lp-h2').classList.add('visible');
+        setTimeout(() => {
+          document.getElementById('lp-cta').classList.add('visible');
+          scrollBrowserToBottom();
+        }, 300);
+      });
+    }, 200);
+  }));
+}
+
+function tryShowHero() {
+  if (state.h2Set && state.ctaSet) showHero();
+}
+
+function tryShowServices() {
+  if (!state.servicesShown) {
+    const anyReady = (state.s1t && state.s1d) || (state.s2t && state.s2d) || (state.s3t && state.s3d);
+    if (!anyReady) return;
+    state.servicesShown = true;
+    reveal('lp-services');
+    scrollBrowserToBottom();
+  }
+  if (state.s1t && state.s1d) { setTimeout(() => { document.getElementById('lp-s1').classList.add('visible'); }, 50); }
+  if (state.s2t && state.s2d) { setTimeout(() => { document.getElementById('lp-s2').classList.add('visible'); }, 150); }
+  if (state.s3t && state.s3d) { setTimeout(() => { document.getElementById('lp-s3').classList.add('visible'); }, 250); }
+}
+
+function renderSection(key, raw) {
+  const content = raw.trim();
+  if (!content) return;
+  state.sections[key] = content;
+
+  switch (key) {
+    case 'h1':
+      state.h1text = content;
+      break;
+    case 'h2':
+      document.getElementById('lp-h2').textContent = content;
+      state.h2Set = true;
+      tryShowHero();
+      break;
+    case 'cta':
+      document.getElementById('lp-cta').textContent = content;
+      state.ctaSet = true;
+      tryShowHero();
+      break;
+    case 'about': {
+      const paras = content.split('\n').filter(p => p.trim());
+      document.getElementById('lp-about-text').innerHTML = paras.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+      reveal('lp-about', state.heroShown ? 200 : 0);
+      scrollBrowserToBottom();
+      break;
+    }
+    case 's1_titulo':
+      document.getElementById('lp-s1-titulo').textContent = content;
+      state.s1t = true; tryShowServices(); break;
+    case 's1_desc':
+      document.getElementById('lp-s1-desc').textContent = content;
+      state.s1d = true; tryShowServices(); break;
+    case 's2_titulo':
+      document.getElementById('lp-s2-titulo').textContent = content;
+      state.s2t = true; tryShowServices(); break;
+    case 's2_desc':
+      document.getElementById('lp-s2-desc').textContent = content;
+      state.s2d = true; tryShowServices(); break;
+    case 's3_titulo':
+      document.getElementById('lp-s3-titulo').textContent = content;
+      state.s3t = true; tryShowServices(); break;
+    case 's3_desc':
+      document.getElementById('lp-s3-desc').textContent = content;
+      state.s3d = true; tryShowServices(); break;
+    case 'oneliner':
+      document.getElementById('lp-oneliner-text').textContent = content;
+      reveal('lp-oneliner', 200);
+      scrollBrowserToBottom();
+      break;
+  }
+}
+
+// ─── Buffer parser ─────────────────────────────────────────────────
+const MARKERS = [
+  { tag: '\u00A7H1\u00A7',        key: 'h1' },
+  { tag: '\u00A7H2\u00A7',        key: 'h2' },
+  { tag: '\u00A7CTA\u00A7',       key: 'cta' },
+  { tag: '\u00A7ABOUT\u00A7',     key: 'about' },
+  { tag: '\u00A7S1_TITULO\u00A7', key: 's1_titulo' },
+  { tag: '\u00A7S1_DESC\u00A7',   key: 's1_desc' },
+  { tag: '\u00A7S2_TITULO\u00A7', key: 's2_titulo' },
+  { tag: '\u00A7S2_DESC\u00A7',   key: 's2_desc' },
+  { tag: '\u00A7S3_TITULO\u00A7', key: 's3_titulo' },
+  { tag: '\u00A7S3_DESC\u00A7',   key: 's3_desc' },
+  { tag: '\u00A7ONELINER\u00A7',  key: 'oneliner' },
+];
+
+function processChunk(text) {
+  state.buffer += text;
+  let found = true;
+  while (found) {
+    found = false;
+    for (const { tag, key } of MARKERS) {
+      const idx = state.buffer.indexOf(tag);
+      if (idx !== -1) {
+        if (state.currentKey !== null) {
+          renderSection(state.currentKey, state.buffer.slice(0, idx));
+        }
+        state.currentKey = key;
+        state.buffer = state.buffer.slice(idx + tag.length);
+        found = true;
+        break;
+      }
+    }
+  }
+}
+
+function finalizeStream() {
+  if (state.currentKey !== null && state.buffer.trim()) {
+    renderSection(state.currentKey, state.buffer);
+  }
+  state.buffer = '';
+}
+
+// ─── SSE stream handler ────────────────────────────────────────────
+async function generate(formData) {
+  try {
+    const res = await fetch('/api/generar-landing', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    if (!res.ok || !res.body) {
+      showGenerationError('No pudimos conectar. Intentá de nuevo.');
+      return;
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let eventBuffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      eventBuffer += decoder.decode(value, { stream: true });
+      const lines = eventBuffer.split('\n');
+      eventBuffer = lines.pop();
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const raw = line.slice(6).trim();
+        if (raw === '[DONE]') {
+          finalizeStream();
+          onDone(formData.nombre);
+          return;
+        }
+        try {
+          const parsed = JSON.parse(raw);
+          if (parsed.error) { showGenerationError(parsed.error); return; }
+          if (parsed.text) processChunk(parsed.text);
+        } catch { /* ignore malformed chunks */ }
+      }
+    }
+
+    finalizeStream();
+    onDone(formData.nombre);
+
+  } catch (err) {
+    console.error(err);
+    showGenerationError('Error de conexión. Verificá tu internet e intentá de nuevo.');
+  }
+}
+
+function onDone(nombre) {
+  const status = document.getElementById('preview-status');
+  status.classList.add('done');
+  document.getElementById('status-text').textContent = '✓ Landing generada';
+
+  const waMsg = encodeURIComponent(
+    `Hola! Acabo de generar el copy de mi landing con el generador de Huella Digital. El negocio es "${nombre}". ¿Me ayudás a llevarla online?`
+  );
+  document.getElementById('btn-wsp-gen').href = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
+  reveal('after-preview', 500);
+  scrollBrowserToBottom();
+}
+
+function showGenerationError(msg) {
+  document.getElementById('preview-status').classList.remove('done');
+  document.getElementById('status-text').textContent = 'Error al generar';
+  document.querySelector('.status-dot').style.background = 'var(--red)';
+  document.getElementById('lp-skeleton').innerHTML = `
+    <div style="text-align:center;padding:48px;color:var(--gray)">
+      <div style="color:var(--red);font-family:'Bebas Neue',sans-serif;font-size:22px;margin-bottom:8px">ALGO SALIÓ MAL</div>
+      <div style="font-size:14px">${escapeHtml(msg)}</div>
+    </div>
+  `;
+}
+
+// ─── Form submit ───────────────────────────────────────────────────
+document.getElementById('gen-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = {
+    nombre:      document.getElementById('f-nombre').value.trim(),
+    rubro:       document.getElementById('f-rubro').value.trim(),
+    audiencia:   document.getElementById('f-audiencia').value.trim(),
+    dolor:       document.getElementById('f-dolor').value.trim(),
+    diferencial: document.getElementById('f-diferencial').value.trim(),
+    tono:        document.querySelector('input[name="tono"]:checked').value,
+  };
+
+  resetState();
+  switchToPreview(formData.nombre);
+  generate(formData);
+});
+
+// ─── Restart ───────────────────────────────────────────────────────
+function doRestart() {
+  if (twTimer) clearInterval(twTimer);
+
+  // Reset DOM sections
+  ['lp-hero','lp-about','lp-services','lp-oneliner','after-preview'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('visible');
+    el.style.display = 'none';
+  });
+  ['lp-s1','lp-s2','lp-s3'].forEach(id => {
+    document.getElementById(id).classList.remove('visible');
+  });
+  document.getElementById('lp-h2').classList.remove('visible');
+  document.getElementById('lp-cta').classList.remove('visible');
+  document.getElementById('lp-h1').textContent = '';
+  document.getElementById('lp-h2').textContent = '';
+  document.getElementById('lp-cta').textContent = '';
+  document.getElementById('lp-about-text').innerHTML = '';
+  document.getElementById('lp-cursor').classList.remove('hidden');
+
+  // Reset skeleton
+  const sk = document.getElementById('lp-skeleton');
+  sk.style.display = 'block';
+  sk.innerHTML = `
+    <div class="lp-skeleton sk-title"></div>
+    <div class="lp-skeleton sk-sub"></div>
+    <div class="lp-skeleton sk-sub2"></div>
+    <div class="lp-skeleton sk-btn"></div>
+  `;
+
+  // Reset status
+  const status = document.getElementById('preview-status');
+  status.classList.remove('done');
+  document.getElementById('status-text').textContent = 'Generando tu landing…';
+
+  // Switch phase
+  const preview = document.getElementById('phase-preview');
+  preview.classList.remove('visible');
+  setTimeout(() => {
+    preview.style.display = 'none';
+    const form = document.getElementById('phase-form');
+    form.style.display = 'flex';
+    form.classList.remove('fade-out');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 300);
+}
+
+document.getElementById('btn-restart').addEventListener('click', doRestart);
+document.getElementById('btn-otra').addEventListener('click', doRestart);
+</script>
+
+</body>
+</html>
