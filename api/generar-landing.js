@@ -1,4 +1,5 @@
 const Anthropic = require('@anthropic-ai/sdk');
+const { checkLimit, getIP } = require('./_ratelimit');
 
 const PROMPT = ({ nombre, rubro, audiencia, dolor, diferencial, tono }) => `Sos un Copywriter Senior y Estratega de Marca experto en el framework StoryBrand. Tu misión es generar el contenido principal de una landing page para un emprendedor argentino.
 
@@ -52,6 +53,14 @@ module.exports = async (req, res) => {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const ip = getIP(req);
+  const { allowed, minutesLeft } = checkLimit(ip, 5);
+  if (!allowed) {
+    return res.status(429).json({
+      error: `Alcanzaste el límite de generaciones por hora. Podés volver a generar en ${minutesLeft} minuto${minutesLeft !== 1 ? 's' : ''}.`
+    });
+  }
 
   const { nombre, rubro, audiencia, dolor, diferencial, tono } = req.body || {};
 

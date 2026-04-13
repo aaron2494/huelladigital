@@ -1,4 +1,5 @@
 const Anthropic = require('@anthropic-ai/sdk');
+const { checkLimit, getIP } = require('./_ratelimit');
 
 const PROMPT = ({ nombre, rubro, faq1, faq2, faq3 }) => `Sos el sistema de IA de un negocio argentino. Tu trabajo es simular exactamente cómo respondería un bot de WhatsApp profesional para este negocio.
 
@@ -41,6 +42,14 @@ module.exports = async (req, res) => {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const ip = getIP(req);
+  const { allowed, minutesLeft } = checkLimit(ip, 5);
+  if (!allowed) {
+    return res.status(429).json({
+      error: `Alcanzaste el límite de simulaciones por hora. Podés volver a generar en ${minutesLeft} minuto${minutesLeft !== 1 ? 's' : ''}.`
+    });
+  }
 
   const { nombre, rubro, faq1, faq2, faq3 } = req.body || {};
 

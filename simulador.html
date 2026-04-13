@@ -611,9 +611,46 @@ async function runSimulation(formData) {
   }
 }
 
+// ─── Inline form error ─────────────────────────────────────────────
+function showFormRateError(msg) {
+  let el = document.getElementById('form-rate-error');
+  if (!el) {
+    el = document.createElement('p');
+    el.id = 'form-rate-error';
+    el.style.cssText = 'color:var(--red);font-size:.85rem;text-align:center;margin-top:12px;';
+    document.getElementById('sim-form').appendChild(el);
+  }
+  el.textContent = msg;
+}
+
+// ─── Client-side rate limit (localStorage) ─────────────────────────
+const RL_KEY = 'hd_sim_times';
+const RL_LIMIT = 5;
+const RL_WINDOW = 60 * 60 * 1000;
+
+function rlCheck() {
+  const now = Date.now();
+  const times = JSON.parse(localStorage.getItem(RL_KEY) || '[]')
+    .filter(t => now - t < RL_WINDOW);
+  if (times.length >= RL_LIMIT) {
+    const oldest = Math.min(...times);
+    const mins = Math.ceil((oldest + RL_WINDOW - now) / 60000);
+    return { allowed: false, mins };
+  }
+  times.push(now);
+  localStorage.setItem(RL_KEY, JSON.stringify(times));
+  return { allowed: true };
+}
+
 // ─── Form submit ───────────────────────────────────────────────────
 document.getElementById('sim-form').addEventListener('submit', async (e) => {
   e.preventDefault();
+
+  const rl = rlCheck();
+  if (!rl.allowed) {
+    showFormRateError(`Alcanzaste el límite de simulaciones por hora. Podés volver en ${rl.mins} minuto${rl.mins !== 1 ? 's' : ''}.`);
+    return;
+  }
 
   const formData = {
     nombre:  document.getElementById('f-nombre').value.trim(),
