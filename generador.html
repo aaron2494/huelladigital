@@ -601,19 +601,32 @@ function scrollBrowserToBottom() {
 }
 
 // ─── Images ────────────────────────────────────────────────────────
-function setImages(rubro) {
-  const kw = encodeURIComponent(rubro.toLowerCase());
-  const seed = Date.now();
+async function setImages(rubro) {
+  try {
+    const res = await fetch(`/api/imagen?q=${encodeURIComponent(rubro)}&count=2`);
+    if (!res.ok) return;
+    const { photos } = await res.json();
+    if (!photos || !photos.length) return;
 
-  // Hero background
-  const heroBg = document.getElementById('lp-hero-bg');
-  heroBg.style.backgroundImage = `url(https://source.unsplash.com/featured/920x520/?${kw},business,local&sig=${seed})`;
+    // Hero background
+    if (photos[0]?.hero) {
+      const heroBg = document.getElementById('lp-hero-bg');
+      const img = new Image();
+      img.onload = () => { heroBg.style.backgroundImage = `url(${photos[0].hero})`; };
+      img.src = photos[0].hero;
+    }
 
-  // About image
-  const aboutImg = document.getElementById('lp-about-img');
-  aboutImg.src = `https://source.unsplash.com/featured/400x400/?${kw},work,professional&sig=${seed + 1}`;
-  aboutImg.onload = () => aboutImg.classList.add('img-loaded');
-  aboutImg.onerror = () => { aboutImg.parentElement.style.display = 'none'; };
+    // About image
+    const src = (photos[1] || photos[0])?.about;
+    if (src) {
+      const aboutImg = document.getElementById('lp-about-img');
+      aboutImg.src = src;
+      aboutImg.onload = () => aboutImg.classList.add('img-loaded');
+      aboutImg.onerror = () => { aboutImg.parentElement.style.display = 'none'; };
+    }
+  } catch (e) {
+    // Las imágenes fallan silenciosamente — el copy igual se muestra
+  }
 }
 
 // ─── Phase switch ──────────────────────────────────────────────────
