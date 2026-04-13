@@ -217,9 +217,21 @@ nav.scrolled {
 /* HERO */
 .lp-hero {
   padding: 72px 56px 64px; text-align: center;
-  background: linear-gradient(160deg, #111111 0%, #0a0a0a 100%);
+  background: #111111;
   border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
 }
+.lp-hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center; background-color: #111;
+  filter: brightness(0.25) saturate(0.7);
+  transition: opacity 0.6s ease;
+}
+.lp-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(10,10,10,0.65) 100%);
+}
+.lp-hero-content { position: relative; z-index: 1; }
 .lp-h1-wrap { margin-bottom: 20px; line-height: 0.95; }
 .lp-h1 {
   font-family: 'Bebas Neue', sans-serif;
@@ -265,6 +277,17 @@ nav.scrolled {
   font-size: 10px; font-weight: 700; letter-spacing: 3px;
   text-transform: uppercase; color: var(--red); margin-bottom: 20px;
 }
+.lp-about-inner { display: flex; gap: 28px; align-items: flex-start; }
+.lp-about-img-wrap {
+  flex-shrink: 0; width: 148px; height: 148px;
+  border-radius: 8px; overflow: hidden;
+  background: #1e1e1e; border: 1px solid var(--border);
+}
+.lp-about-img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: 0; transition: opacity 0.7s ease;
+}
+.lp-about-img.img-loaded { opacity: 1; }
 .lp-about-text p {
   font-size: 14px; line-height: 1.8; color: var(--gray); margin-bottom: 14px;
 }
@@ -354,6 +377,8 @@ nav.scrolled {
   .form-card { padding: 28px 20px; }
   .lp-hero { padding: 48px 28px; }
   .lp-about { padding: 40px 28px; }
+  .lp-about-inner { flex-direction: column; }
+  .lp-about-img-wrap { width: 100%; height: 180px; }
   .lp-services { padding: 40px 28px; }
   .lp-services-grid { grid-template-columns: 1fr; }
   .lp-oneliner { padding: 48px 28px; }
@@ -475,17 +500,26 @@ nav.scrolled {
 
       <!-- HERO -->
       <div class="lp-section lp-hero" id="lp-hero" style="display:none">
-        <div class="lp-h1-wrap">
-          <span class="lp-h1" id="lp-h1"></span><span class="lp-cursor" id="lp-cursor"></span>
+        <div class="lp-hero-bg" id="lp-hero-bg"></div>
+        <div class="lp-hero-overlay"></div>
+        <div class="lp-hero-content">
+          <div class="lp-h1-wrap">
+            <span class="lp-h1" id="lp-h1"></span><span class="lp-cursor" id="lp-cursor"></span>
+          </div>
+          <p class="lp-h2" id="lp-h2"></p>
+          <span class="lp-cta-btn" id="lp-cta"></span>
         </div>
-        <p class="lp-h2" id="lp-h2"></p>
-        <span class="lp-cta-btn" id="lp-cta"></span>
       </div>
 
       <!-- ABOUT -->
       <div class="lp-section lp-about" id="lp-about" style="display:none">
         <div class="lp-eyebrow">Sobre nosotros</div>
-        <div class="lp-about-text" id="lp-about-text"></div>
+        <div class="lp-about-inner">
+          <div class="lp-about-img-wrap">
+            <img class="lp-about-img" id="lp-about-img" src="" alt="" loading="lazy">
+          </div>
+          <div class="lp-about-text" id="lp-about-text"></div>
+        </div>
       </div>
 
       <!-- SERVICES -->
@@ -564,6 +598,22 @@ function reveal(id, delay) {
 function scrollBrowserToBottom() {
   const bc = document.getElementById('browser-content');
   setTimeout(() => bc.scrollTo({ top: bc.scrollHeight, behavior: 'smooth' }), 100);
+}
+
+// ─── Images ────────────────────────────────────────────────────────
+function setImages(rubro) {
+  const kw = encodeURIComponent(rubro.toLowerCase());
+  const seed = Date.now();
+
+  // Hero background
+  const heroBg = document.getElementById('lp-hero-bg');
+  heroBg.style.backgroundImage = `url(https://source.unsplash.com/featured/920x520/?${kw},business,local&sig=${seed})`;
+
+  // About image
+  const aboutImg = document.getElementById('lp-about-img');
+  aboutImg.src = `https://source.unsplash.com/featured/400x400/?${kw},work,professional&sig=${seed + 1}`;
+  aboutImg.onload = () => aboutImg.classList.add('img-loaded');
+  aboutImg.onerror = () => { aboutImg.parentElement.style.display = 'none'; };
 }
 
 // ─── Phase switch ──────────────────────────────────────────────────
@@ -844,6 +894,7 @@ document.getElementById('gen-form').addEventListener('submit', (e) => {
   };
 
   resetState();
+  setImages(formData.rubro);
   switchToPreview(formData.nombre);
   generate(formData);
 });
