@@ -43,17 +43,6 @@ ESTRUCTURA DEL BRIEF (usá exactamente estos markers):
 - Título del beneficio para el cliente
 - Descripción de 1 línea]
 
-§IMAGENES§
-[4 tipos específicos de imagen que debería usar — no "fotos del negocio", sino "foto del frente del local al atardecer con luz cálida"]
-
-§COPYCTA§
-[Mensaje para WhatsApp]
-[Texto para el botón]
-
-§SOCIAL§
-[Bio de Instagram sugerida — 150 caracteres]
-[Primer post sugerido — caption completo]
-
 §PORQUE§
 [3 razones por las que esta web va a generar clientes — específicas al negocio]
 
