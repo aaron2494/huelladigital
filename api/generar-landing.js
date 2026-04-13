@@ -46,6 +46,22 @@ FORMATO DE RESPUESTA — usá EXACTAMENTE estos marcadores, en este orden, sin m
 
 Respondé ÚNICAMENTE con el formato especificado. Sin explicaciones, sin markdown, sin texto adicional antes o después.`;
 
+// Suggest brand color based on rubro
+function suggestColor(rubro) {
+  const r = rubro.toLowerCase();
+  if (r.includes('pizza') || r.includes('hamburguesa') || r.includes('comida') || r.includes('restaurant') || r.includes('cocina')) return '#E53935'; // red
+  if (r.includes('peluquería') || r.includes('peluqueria') || r.includes('barber') || r.includes('belleza') || r.includes('estética')) return '#D62828'; // red
+  if (r.includes('gym') || r.includes('fitness') || r.includes('deporte') || r.includes('entrenamiento')) return '#0A0A0A'; // black
+  if (r.includes('limpieza') || r.includes('limpio') || r.includes('mantenimiento')) return '#0288D1'; // blue
+  if (r.includes('salud') || r.includes('clínica') || r.includes('clinica') || r.includes('médico') || r.includes('medico') || r.includes('odont') || r.includes('veterinaria')) return '#00897B'; // teal
+  if (r.includes('construcción') || r.includes('construccion') || r.includes('obra') || r.includes('arquitect')) return '#F57C00'; // orange
+  if (r.includes('flor') || r.includes('jardín') || r.includes('jardin') || r.includes('plantas')) return '#43A047'; // green
+  if (r.includes('música') || r.includes('musica') || r.includes('audio') || r.includes('dj')) return '#7B1FA2'; // purple
+  if (r.includes('negocio') || r.includes('asesor') || r.includes('consult')) return '#1565C0'; // blue
+  if (r.includes('transporte') || r.includes('logística') || r.includes('logistica') || r.includes('delivery')) return '#FDD835'; // yellow/gold
+  return '#D62828'; // default red
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -62,11 +78,17 @@ module.exports = async (req, res) => {
     });
   }
 
-  const { nombre, rubro, audiencia, dolor, diferencial, tono } = req.body || {};
+  const { nombre, rubro, audiencia, dolor, diferencial, color, tono } = req.body || {};
 
   if (!nombre?.trim() || !rubro?.trim() || !audiencia?.trim() || !dolor?.trim() || !diferencial?.trim()) {
     return res.status(400).json({ error: 'Faltan datos requeridos.' });
   }
+
+  // Suggest color if not provided
+  const brandColor = color?.trim() || suggestColor(rubro.trim());
+
+  // Return color in stream for UI application
+  res.write(`data: ${JSON.stringify({ color: brandColor })}\n\n`);
 
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 

@@ -18,6 +18,10 @@
   --black: #0A0A0A; --dark: #111111; --card: #161616;
   --border: rgba(255,255,255,0.07); --white: #FFFFFF;
   --gray: rgba(255,255,255,0.55); --gray-dim: rgba(255,255,255,0.25);
+  
+  /* Brand color - dynamically applied */
+  --brand: #D62828;
+  --lp-brand: var(--red);
 }
 
 html { scroll-behavior: smooth; }
@@ -258,12 +262,13 @@ nav.scrolled {
 .lp-h2.visible { opacity: 1; }
 
 .lp-cta-btn {
-  display: inline-block; background: var(--red);
+  display: inline-block; background: var(--lp-brand);
   padding: 13px 30px; border-radius: 4px;
   font-family: 'Bebas Neue', sans-serif; font-size: 18px;
   letter-spacing: 1.5px; color: white;
   opacity: 0; transition: opacity 0.5s ease;
   cursor: default;
+  transition: background 0.3s ease;
 }
 .lp-cta-btn.visible { opacity: 1; }
 
@@ -275,7 +280,7 @@ nav.scrolled {
 }
 .lp-eyebrow {
   font-size: 10px; font-weight: 700; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--red); margin-bottom: 20px;
+  text-transform: uppercase; color: var(--lp-brand); margin-bottom: 20px;
 }
 .lp-about-inner { display: flex; gap: 28px; align-items: flex-start; }
 .lp-about-img-wrap {
@@ -517,6 +522,12 @@ nav.scrolled {
           <input type="text" id="f-diferencial" placeholder="Ej: Masa madre propia, entrega en 30 min, sin TACC" required maxlength="120">
         </div>
 
+        <div class="field field-mb">
+          <label for="f-color">🎨 Color de marca (opcional)</label>
+          <input type="text" id="f-color" placeholder="Ej: #D62828, azul, dorado..." maxlength="20">
+          <p style="font-size:11px;color:var(--gray-dim);margin-top:6px">Dejá vacío y te sugerimos uno según tu rubro</p>
+        </div>
+
         <div class="tono-wrap">
           <span class="tono-label-text">Tono de voz</span>
           <div class="tono-pills">
@@ -709,6 +720,31 @@ function reveal(id, delay) {
 function scrollBrowserToBottom() {
   const bc = document.getElementById('browser-content');
   setTimeout(() => bc.scrollTo({ top: bc.scrollHeight, behavior: 'smooth' }), 100);
+}
+
+// ─── Brand color application ────────────────────────────────────────
+function applyBrandColor(color) {
+  if (!color) return;
+  // Normalize color
+  const normalized = color.startsWith('#') ? color.toUpperCase() : color.toLowerCase();
+  document.documentElement.style.setProperty('--brand', normalized);
+  
+  // Apply to key elements in preview
+  const root = document.documentElement;
+  root.style.setProperty('--lp-brand', normalized);
+  
+  // Also update CTA button and accents
+  const cta = document.getElementById('lp-cta');
+  if (cta) cta.style.background = normalized;
+  
+  // Update oneliner background
+  const oneliner = document.getElementById('lp-oneliner');
+  if (oneliner) oneliner.style.background = normalized;
+  
+  // Update eyebrow accents
+  document.querySelectorAll('.lp-eyebrow').forEach(el => {
+    el.style.color = normalized;
+  });
 }
 
 // ─── Images ────────────────────────────────────────────────────────
@@ -966,6 +1002,7 @@ async function generate(formData) {
         try {
           const parsed = JSON.parse(raw);
           if (parsed.error) { showGenerationError(parsed.error); return; }
+          if (parsed.color) applyBrandColor(parsed.color);
           if (parsed.text) processChunk(parsed.text);
         } catch { /* ignore malformed chunks */ }
       }
@@ -1085,6 +1122,7 @@ function buildShareURL() {
     audiencia:   document.getElementById('f-audiencia').value.trim(),
     dolor:       document.getElementById('f-dolor').value.trim(),
     diferencial: document.getElementById('f-diferencial').value.trim(),
+    color:       document.getElementById('f-color').value.trim() || '',
     tono:        document.querySelector('input[name="tono"]:checked')?.value || 'Cercano y familiar',
   });
   return `${location.origin}/generador.html?${params.toString()}`;
@@ -1165,6 +1203,7 @@ document.getElementById('gen-form').addEventListener('submit', (e) => {
     audiencia:   document.getElementById('f-audiencia').value.trim(),
     dolor:       document.getElementById('f-dolor').value.trim(),
     diferencial: document.getElementById('f-diferencial').value.trim(),
+    color:       document.getElementById('f-color').value.trim() || null,
     tono:        document.querySelector('input[name="tono"]:checked').value,
   };
 
