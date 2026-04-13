@@ -355,13 +355,14 @@ nav.scrolled {
 .lead-capture.visible { opacity: 1; transform: translateY(0); }
 
 .lead-card {
-  background: var(--card); border: 1px solid rgba(214,40,40,0.25);
+  background: var(--card); border: 1px solid var(--lp-brand);
+  border-color: rgba(214,40,40,0.25);
   border-radius: 12px; padding: 40px 48px;
   position: relative; overflow: hidden;
 }
 .lead-card::before {
   content: ''; position: absolute; top: 0; left: 48px; right: 48px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  background: linear-gradient(90deg, transparent, var(--lp-brand), transparent);
 }
 .lead-badge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -1218,6 +1219,10 @@ document.getElementById('gen-form').addEventListener('submit', (e) => {
 function doRestart() {
   if (twTimer) clearInterval(twTimer);
 
+  // Reset brand color to default
+  document.documentElement.style.setProperty('--brand', '#D62828');
+  document.documentElement.style.setProperty('--lp-brand', '#D62828');
+
   // Reset DOM sections
   ['lp-hero','lp-about','lp-services','lp-oneliner','after-preview'].forEach(id => {
     const el = document.getElementById(id);
@@ -1232,6 +1237,8 @@ function doRestart() {
   document.getElementById('lp-h1').textContent = '';
   document.getElementById('lp-h2').textContent = '';
   document.getElementById('lp-cta').textContent = '';
+  document.getElementById('lp-cta').style.background = '';
+  document.getElementById('lp-oneliner').style.background = '';
   document.getElementById('lp-about-text').innerHTML = '';
   document.getElementById('lp-cursor').classList.remove('hidden');
 
@@ -1277,6 +1284,11 @@ document.getElementById('btn-otra').addEventListener('click', doRestart);
   set('f-audiencia',   p.get('audiencia'));
   set('f-dolor',       p.get('dolor'));
   set('f-diferencial', p.get('diferencial'));
+  set('f-color',       p.get('color'));
+
+  // Auto-apply color if provided in URL
+  const urlColor = p.get('color');
+  if (urlColor) applyBrandColor(urlColor);
 
   const tono = p.get('tono');
   if (tono) {
