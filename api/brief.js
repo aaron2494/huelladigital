@@ -1,44 +1,63 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const { checkLimit, getIP } = require('./_ratelimit');
 
-const PROMPT = ({ nombre, negocio, target, diferencial, color }) => `Sos un estratega de marca y planner web. Tu misión es generar un brief orientativo para un cliente que quiere una página web.
+const PROMPT = ({ nombre, negocio, target, diferencial, color }) => `Sos el Director de Estrategia de la agencia Huella Digital. Un潜在 cliente completó un brief y necesitás entregarle EL PLAN COMPLETO para su web. Esto NO son sugerencias — es lo que vas a construir.
 
-DATOS DEL NEGOCIO:
-- Nombre: ${nombre}
+Tu job: Generar un brief comercial que:
+- Sea tan bueno que el cliente quiera contrate AHORA
+- Se sienta como "ya está todo listo"
+- Tenga texto real, usable, no genérico
+- Use estructura de ventas: problema → solución → beneficio
+
+DATOS:
+- Negocio: ${nombre}
 - Qué hace: ${negocio}
-- Para quién es: ${target}
+- Para quién: ${target}
 - Diferencial: ${diferencial}
-- Color de marca: ${color}
+- Color: ${color}
 
 REGLAS:
-1. Usá segunda persona ("tu negocio", "tus clientes")
-2. Frases cortas, tono argentino, sin tecnicismos
-3. Sé específico — nada de texto genérico
-4. Si no te dan diferencial, inventá uno razonable basado en el negocio
+1. NUNCA digas "sugerimos" — siempreDecinos "esto es lo que lleva tu web"
+2. El copy debe ser usable TAL CUAL — no placeholders
+3. Usá el nombre del negocio en todas partes
+4. Tono: profesional pero cercano, como un AM que conoce su negocio
+5. Incluí-benefit en cada servicio
 
-FORMATO DE RESPUESTA — usá EXACTAMENTE estos marcadores:
+ESTRUCTURA DEL BRIEF (usá exactamente estos markers):
+
+§RESUMEN§
+[Párrafo de 3 líneas que vende la propuesta de valor del sitio — por qué necesita esta web y qué va a lograr]
 
 §ESTRUCTURA§
-[Listado de 4-5 secciones recomendadas para la web — una por línea]
+[Lista de 6 secciones con nombres específicos — no "Home", sino "Tu Home con mensaje de impacto"]
 
 §TEXTOS§
-[H1 suggested]
-[Subtítulo suggested]
-[Párrafo "Sobre nosotros" sugerido — 2-3 frases]
+[H1 definitivo — el titular que va en la home]
+[Subtítulo — el gancho bajo el H1]
+[Párrafo About — la historia del negocio, lista para copiar]
+[3 beneficios clave para el cliente]
 
 §SERVICIOS§
-[3 servicios con descripción corta cada uno]
-
-§COLORES§
-[Paleta sugerida: color principal + 2 colores complementarios en hex]
+[3 servicios con:
+- Nombre del servicio
+- Título del beneficio para el cliente
+- Descripción de 1 línea]
 
 §IMAGENES§
-[3 ideas de tipo de imagen que應該 usar — específico, no "fotos genéricas"]
+[4 tipos específicos de imagen que debería usar — no "fotos del negocio", sino "foto del frente del local al atardecer con luz cálida"]
 
-§CTA§
-[Mensaje para el botón de contacto]
+§COPYCTA§
+[Mensaje para WhatsApp]
+[Texto para el botón]
 
-Respondé ÚNICAMENTE con el formato. Sin markdown, sin texto extra.`;
+§SOCIAL§
+[Bio de Instagram sugerida — 150 caracteres]
+[Primer post sugerido — caption completo]
+
+§PORQUE§
+[3 razones por las que esta web va a generar clientes — específicas al negocio]
+
+Respondé TODO, ningún campo vacío. Se específico y concreto.`;
 
 function suggestColor(negocio) {
   const n = negocio.toLowerCase();
@@ -49,7 +68,7 @@ function suggestColor(negocio) {
   if (n.includes('belleza') || n.includes('peluqu') || n.includes('barber')) return '#D62828,#FFFFFF,#1E1E1E';
   if (n.includes('flor') || n.includes('jardín')) return '#43A047,#FFFFFF,#0A0A0A';
   if (n.includes('música') || n.includes('dj')) return '#7B1FA2,#FFFFFF,#0A0A0A';
-  return '#D62828,#FFFFFF,#1E1E1E'; // default
+  return '#D62828,#FFFFFF,#1E1E1E';
 }
 
 function parseColor(input) {

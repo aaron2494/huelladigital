@@ -255,7 +255,7 @@ nav {
 
     <!-- COLORES -->
     <div class="brief-card" id="card-colores">
-      <h3>🎨 Paleta Sugerida</h3>
+      <h3>🎨 Paleta de Colores</h3>
       <div class="palette-colors" id="palette-display">
         <div class="skeleton palette-swatch" style="width:80px;height:80px"></div>
         <div class="skeleton palette-swatch" style="width:80px;height:80px"></div>
@@ -263,9 +263,19 @@ nav {
       </div>
     </div>
 
+    <!-- RESUMEN -->
+    <div class="brief-card" id="card-resumen">
+      <h3>💡 La Propuesta</h3>
+      <div id="resumen-content">
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-text"></div>
+        <div class="skeleton sk-text2"></div>
+      </div>
+    </div>
+
     <!-- ESTRUCTURA -->
     <div class="brief-card" id="card-estructura">
-      <h3>🗂️ Estructura Recomendada</h3>
+      <h3>🗂️ Secciones de tu Web</h3>
       <div id="estructura-content">
         <div class="skeleton sk-title"></div>
         <div class="skeleton sk-text"></div>
@@ -275,7 +285,7 @@ nav {
 
     <!-- TEXTOS -->
     <div class="brief-card" id="card-textos">
-      <h3>✍️ Textos Sugeridos</h3>
+      <h3>✍️ Copy Listo para Usar</h3>
       <div id="textos-content">
         <div class="skeleton sk-title"></div>
         <div class="skeleton sk-text"></div>
@@ -285,13 +295,53 @@ nav {
 
     <!-- SERVICIOS -->
     <div class="brief-card" id="card-servicios">
-      <h3>⚡ Servicios</h3>
+      <h3>⚡ Servicios con Beneficio</h3>
       <div id="servicios-content">
         <div class="skeleton sk-title"></div>
         <div class="skeleton sk-text"></div>
         <div class="skeleton sk-text2"></div>
       </div>
     </div>
+
+    <!-- IMAGENES -->
+    <div class="brief-card" id="card-imagenes">
+      <h3>📷 Guía de Imágenes</h3>
+      <div id="imagenes-content">
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-text"></div>
+        <div class="skeleton sk-text2"></div>
+      </div>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="brief-card" id="card-social">
+      <h3>📱 Contenido para Instagram</h3>
+      <div id="social-content">
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-text"></div>
+        <div class="skeleton sk-text2"></div>
+      </div>
+    </div>
+
+    <!-- PORQUE -->
+    <div class="brief-card" id="card-porque">
+      <h3>🎯 Por Qué Va a Generar Clientes</h3>
+      <div id="porque-content">
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-text"></div>
+        <div class="skeleton sk-text2"></div>
+      </div>
+    </div>
+
+    <!-- COPYCTA -->
+    <div class="brief-card" id="card-copycta">
+      <h3>📣 Contacto</h3>
+      <div id="copycta-content">
+        <div class="skeleton sk-title"></div>
+      </div>
+    </div>
+
+    <div class="brief-cta">
 
     <!-- IMAGENES -->
     <div class="brief-card" id="card-imagenes">
@@ -328,12 +378,15 @@ const WA_NUMBER = '5491164115327';
 
 let state = { buffer: '', currentKey: null, sections: {} };
 const MARKERS = [
+  { tag: '§RESUMEN§', key: 'resumen' },
   { tag: '§ESTRUCTURA§', key: 'estructura' },
   { tag: '§TEXTOS§', key: 'textos' },
   { tag: '§SERVICIOS§', key: 'servicios' },
   { tag: '§IMAGENES§', key: 'imagenes' },
+  { tag: '§COPYCTA§', key: 'copycta' },
+  { tag: '§SOCIAL§', key: 'social' },
+  { tag: '§PORQUE§', key: 'porque' },
   { tag: '§COLORES§', key: 'colores' },
-  { tag: '§CTA§', key: 'cta' },
 ];
 
 function escapeHtml(str) {
@@ -370,13 +423,13 @@ function renderSection(key, raw) {
   const el = document.getElementById(`${key}-content`);
   if (!el) return;
   
-  if (key === 'estructura' || key === 'servicios' || key === 'imagenes') {
+  if (key === 'estructura' || key === 'servicios' || key === 'imagenes' || key === 'porque') {
     const lines = content.split('\n').filter(l => l.trim());
     el.innerHTML = `<ul>${lines.map(l => `<li>${escapeHtml(l.trim())}</li>`).join('')}</ul>`;
   } else if (key === 'textos') {
     el.innerHTML = content.split('\n').map(l => `<div class="textos-content">${escapeHtml(l.trim())}</div>`).join('');
-  } else if (key === 'cta') {
-    el.innerHTML = `<p>${escapeHtml(content)}</p>`;
+  } else if (key === 'resumen' || key === 'copycta' || key === 'social') {
+    el.innerHTML = `<div class="textos-content" style="white-space:pre-line">${escapeHtml(content)}</div>`;
   } else if (key === 'colores') {
     // Already handled separately
   }
@@ -488,118 +541,190 @@ document.getElementById('btn-download').addEventListener('click', async () => {
   const BRAND = '#D62828';
   const DARK = '#0A0A0A';
   const GRAY = '#666666';
+  let y = 50;
   
   // Header
   doc.setFillColor(DARK);
-  doc.rect(0, 0, 210, 40, 'F');
+  doc.rect(0, 0, 210, 35, 'F');
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(24);
+  doc.setFontSize(22);
   doc.setTextColor('#FFFFFF');
-  doc.text('BRIEF WEB', 20, 25);
-  doc.setFontSize(12);
-  doc.text(nombre, 20, 33);
+  doc.text('BRIEF WEB', 15, 22);
+  doc.setFontSize(11);
+  doc.text(nombre, 15, 30);
   
   // Colors
   doc.setTextColor(DARK);
-  doc.setFontSize(14);
+  doc.setFontSize(12);
   doc.setFont('helvetica', 'bold');
-  doc.text('PALETA DE COLORES', 20, 55);
+  doc.text('PALETA DE COLORES', 15, y);
+  y += 8;
   
-  let x = 20;
+  let x = 15;
   colors.forEach((c, i) => {
     doc.setFillColor(c);
-    doc.roundedRect(x, 60, 25, 15, 3, 3, 'F');
-    doc.setFontSize(8);
+    doc.roundedRect(x, y, 22, 12, 2, 2, 'F');
+    doc.setFontSize(7);
     doc.setTextColor(c === '#FFFFFF' ? '#000' : '#fff');
-    doc.text(c, x + 3, 70);
-    x += 35;
+    doc.text(c, x + 2, y + 8);
+    x += 30;
   });
+  y += 25;
+  
+  // Resumen
+  if (s.resumen) {
+    doc.setTextColor(BRAND);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('LA PROPUESTA', 15, y);
+    y += 7;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(GRAY);
+    const lines = doc.splitTextToWidth(s.resumen.trim(), 180);
+    lines.slice(0, 4).forEach(line => {
+      doc.text(line, 15, y);
+      y += 5;
+    });
+    y += 10;
+  }
   
   // Estructura
-  doc.setTextColor(DARK);
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.text('ESTRUCTURA RECOMENDADA', 20, 90);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(GRAY);
-  
-  const estructura = s.estructura || '';
-  const estLines = estructura.split('\n').filter(l => l.trim());
-  let y = 98;
-  estLines.slice(0, 5).forEach(line => {
-    doc.text('• ' + line.trim(), 20, y);
+  if (s.estructura) {
+    doc.setTextColor(DARK);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('SECCIONES DE TU WEB', 15, y);
     y += 7;
-  });
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(GRAY);
+    const lines = s.estructura.split('\n').filter(l => l.trim());
+    lines.slice(0, 6).forEach(line => {
+      doc.text('• ' + line.trim(), 15, y);
+      y += 5;
+    });
+    y += 8;
+  }
   
   // Textos
-  doc.setTextColor(DARK);
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.text('TEXTOS SUGERIDOS', 20, y + 10);
-  y += 18;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  
-  const textos = s.textos || '';
-  const txtLines = textos.split('\n').filter(l => l.trim());
-  txtLines.slice(0, 3).forEach(line => {
+  if (s.textos) {
+    if (y > 220) { doc.addPage(); y = 20; }
     doc.setTextColor(DARK);
-    doc.text(line.trim(), 20, y);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('COPY LISTO PARA USAR', 15, y);
     y += 7;
-  });
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(GRAY);
+    const lines = s.textos.split('\n').filter(l => l.trim());
+    lines.slice(0, 5).forEach(line => {
+      doc.setTextColor(DARK);
+      doc.text(line.trim(), 15, y);
+      y += 5;
+    });
+    y += 8;
+  }
   
   // Servicios
-  doc.setTextColor(DARK);
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.text('SERVICIOS', 20, y + 12);
-  y += 20;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(GRAY);
-  
-  const servicios = s.servicios || '';
-  const srvLines = servicios.split('\n').filter(l => l.trim());
-  srvLines.slice(0, 4).forEach(line => {
-    doc.text('• ' + line.trim(), 20, y);
-    y += 7;
-  });
-  
-  // Imágenes
-  if (s.imagenes) {
+  if (s.servicios) {
+    if (y > 220) { doc.addPage(); y = 20; }
     doc.setTextColor(DARK);
-    doc.setFontSize(14);
+    doc.setFontSize(12);
     doc.setFont('helvetica', 'bold');
-    doc.text('IDEAS DE IMÁGENES', 20, y + 12);
-    y += 20;
+    doc.text('SERVICIOS CON BENEFICIO', 15, y);
+    y += 7;
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
+    doc.setFontSize(9);
     doc.setTextColor(GRAY);
-    
-    const imgLines = s.imagenes.split('\n').filter(l => l.trim());
-    imgLines.slice(0, 3).forEach(line => {
-      doc.text('• ' + line.trim(), 20, y);
-      y += 7;
+    const lines = s.servicios.split('\n').filter(l => l.trim());
+    lines.slice(0, 4).forEach(line => {
+      doc.text('• ' + line.trim(), 15, y);
+      y += 5;
     });
+    y += 8;
+  }
+  
+  // Imagenes
+  if (s.imagenes) {
+    if (y > 220) { doc.addPage(); y = 20; }
+    doc.setTextColor(DARK);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('GUÍA DE IMÁGENES', 15, y);
+    y += 7;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(GRAY);
+    const lines = s.imagenes.split('\n').filter(l => l.trim());
+    lines.slice(0, 4).forEach(line => {
+      doc.text('• ' + line.trim(), 15, y);
+      y += 5;
+    });
+    y += 8;
+  }
+  
+  // Social
+  if (s.social) {
+    if (y > 220) { doc.addPage(); y = 20; }
+    doc.setTextColor(BRAND);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('CONTENIDO PARA INSTAGRAM', 15, y);
+    y += 7;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(GRAY);
+    const lines = doc.splitTextToWidth(s.social.trim(), 180);
+    lines.slice(0, 6).forEach(line => {
+      doc.text(line, 15, y);
+      y += 5;
+    });
+    y += 8;
+  }
+  
+  // Porque
+  if (s.porque) {
+    if (y > 220) { doc.addPage(); y = 20; }
+    doc.setTextColor(DARK);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('POR QUÉ VA A GENERAR CLIENTES', 15, y);
+    y += 7;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(GRAY);
+    const lines = s.porque.split('\n').filter(l => l.trim());
+    lines.slice(0, 3).forEach(line => {
+      doc.text('• ' + line.trim(), 15, y);
+      y += 5;
+    });
+    y += 8;
   }
   
   // CTA
-  if (s.cta) {
+  if (s.copycta) {
+    if (y > 220) { doc.addPage(); y = 20; }
     doc.setTextColor(BRAND);
-    doc.setFontSize(14);
+    doc.setFontSize(12);
     doc.setFont('helvetica', 'bold');
-    doc.text('CONTACTO SUGERIDO', 20, y + 12);
-    y += 20;
+    doc.text('CONTACTO', 15, y);
+    y += 7;
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(11);
-    doc.text(s.cta.trim(), 20, y);
+    doc.setFontSize(9);
+    doc.setTextColor(GRAY);
+    const lines = doc.splitTextToWidth(s.copycta.trim(), 180);
+    lines.slice(0, 3).forEach(line => {
+      doc.text(line, 15, y);
+      y += 5;
+    });
   }
   
   // Footer
   doc.setFontSize(8);
   doc.setTextColor('#999');
-  doc.text('Generado por Huella Digital | huelladigital.ar', 20, 285);
+  doc.text('Generado por Huella Digital | huelladigital.ar', 15, 290);
   
   // Download
   doc.save(`brief-${nombre.toLowerCase().replace(/\s+/g, '-')}.pdf`);
