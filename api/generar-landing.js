@@ -46,6 +46,46 @@ FORMATO DE RESPUESTA — usá EXACTAMENTE estos marcadores, en este orden, sin m
 
 Respondé ÚNICAMENTE con el formato especificado. Sin explicaciones, sin markdown, sin texto adicional antes o después.`;
 
+// Parse user color input (hex or name) to hex
+function parseColor(input) {
+  if (!input) return null;
+  const c = input.trim().toLowerCase();
+  
+  // Already hex
+  if (c.startsWith('#')) return c.toUpperCase();
+  
+  // Common color names -> hex
+  const colors = {
+    'rosa': '#E91E63',
+    'rojo': '#D62828',
+    'rojo oscuro': '#B71C1C',
+    'azul': '#2196F3',
+    'azul oscuro': '#1565C0',
+    'verde': '#4CAF50',
+    'verde oscuro': '#388E3C',
+    'negro': '#0A0A0A',
+    'blanco': '#FFFFFF',
+    'gris': '#6B6B66',
+    'naranja': '#FF9800',
+    'dorado': '#FFC107',
+    'amarillo': '#FFEB3B',
+    'violeta': '#9C27B0',
+    'morado': '#7B1FA2',
+    'celeste': '#03A9F4',
+    'turquesa': '#009688',
+    'cyan': '#00BCD4',
+    'lime': '#CDDC39',
+    'teal': '#00897B',
+  };
+  
+  // Check exact or partial match
+  for (const [name, hex] of Object.entries(colors)) {
+    if (c.includes(name) || c === name) return hex;
+  }
+  
+  return null;
+}
+
 // Suggest brand color based on rubro
 function suggestColor(rubro) {
   const r = rubro.toLowerCase();
@@ -84,8 +124,9 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Faltan datos requeridos.' });
   }
 
-  // Suggest color if not provided
-  const brandColor = color?.trim() || suggestColor(rubro.trim());
+  // Parse user color or suggest based on rubro
+  const parsedColor = parseColor(color);
+  const brandColor = parsedColor || suggestColor(rubro.trim());
 
   // Set SSE headers FIRST
   res.setHeader('Content-Type', 'text/event-stream');

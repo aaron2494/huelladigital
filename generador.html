@@ -1004,7 +1004,10 @@ async function generate(formData) {
         try {
           const parsed = JSON.parse(raw);
           if (parsed.error) { showGenerationError(parsed.error); return; }
-          if (parsed.color) applyBrandColor(parsed.color);
+          if (parsed.color) {
+          console.log('[COLOR] Received:', parsed.color);
+          applyBrandColor(parsed.color);
+        }
           if (parsed.text) processChunk(parsed.text);
         } catch { /* ignore malformed chunks */ }
       }
