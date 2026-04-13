@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brief Builder | Huella Digital</title>
+<meta name="description" content="Armá el plan de tu web en 2 minutos. Completá y te sugerimos estructura, textos y colores.">
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='47' r='7' fill='%23D62828'/%3E%3Cellipse cx='50' cy='47' rx='17' ry='12' fill='none' stroke='white' stroke-width='5'/%3E%3Cellipse cx='50' cy='47' rx='29' ry='21' fill='none' stroke='white' stroke-width='4' stroke-dasharray='165 8'/%3E%3Cellipse cx='50' cy='47' rx='42' ry='31' fill='none' stroke='%23D62828' stroke-width='3.5' stroke-dasharray='240 10'/%3E%3C/svg%3E">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red: #D62828; --red-dark: #A81F1F;
+  --black: #0A0A0A; --dark: #111111; --card: #161616;
+  --border: rgba(255,255,255,0.07); --white: #FFFFFF;
+  --gray: rgba(255,255,255,0.55); --gray-dim: rgba(255,255,255,0.25);
+  --brand: #D62828;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--red); color: white; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 900px; margin: 0 auto; padding: 0 32px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; color: var(--white); line-height: 1; }
+.nav-logo-text span { color: var(--red); }
+.nav-back { font-size: 13px; font-weight: 600; letter-spacing: 1px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--white); }
+
+#app { min-height: 100vh; padding: 100px 24px 80px; }
+
+.hero { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.hero-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--red); border: 1px solid rgba(214,40,40,0.3);
+  border-radius: 2px; padding: 6px 14px; margin-bottom: 24px;
+}
+.hero-h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 7vw, 64px);
+  line-height: 0.95; letter-spacing: 1px; margin-bottom: 16px;
+}
+.hero-h1 .red { color: var(--red); }
+.hero-sub { font-size: 16px; line-height: 1.6; color: var(--gray); }
+
+.form-card {
+  max-width: 520px; margin: 0 auto;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 32px;
+}
+.form-card::before {
+  content: ''; position: absolute; top: 0; left: 40px; right: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+}
+.field { margin-bottom: 20px; }
+.field label {
+  display: block; font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gray-dim); margin-bottom: 8px;
+}
+.field input {
+  width: 100%; background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 14px 16px; font-family: 'Inter', sans-serif;
+  font-size: 15px; color: var(--white); outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.field input::placeholder { color: var(--gray-dim); }
+.field input:focus {
+  border-color: rgba(214,40,40,0.5);
+  background: rgba(214,40,40,0.04);
+}
+
+.btn-submit {
+  width: 100%; padding: 16px; background: var(--red);
+  border: none; border-radius: 6px; cursor: pointer;
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+  letter-spacing: 2px; color: white;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-submit:hover { background: var(--red-dark); }
+.btn-submit:active { transform: scale(0.99); }
+.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.form-disclaimer { text-align: center; font-size: 12px; color: var(--gray-dim); margin-top: 14px; }
+
+/* ─── BRIEF OUTPUT ───────────────────────────────────────────────── */
+#brief-output {
+  display: none; max-width: 700px; margin: 0 auto;
+  animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.brief-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px; flex-wrap: wrap; gap: 16px;
+}
+.brief-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 1px;
+}
+.btn-new { 
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  color: var(--gray); background: none;
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 8px 16px; cursor: pointer; transition: all 0.2s;
+}
+.btn-new:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+.brief-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 28px; margin-bottom: 20px;
+}
+.brief-card h3 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+  letter-spacing: 1px; color: var(--red); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.brief-card h3::before { content: ''; width: 4px; height: 18px; background: var(--red); border-radius: 2px; }
+.brief-card p, .brief-card ul { font-size: 14px; line-height: 1.7; color: var(--gray); }
+.brief-card ul { padding-left: 20px; }
+.brief-card li { margin-bottom: 6px; }
+
+.palette-colors {
+  display: flex; gap: 12px; margin-top: 12px;
+}
+.palette-swatch {
+  width: 48px; height: 48px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.7);
+}
+
+.brief-cta {
+  text-align: center; margin-top: 32px; padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.brief-cta p { font-size: 15px; color: var(--gray); margin-bottom: 16px; }
+.btn-wsp {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #25D366; color: white;
+  padding: 16px 32px; border-radius: 6px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+  letter-spacing: 1.5px; text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-wsp:hover { background: #1ebe5d; transform: scale(1.02); }
+
+.textos-content {
+  background: #0d0d0d; border-radius: 8px; padding: 16px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px;
+  line-height: 1.5; margin-bottom: 12px;
+}
+
+.skeleton {
+  background: rgba(255,255,255,0.05); border-radius: 4px;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+@keyframes shimmer { 0%,100% { opacity: 0.4; } 50% { opacity: 0.9; } }
+.sk-title { height: 24px; width: 60%; margin-bottom: 12px; }
+.sk-text { height: 16px; width: 90%; margin-bottom: 8px; }
+.sk-text2 { height: 16px; width: 70%; }
+
+@media (max-width: 500px) {
+  .form-card { padding: 24px 20px; }
+  .brief-card { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 32 32" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="3.5" fill="#D62828"/>
+        <ellipse cx="16" cy="16" rx="8" ry="5.8" fill="none" stroke="white" stroke-width="2.2"/>
+        <ellipse cx="16" cy="16" rx="13.5" ry="9.8" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8"/>
+      </svg>
+      <span class="nav-logo-text">HUELLA<span>DIGITAL</span></span>
+    </a>
+    <a href="index.html" class="nav-back">← Volver</a>
+  </div>
+</nav>
+
+<div id="app">
+  <!-- PHASE 1: FORM -->
+  <div id="phase-form">
+    <div class="hero">
+      <div class="hero-label">✦ Brief Express</div>
+      <h1 class="hero-h1">ARMÁ EL PLAN<br>DE TU <span class="red">WEB</span></h1>
+      <p class="hero-sub">
+        Completá 4 datos y te sugerimos la estructura,<br>textos y colores para tu página.
+      </p>
+    </div>
+
+    <div class="form-card">
+      <form id="brief-form">
+        <div class="field">
+          <label for="f-nombre">Nombre del negocio</label>
+          <input type="text" id="f-nombre" placeholder="Ej: Pizzería Carlitos" required maxlength="60">
+        </div>
+        <div class="field">
+          <label for="f-negocio">Qué hacés / servicio principal</label>
+          <input type="text" id="f-negocio" placeholder="Ej: Pizzas artisanales a domicilio" required maxlength="80">
+        </div>
+        <div class="field">
+          <label for="f-target">Para quién es (tu cliente ideal)</label>
+          <input type="text" id="f-target" placeholder="Ej: Familias del barrio que buscan comida rica" required maxlength="100">
+        </div>
+        <div class="field">
+          <label for="f-diferencial">Qué te diferencia (opcional)</label>
+          <input type="text" id="f-diferencial" placeholder="Ej: Masa madre propia, entrega en 30 min" maxlength="80">
+        </div>
+        <div class="field" style="margin-bottom:24px">
+          <label for="f-color">Color de marca (opcional)</label>
+          <input type="text" id="f-color" placeholder="Ej: rojo, azul, #D62828..." maxlength="20">
+        </div>
+
+        <button type="submit" class="btn-submit">GENERAR MI BRIEF</button>
+        <p class="form-disclaimer">Sin registro. 100% gratuito.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- PHASE 2: OUTPUT -->
+  <div id="brief-output">
+<div class="brief-header">
+  <h2 class="brief-title">📋 Brief: <span id="output-nombre"></span></h2>
+  <div style="display:flex;gap:12px">
+    <button class="btn-new" id="btn-download">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+      </svg>
+      Descargar PDF
+    </button>
+    <button class="btn-new" id="btn-new">← Generar otro</button>
+  </div>
+</div>
+
+    <!-- COLORES -->
+    <div class="brief-card" id="card-colores">
+      <h3>🎨 Paleta Sugerida</h3>
+      <div class="palette-colors" id="palette-display">
+        <div class="skeleton palette-swatch" style="width:80px;height:80px"></div>
+        <div class="skeleton palette-swatch" style="width:80px;height:80px"></div>
+        <div class="skeleton palette-swatch" style="width:80px;height:80px"></div>
+      </div>
+    </div>
+
+    <!-- ESTRUCTURA -->
+    <div class="brief-card" id="card-estructura">
+      <h3>🗂️ Estructura Recomendada</h3>
+      <div id="estructura-content">
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-text"></div>
+        <div class="skeleton sk-text2"></div>
+      </div>
+    </div>
+
+    <!-- TEXTOS -->
+    <div class="brief-card" id="card-textos">
+      <h3>✍️ Textos Sugeridos</h3>
+      <div id="textos-content">
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-text"></div>
+        <div class="skeleton sk-text2"></div>
+      </div>
+    </div>
+
+    <!-- SERVICIOS -->
+    <div class="brief-card" id="card-servicios">
+      <h3>⚡ Servicios</h3>
+      <div id="servicios-content">
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-text"></div>
+        <div class="skeleton sk-text2"></div>
+      </div>
+    </div>
+
+    <!-- IMAGENES -->
+    <div class="brief-card" id="card-imagenes">
+      <h3>📷 Ideas de Imágenes</h3>
+      <div id="imagenes-content">
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-text"></div>
+        <div class="skeleton sk-text2"></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="brief-card" id="card-cta">
+      <h3>📣 Texto para Contacto</h3>
+      <div id="cta-content">
+        <div class="skeleton sk-title"></div>
+      </div>
+    </div>
+
+    <div class="brief-cta">
+      <p>¿Te sirve este plan? Coordinamos la web real.</p>
+      <a href="https://wa.me/5491164115327?text=Hola! Quería coordinar la web para mi negocio." class="btn-wsp" id="btn-wsp">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        HABLAR CON HUELLA DIGITAL
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+const WA_NUMBER = '5491164115327';
+
+let state = { buffer: '', currentKey: null, sections: {} };
+const MARKERS = [
+  { tag: '§ESTRUCTURA§', key: 'estructura' },
+  { tag: '§TEXTOS§', key: 'textos' },
+  { tag: '§SERVICIOS§', key: 'servicios' },
+  { tag: '§IMAGENES§', key: 'imagenes' },
+  { tag: '§COLORES§', key: 'colores' },
+  { tag: '§CTA§', key: 'cta' },
+];
+
+function escapeHtml(str) {
+  const d = document.createElement('div');
+  d.appendChild(document.createTextNode(str));
+  return d.innerHTML;
+}
+
+function processChunk(text) {
+  state.buffer += text;
+  let found = true;
+  while (found) {
+    found = false;
+    for (const { tag, key } of MARKERS) {
+      const idx = state.buffer.indexOf(tag);
+      if (idx !== -1) {
+        if (state.currentKey !== null) {
+          renderSection(state.currentKey, state.buffer.slice(0, idx));
+        }
+        state.currentKey = key;
+        state.buffer = state.buffer.slice(idx + tag.length);
+        found = true;
+        break;
+      }
+    }
+  }
+}
+
+function renderSection(key, raw) {
+  const content = raw.trim();
+  if (!content) return;
+  state.sections[key] = content;
+  
+  const el = document.getElementById(`${key}-content`);
+  if (!el) return;
+  
+  if (key === 'estructura' || key === 'servicios' || key === 'imagenes') {
+    const lines = content.split('\n').filter(l => l.trim());
+    el.innerHTML = `<ul>${lines.map(l => `<li>${escapeHtml(l.trim())}</li>`).join('')}</ul>`;
+  } else if (key === 'textos') {
+    el.innerHTML = content.split('\n').map(l => `<div class="textos-content">${escapeHtml(l.trim())}</div>`).join('');
+  } else if (key === 'cta') {
+    el.innerHTML = `<p>${escapeHtml(content)}</p>`;
+  } else if (key === 'colores') {
+    // Already handled separately
+  }
+}
+
+function finalizeStream() {
+  if (state.currentKey !== null && state.buffer.trim()) {
+    renderSection(state.currentKey, state.buffer);
+  }
+  state.buffer = '';
+}
+
+function switchToOutput(nombre) {
+  document.getElementById('output-nombre').textContent = nombre;
+  document.getElementById('phase-form').style.display = 'none';
+  const output = document.getElementById('brief-output');
+  output.style.display = 'block';
+  output.scrollIntoView({ behavior: 'smooth' });
+}
+
+function applyPalette(palette) {
+  const colors = palette.split(',').map(c => c.trim());
+  const container = document.getElementById('palette-display');
+  container.innerHTML = colors.map((c, i) => {
+    const isDark = i === 0 && c.toUpperCase() !== '#FFFFFF';
+    return `<div class="palette-swatch" style="background:${c};color:${isDark ? '#fff' : '#000'}">${c}</div>`;
+  }).join('');
+}
+
+async function generate(formData) {
+  try {
+    const res = await fetch('/api/brief', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    if (!res.ok || !res.body) {
+      alert('Error de conexión. Intentá de nuevo.');
+      return;
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let eventBuffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      eventBuffer += decoder.decode(value, { stream: true });
+      const lines = eventBuffer.split('\n');
+      eventBuffer = lines.pop();
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const raw = line.slice(6).trim();
+        if (raw === '[DONE]') {
+          finalizeStream();
+          return;
+        }
+        try {
+          const parsed = JSON.parse(raw);
+          if (parsed.palette) applyPalette(parsed.palette);
+          if (parsed.text) processChunk(parsed.text);
+        } catch {}
+      }
+    }
+
+    finalizeStream();
+  } catch (err) {
+    console.error(err);
+    alert('Error. Verificá tu conexión e intentá de nuevo.');
+  }
+}
+
+document.getElementById('brief-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const formData = {
+    nombre: document.getElementById('f-nombre').value.trim(),
+    negocio: document.getElementById('f-negocio').value.trim(),
+    target: document.getElementById('f-target').value.trim(),
+    diferencial: document.getElementById('f-diferencial').value.trim(),
+    color: document.getElementById('f-color').value.trim(),
+  };
+
+  state = { buffer: '', currentKey: null, sections: {} };
+  switchToOutput(formData.nombre);
+  generate(formData);
+});
+
+document.getElementById('btn-new').addEventListener('click', () => {
+  document.getElementById('brief-output').style.display = 'none';
+  document.getElementById('phase-form').style.display = 'block';
+  document.getElementById('brief-form').reset();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ─── PDF Generation ─────────────────────────────────────────────
+document.getElementById('btn-download').addEventListener('click', async () => {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const nombre = document.getElementById('output-nombre').textContent || 'Mi Negocio';
+  const s = state.sections;
+  const palette = document.querySelectorAll('#palette-display .palette-swatch');
+  const colors = Array.from(palette).map(el => el.textContent.trim()).filter(Boolean);
+  
+  const BRAND = '#D62828';
+  const DARK = '#0A0A0A';
+  const GRAY = '#666666';
+  
+  // Header
+  doc.setFillColor(DARK);
+  doc.rect(0, 0, 210, 40, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(24);
+  doc.setTextColor('#FFFFFF');
+  doc.text('BRIEF WEB', 20, 25);
+  doc.setFontSize(12);
+  doc.text(nombre, 20, 33);
+  
+  // Colors
+  doc.setTextColor(DARK);
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text('PALETA DE COLORES', 20, 55);
+  
+  let x = 20;
+  colors.forEach((c, i) => {
+    doc.setFillColor(c);
+    doc.roundedRect(x, 60, 25, 15, 3, 3, 'F');
+    doc.setFontSize(8);
+    doc.setTextColor(c === '#FFFFFF' ? '#000' : '#fff');
+    doc.text(c, x + 3, 70);
+    x += 35;
+  });
+  
+  // Estructura
+  doc.setTextColor(DARK);
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text('ESTRUCTURA RECOMENDADA', 20, 90);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(GRAY);
+  
+  const estructura = s.estructura || '';
+  const estLines = estructura.split('\n').filter(l => l.trim());
+  let y = 98;
+  estLines.slice(0, 5).forEach(line => {
+    doc.text('• ' + line.trim(), 20, y);
+    y += 7;
+  });
+  
+  // Textos
+  doc.setTextColor(DARK);
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text('TEXTOS SUGERIDOS', 20, y + 10);
+  y += 18;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  
+  const textos = s.textos || '';
+  const txtLines = textos.split('\n').filter(l => l.trim());
+  txtLines.slice(0, 3).forEach(line => {
+    doc.setTextColor(DARK);
+    doc.text(line.trim(), 20, y);
+    y += 7;
+  });
+  
+  // Servicios
+  doc.setTextColor(DARK);
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text('SERVICIOS', 20, y + 12);
+  y += 20;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(GRAY);
+  
+  const servicios = s.servicios || '';
+  const srvLines = servicios.split('\n').filter(l => l.trim());
+  srvLines.slice(0, 4).forEach(line => {
+    doc.text('• ' + line.trim(), 20, y);
+    y += 7;
+  });
+  
+  // Imágenes
+  if (s.imagenes) {
+    doc.setTextColor(DARK);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('IDEAS DE IMÁGENES', 20, y + 12);
+    y += 20;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(GRAY);
+    
+    const imgLines = s.imagenes.split('\n').filter(l => l.trim());
+    imgLines.slice(0, 3).forEach(line => {
+      doc.text('• ' + line.trim(), 20, y);
+      y += 7;
+    });
+  }
+  
+  // CTA
+  if (s.cta) {
+    doc.setTextColor(BRAND);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('CONTACTO SUGERIDO', 20, y + 12);
+    y += 20;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    doc.text(s.cta.trim(), 20, y);
+  }
+  
+  // Footer
+  doc.setFontSize(8);
+  doc.setTextColor('#999');
+  doc.text('Generado por Huella Digital | huelladigital.ar', 20, 285);
+  
+  // Download
+  doc.save(`brief-${nombre.toLowerCase().replace(/\s+/g, '-')}.pdf`);
+});
+</script>
+</body>
+</html>
