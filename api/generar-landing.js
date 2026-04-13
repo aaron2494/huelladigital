@@ -87,14 +87,15 @@ module.exports = async (req, res) => {
   // Suggest color if not provided
   const brandColor = color?.trim() || suggestColor(rubro.trim());
 
+  // Set SSE headers FIRST
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+
   // Return color in stream for UI application
   res.write(`data: ${JSON.stringify({ color: brandColor })}\n\n`);
 
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
 
   try {
     const stream = client.messages.stream({

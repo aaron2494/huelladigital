@@ -42,11 +42,18 @@ function checkLimit(ip, limit = 5) {
 
 /**
  * Extrae la IP real del request (Vercel pone x-forwarded-for).
+ * Bypasea rate limit en localhost para desarrollo.
  */
 function getIP(req) {
   const forwarded = req.headers['x-forwarded-for'];
-  if (forwarded) return forwarded.split(',')[0].trim();
-  return req.socket?.remoteAddress || 'unknown';
+  let ip = forwarded ? forwarded.split(',')[0].trim() : req.socket?.remoteAddress || 'unknown';
+  
+  // Bypass para localhost en desarrollo
+  if (ip === '127.0.0.1' || ip === '::1' || ip === '::ffff:127.0.0.1') {
+    return 'localhost-bypass';
+  }
+  
+  return ip;
 }
 
 module.exports = { checkLimit, getIP };
