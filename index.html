@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- SEO Primary -->
-<title>Huella Digital | Sistemas Automatizados con IA para Generar Clientes</title>
-<meta name="description" content="Instalamos sistemas con IA que generan clientes automáticamente para negocios argentinos. Web + automatizaciones + respuestas inteligentes. Activo en 7 días.">
-<meta name="keywords" content="sistema automatizado clientes argentina, web con inteligencia artificial, automatizacion whatsapp negocios, generacion de leads argentina, captacion clientes automatica, sistema digital para negocios">
+<title>Huella Digital | Landing pages, webs, tiendas y bots para tu negocio</title>
+<meta name="description" content="Estudio digital en Argentina. Landing pages, sitios web, tiendas online, bots de WhatsApp y automatizaciones. Para emprendedores que arrancan y agencias que necesitan resolver.">
+<meta name="keywords" content="landing pages argentina, diseño web emprendedores, tienda online argentina, bot de whatsapp para negocios, automatizaciones para negocios, desarrollo web marca blanca agencias">
 <meta name="author" content="Huella Digital">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://huelladigital.ar/">
@@ -16,16 +16,16 @@
 <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://huelladigital.ar/">
-<meta property="og:title" content="Huella Digital — Tu negocio genera clientes solo.">
-<meta property="og:description" content="Instalamos un sistema con IA que captura, responde y convierte consultas en clientes. Sin que muevas un dedo. Activo en 7 días.">
+<meta property="og:title" content="Huella Digital — Tu negocio en internet, sin vueltas.">
+<meta property="og:description" content="De la primera landing al bot que atiende por vos. Webs, tiendas, bots y automatizaciones para emprendedores y agencias.">
 <meta property="og:image" content="https://huelladigital.ar/img/og-image.jpg">
 <meta property="og:locale" content="es_AR">
 <meta property="og:site_name" content="Huella Digital">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Huella Digital — Sistema automatizado para generar clientes con IA">
-<meta name="twitter:description" content="Web + IA + automatizaciones. Tu negocio capta y responde consultas solo, 24/7. Funcionando en 7 días.">
+<meta name="twitter:title" content="Huella Digital — Tu negocio en internet, sin vueltas.">
+<meta name="twitter:description" content="Landing pages, webs, tiendas online, bots de WhatsApp y automatizaciones. Hablás con una persona, no con un ticket.">
 <meta name="twitter:image" content="https://huelladigital.ar/img/og-image.jpg">
 
 <!-- Favicon -->
@@ -37,20 +37,20 @@
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Huella Digital",
-  "description": "Instalamos sistemas automatizados con IA para que negocios argentinos generen clientes en piloto automático. Web optimizada, respuestas inteligentes y automatizaciones activas en 7 días.",
+  "description": "Estudio digital argentino: landing pages, sitios web, tiendas online, bots de WhatsApp e Instagram y automatizaciones para emprendedores, pymes y agencias.",
   "url": "https://huelladigital.ar",
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "AR"
   },
   "areaServed": "Argentina",
-  "serviceType": ["Sistemas con IA", "Automatizaciones para Negocios", "Generación de Clientes", "Landing Pages"],
+  "serviceType": ["Landing Pages", "Diseño Web", "Tiendas Online", "Bots de WhatsApp", "Automatizaciones para Negocios", "Desarrollo Web Marca Blanca"],
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
     "availableLanguage": "Spanish"
   },
-  "sameAs": ["https://instagram.com/huelladigital.ar"]
+  "sameAs": ["https://instagram.com/huelladigital.2026"]
 }
 </script>
 
@@ -65,16 +65,19 @@
 :root {
   --red: #D62828;
   --red-dark: #A81F1F;
+  --red-soft: rgba(214,40,40,0.1);
+  --red-line: rgba(214,40,40,0.25);
   --black: #0A0A0A;
   --dark: #111111;
   --card: #161616;
   --border: rgba(255,255,255,0.07);
   --white: #FFFFFF;
-  --gray: rgba(255,255,255,0.55);
-  --gray-dim: rgba(255,255,255,0.25);
+  --gray: rgba(255,255,255,0.62);
+  --gray-dim: rgba(255,255,255,0.38);
 }
 
 html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 64px; }
 
 body {
   font-family: 'Inter', sans-serif;
@@ -86,12 +89,14 @@ body {
 
 ::selection { background: var(--red); color: white; }
 
-/* ===========================
-   SCROLLBAR
-=========================== */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--black); }
 ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, label:focus-within {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
 
 /* ===========================
    UTILITIES
@@ -104,6 +109,35 @@ body {
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  letter-spacing: 1px;
+  line-height: 0.95;
+  margin-bottom: 20px;
+}
+
+.section-intro {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--gray);
+  max-width: 560px;
+}
+
+.section-head { margin-bottom: 56px; }
+.section-head.center { text-align: center; }
+.section-head.center .section-intro { margin: 0 auto; }
 
 /* ===========================
    NAV
@@ -144,7 +178,7 @@ nav.scrolled {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
   list-style: none;
 }
 .nav-links a {
@@ -164,22 +198,22 @@ nav.scrolled {
   font-weight: 700 !important;
   transition: background 0.2s !important;
 }
-.nav-cta:hover { background: var(--red-dark) !important; color: white !important; }
+.nav-cta:hover { background: var(--red-dark) !important; }
 
-/* Mobile nav */
 .nav-hamburger {
-  background: #0A0A0A;
+  background: none;
+  border: none;
   display: none;
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
   z-index: 110;
   position: relative;
 }
 .nav-hamburger span {
   width: 22px; height: 2px;
-  background:red;
+  background: var(--white);
   border-radius: 2px;
   transition: all 0.3s;
   display: block;
@@ -188,11 +222,10 @@ nav.scrolled {
 .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Mobile menu panel */
 .nav-mobile-panel {
   display: none;
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
   background: rgba(10,10,10,0.98);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -200,38 +233,69 @@ nav.scrolled {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0;
-  padding: 80px 40px 40px;
+  padding: 80px 32px 40px;
 }
-.nav-mobile-panel.open {
-  display: flex;
-}
+.nav-mobile-panel.open { display: flex; }
 .nav-mobile-panel a {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 42px;
+  font-size: 38px;
   letter-spacing: 2px;
   color: rgba(255,255,255,0.75);
   text-decoration: none;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
   width: 100%;
   text-align: center;
   transition: color 0.2s;
 }
 .nav-mobile-panel a:last-child { border-bottom: none; }
-.nav-mobile-panel a:hover,
-.nav-mobile-panel a:active { color: var(--red); }
+.nav-mobile-panel a:hover { color: var(--red); }
 .nav-mobile-panel .nav-cta-mobile {
   margin-top: 24px;
   background: var(--red);
-  color: white !important;
+  color: white;
   padding: 16px 40px;
   border-radius: 3px;
-  font-size: 18px !important;
+  font-size: 20px;
   letter-spacing: 3px;
-  border-bottom: none !important;
-  width: auto !important;
+  width: auto;
 }
+
+/* ===========================
+   BUTTONS
+=========================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 16px 28px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.btn-secondary:hover { color: var(--white); }
+.btn-secondary svg { transition: transform 0.2s; }
+.btn-secondary:hover svg { transform: translateX(3px); }
 
 /* ===========================
    HERO
@@ -244,19 +308,6 @@ nav.scrolled {
   overflow: hidden;
   padding: 120px 0 80px;
 }
-
-/* Grain texture */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Glow */
 .hero-glow {
   position: absolute;
   width: 700px; height: 700px;
@@ -264,19 +315,7 @@ nav.scrolled {
   background: radial-gradient(circle, rgba(214,40,40,0.12) 0%, transparent 65%);
   top: -100px; right: -200px;
   pointer-events: none;
-  z-index: 0;
 }
-.hero-glow-2 {
-  position: absolute;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(214,40,40,0.06) 0%, transparent 65%);
-  bottom: 0; left: -100px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Grid overlay */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -285,26 +324,21 @@ nav.scrolled {
     linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
-  z-index: 0;
 }
-
 .hero-inner {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.15fr 0.85fr;
   gap: 60px;
   align-items: center;
 }
-
-.hero-content { }
-
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(214,40,40,0.1);
-  border: 1px solid rgba(214,40,40,0.25);
+  background: var(--red-soft);
+  border: 1px solid var(--red-line);
   border-radius: 100px;
   padding: 6px 14px;
   font-size: 11px;
@@ -326,293 +360,144 @@ nav.scrolled {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(0.7); }
 }
-
 .hero-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(64px, 7.5vw, 96px);
+  font-size: clamp(64px, 8vw, 104px);
   line-height: 0.92;
   letter-spacing: 1px;
   margin-bottom: 28px;
   opacity: 0;
   animation: fadeUp 0.8s 0.35s forwards;
 }
-.hero-title .line-red { color: var(--red); display: block; }
-.hero-title .line-white { color: var(--white); display: block; }
-.hero-title .line-dim { color: rgba(255,255,255,0.35); display: block; }
-
+.hero-title span { display: block; }
+.hero-title .line-dim { color: rgba(255,255,255,0.4); }
+.hero-title .line-red { color: var(--red); }
 .hero-desc {
   font-size: 17px;
   line-height: 1.65;
   color: var(--gray);
-  max-width: 440px;
+  max-width: 500px;
   margin-bottom: 40px;
   opacity: 0;
   animation: fadeUp 0.8s 0.5s forwards;
 }
 .hero-desc strong { color: var(--white); }
-
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   flex-wrap: wrap;
   opacity: 0;
   animation: fadeUp 0.8s 0.65s forwards;
 }
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--red);
-  color: white;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 1px;
-  padding: 16px 28px;
-  border-radius: 3px;
-  text-decoration: none;
-  transition: background 0.2s, transform 0.2s;
-}
-.btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--gray);
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.btn-secondary:hover { color: var(--white); }
-.btn-secondary svg { transition: transform 0.2s; }
-.btn-secondary:hover svg { transform: translateX(3px); }
-
-/* ===========================
-   AUDIT BANNER
-=========================== */
-.audit-banner {
-  padding: 0 0 80px;
-}
-.audit-banner-inner {
-  background: var(--card);
-  border: 1px solid rgba(214,40,40,0.25);
-  border-radius: 10px;
-  padding: 48px 56px;
+.hero-chips {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  position: relative;
-  overflow: hidden;
-}
-.audit-banner-inner::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--red), transparent);
-}
-.audit-banner-inner::after {
-  content: '';
-  position: absolute;
-  right: -60px; top: 50%; transform: translateY(-50%);
-  width: 300px; height: 300px; border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(214,40,40,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-.audit-banner-text { flex: 1; }
-.audit-banner-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--red);
-  display: flex; align-items: center; gap: 8px;
-  margin-bottom: 14px;
-}
-.audit-banner-label::before {
-  content: ''; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--red); animation: pulse 2s infinite;
-}
-.audit-banner-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(28px, 3.5vw, 42px);
-  letter-spacing: 1px; line-height: 1;
-  margin-bottom: 12px;
-}
-.audit-banner-desc {
-  font-size: 15px; color: var(--gray); line-height: 1.6;
-  max-width: 480px;
-}
-.audit-banner-action { flex-shrink: 0; text-align: center; }
-.btn-audit-main {
-  display: inline-flex; align-items: center; gap: 12px;
-  background: var(--red); color: white;
-  padding: 18px 32px; border-radius: 4px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px; letter-spacing: 2px;
-  text-decoration: none; white-space: nowrap;
-  transition: background 0.2s, transform 0.15s;
-}
-.btn-audit-main:hover { background: var(--red-dark); transform: translateY(-2px); }
-.btn-audit-main svg { width: 18px; height: 18px; fill: none; stroke: white; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.audit-banner-free {
-  font-size: 12px; color: var(--gray-dim);
-  margin-top: 10px; letter-spacing: 0.5px;
-}
-
-@media (max-width: 768px) {
-  .audit-banner-inner { flex-direction: column; padding: 36px 28px; text-align: center; }
-  .audit-banner-label { justify-content: center; }
-  .btn-audit-main { width: 100%; justify-content: center; }
-}
-
-.hero-stats {
-  display: flex;
-  gap: 32px;
-  margin-top: 52px;
-  padding-top: 40px;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 48px;
+  padding-top: 32px;
   border-top: 1px solid var(--border);
+  list-style: none;
   opacity: 0;
   animation: fadeUp 0.8s 0.8s forwards;
 }
-.stat-item { }
-.stat-number {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 40px;
-  letter-spacing: 1px;
-  line-height: 1;
-  color: var(--white);
-}
-.stat-number span { color: var(--red); }
-.stat-label {
+.hero-chips li {
   font-size: 12px;
-  color: var(--gray-dim);
-  margin-top: 4px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
+  color: var(--gray);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  border-radius: 100px;
+  padding: 7px 14px;
 }
 
-/* Hero fingerprint */
 .hero-visual {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   opacity: 0;
   animation: fadeIn 1.2s 0.4s forwards;
 }
-
-.hero-fp-wrap {
-  position: relative;
-  width: 420px;
-  height: 420px;
-}
-
-.hero-fp-wrap svg {
-  width: 100%;
-  height: 100%;
-  animation: slowRotate 30s linear infinite;
-}
-
-@keyframes slowRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.hero-fp-center {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-.hero-fp-label {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 4px;
-  color: rgba(255,255,255,0.3);
-  display: block;
-  margin-top: 8px;
-}
-
+.hero-fp-wrap { position: relative; width: 400px; height: 400px; }
+.hero-fp-wrap svg { width: 100%; height: 100%; animation: slowRotate 30s linear infinite; }
+@keyframes slowRotate { to { transform: rotate(360deg); } }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* ===========================
-   PROBLEM SECTION
+   PERFILES (para quién)
 =========================== */
-.problem {
+.perfiles {
   padding: 120px 0;
-  position: relative;
   border-top: 1px solid var(--border);
 }
-
-.section-label {
+.perfiles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.perfil-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s;
+}
+.perfil-card:hover { border-color: var(--red-line); }
+.perfil-tag {
+  align-self: flex-start;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--red);
-  margin-bottom: 16px;
-  display: block;
+  background: var(--red-soft);
+  border-radius: 100px;
+  padding: 5px 12px;
+  margin-bottom: 20px;
 }
-
-.section-title {
+.perfil-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(40px, 5vw, 64px);
-  letter-spacing: 1px;
-  line-height: 0.95;
-  margin-bottom: 24px;
-}
-
-.problem-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-
-.problem-text .section-title { margin-bottom: 20px; }
-.problem-text p {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--gray);
-  margin-bottom: 32px;
-}
-.problem-text p strong { color: var(--white); }
-
-.problem-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-}
-.pstat {
-  background: var(--card);
-  padding: 32px 28px;
-  border: 1px solid var(--border);
-}
-.pstat:first-child { border-radius: 12px 0 0 0; }
-.pstat:nth-child(2) { border-radius: 0 12px 0 0; }
-.pstat:nth-child(3) { border-radius: 0 0 0 12px; }
-.pstat:last-child { border-radius: 0 0 12px 0; }
-.pstat-number {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 52px;
+  font-size: 38px;
   letter-spacing: 1px;
   line-height: 1;
-  color: var(--red);
+  margin-bottom: 14px;
 }
-.pstat-desc {
-  font-size: 13px;
+.perfil-desc {
+  font-size: 15px;
+  line-height: 1.65;
   color: var(--gray);
-  margin-top: 8px;
-  line-height: 1.5;
+  margin-bottom: 24px;
 }
+.check-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.check-list li {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.8);
+}
+.check-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--red-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.5l2.5 2.5L13 6.5' fill='none' stroke='%23D62828' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat;
+}
+.perfil-card .btn-secondary { margin-top: auto; color: var(--red); font-weight: 700; }
 
 /* ===========================
    SERVICES
@@ -623,38 +508,21 @@ nav.scrolled {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
-
-.services-header {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto 64px;
-}
-.services-header p {
-  font-size: 16px;
-  color: var(--gray);
-  margin-top: 16px;
-  line-height: 1.6;
-}
-
 .services-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
-
 .service-card {
   background: var(--black);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 48px 44px;
+  border-radius: 14px;
+  padding: 36px 32px;
   position: relative;
   overflow: hidden;
   transition: border-color 0.3s, transform 0.3s;
 }
-.service-card:hover {
-  border-color: rgba(214,40,40,0.3);
-  transform: translateY(-4px);
-}
+.service-card:hover { border-color: var(--red-line); transform: translateY(-4px); }
 .service-card::before {
   content: '';
   position: absolute;
@@ -666,93 +534,159 @@ nav.scrolled {
   transition: transform 0.3s;
 }
 .service-card:hover::before { transform: scaleX(1); }
-
+.service-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
 .service-icon {
-  width: 52px; height: 52px;
-  background: rgba(214,40,40,0.1);
+  width: 48px; height: 48px;
+  background: var(--red-soft);
   border: 1px solid rgba(214,40,40,0.2);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 28px;
 }
-
+.service-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--red); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.service-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--gray-dim);
+}
 .service-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
+  font-size: 30px;
   letter-spacing: 1px;
-  margin-bottom: 12px;
   line-height: 1;
+  margin-bottom: 12px;
 }
-
 .service-desc {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.65;
   color: var(--gray);
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
-.service-desc strong { color: var(--white); }
+.service-ideal {
+  font-size: 12px;
+  color: var(--gray-dim);
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  line-height: 1.5;
+}
+.service-ideal strong { color: rgba(255,255,255,0.75); font-weight: 600; }
 
-.service-features {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* ===========================
+   ARMAR (configurador → WhatsApp)
+=========================== */
+.armar { padding: 120px 0; }
+.armar-box {
+  background: var(--card);
+  border: 1px solid var(--red-line);
+  border-radius: 16px;
+  padding: 56px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  position: relative;
+  overflow: hidden;
 }
-.service-features li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 14px;
-  color: var(--gray);
-}
-.service-features li::before {
+.armar-box::before {
   content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--red);
-  margin-top: 6px;
-  flex-shrink: 0;
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
 }
-.service-demo-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 24px;
+.armar-text .section-intro { margin-bottom: 24px; }
+.armar-note {
   font-size: 13px;
+  color: var(--gray-dim);
+  line-height: 1.6;
+}
+.armar-form fieldset { border: none; margin-bottom: 28px; }
+.armar-form legend {
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--red);
-  text-decoration: none;
-  border: 1px solid rgba(214,40,40,0.3);
-  border-radius: 6px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 14px;
+}
+.opt-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.opt { position: relative; }
+.opt input { position: absolute; opacity: 0; pointer-events: none; }
+.opt span {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 100px;
   padding: 10px 16px;
-  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
 }
-.service-demo-btn:hover {
-  background: rgba(214,40,40,0.08);
-  border-color: rgba(214,40,40,0.6);
+.opt span:hover { border-color: rgba(255,255,255,0.35); color: var(--white); }
+.opt input:checked + span {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
 }
+.opt:focus-within span { outline: 2px solid var(--red); outline-offset: 2px; }
+.opt { outline: none !important; }
+.field-text {
+  width: 100%;
+  background: var(--black);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--white);
+  transition: border-color 0.2s;
+}
+.field-text::placeholder { color: var(--gray-dim); }
+.field-text:focus { border-color: var(--red); outline: none; }
+.armar-preview {
+  background: var(--black);
+  border: 1px dashed rgba(255,255,255,0.14);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin-bottom: 20px;
+  white-space: pre-line;
+}
+.armar-preview-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray-dim);
+  margin-bottom: 8px;
+}
+.armar-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.armar-hint { font-size: 12px; color: var(--gray-dim); }
 
 /* ===========================
    PROCESS
 =========================== */
 .process {
   padding: 120px 0;
-  position: relative;
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
-
-.process-header { margin-bottom: 72px; }
-
 .process-steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0;
   position: relative;
 }
-
-/* Connector line */
 .process-steps::before {
   content: '';
   position: absolute;
@@ -761,93 +695,39 @@ nav.scrolled {
   right: calc(12.5% + 16px);
   height: 1px;
   background: linear-gradient(90deg, var(--red), rgba(214,40,40,0.2));
-  z-index: 0;
 }
-
-.step {
-  padding: 0 24px;
-  position: relative;
-  z-index: 1;
-}
-
+.step { padding: 0 24px; position: relative; z-index: 1; }
 .step-number {
   width: 56px; height: 56px;
   border-radius: 50%;
-  background: var(--black);
-  border: 1px solid var(--border);
+  background: var(--dark);
+  border: 1px solid rgba(255,255,255,0.14);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 20px;
-  color: var(--gray-dim);
+  color: var(--gray);
   margin-bottom: 24px;
-  position: relative;
-  transition: border-color 0.3s, color 0.3s;
 }
-.step:first-child .step-number {
-  background: var(--red);
-  border-color: var(--red);
-  color: white;
-}
-
+.step:first-child .step-number { background: var(--red); border-color: var(--red); color: white; }
 .step-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 24px;
   letter-spacing: 1px;
   margin-bottom: 10px;
 }
-
-.step-desc {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--gray);
-}
-
-.step-time {
-  display: inline-block;
-  margin-top: 12px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--red);
-}
+.step-desc { font-size: 14px; line-height: 1.6; color: var(--gray); }
 
 /* ===========================
    WORKS
 =========================== */
-.works {
-  padding: 120px 0;
-  background: var(--dark);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.works-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 56px;
-  gap: 24px;
-}
-.works-header a {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--red);
-  text-decoration: none;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
+.works { padding: 120px 0; }
 .works-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
-
 .work-card {
   border-radius: 12px;
   overflow: hidden;
@@ -858,37 +738,16 @@ nav.scrolled {
   color: var(--white);
   display: block;
 }
-.work-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(214,40,40,0.25);
-}
-
+.work-card:hover { transform: translateY(-6px); border-color: var(--red-line); }
 .work-thumb {
   width: 100%;
   aspect-ratio: 16/10;
   background: var(--black);
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.work-thumb-placeholder {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 4px;
-  color: rgba(255,255,255,0.1);
-  text-align: center;
-}
-.work-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s;
-}
+.work-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
 .work-card:hover .work-thumb img { transform: scale(1.03); }
-
-/* Overlay on hover */
 .work-thumb::after {
   content: 'Ver proyecto →';
   position: absolute;
@@ -905,7 +764,6 @@ nav.scrolled {
   transition: opacity 0.3s;
 }
 .work-card:hover .work-thumb::after { opacity: 1; }
-
 .work-info { padding: 20px 22px; }
 .work-category {
   font-size: 10px;
@@ -915,26 +773,76 @@ nav.scrolled {
   color: var(--red);
   margin-bottom: 6px;
 }
-.work-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 1px;
+.work-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; }
+.work-desc { font-size: 13px; color: var(--gray); margin-top: 4px; line-height: 1.5; }
+
+/* ===========================
+   NOSOTROS
+=========================== */
+.nosotros {
+  padding: 120px 0;
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
-.work-desc {
-  font-size: 13px;
+.nosotros-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+.nosotros-text { font-size: 17px; line-height: 1.85; color: var(--gray); margin-bottom: 20px; }
+.nosotros-text strong { color: var(--white); }
+.nosotros-divider { width: 48px; height: 2px; background: var(--red); margin: 48px auto; border-radius: 2px; }
+.nosotros-tagline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(34px, 5vw, 54px);
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+.nosotros-tagline span { color: var(--red); }
+
+/* ===========================
+   FAQ
+=========================== */
+.faq { padding: 120px 0; }
+.faq-list { max-width: 800px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  font-size: 17px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { color: var(--red); }
+.faq-item summary::after {
+  content: '+';
+  flex-shrink: 0;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--red);
+  transition: transform 0.25s;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p {
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--gray);
-  margin-top: 4px;
+  padding: 0 40px 24px 0;
 }
 
 /* ===========================
-   CTA SECTION
+   CTA
 =========================== */
 .cta-section {
   padding: 140px 0;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid var(--border);
 }
-
 .cta-glow {
   position: absolute;
   width: 600px; height: 600px;
@@ -944,15 +852,7 @@ nav.scrolled {
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
-
-.cta-inner {
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
+.cta-inner { text-align: center; position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
 .cta-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(52px, 7vw, 88px);
@@ -961,23 +861,9 @@ nav.scrolled {
   margin-bottom: 24px;
 }
 .cta-title span { color: var(--red); }
-
-.cta-desc {
-  font-size: 17px;
-  line-height: 1.65;
-  color: var(--gray);
-  margin-bottom: 44px;
-}
+.cta-desc { font-size: 17px; line-height: 1.65; color: var(--gray); margin-bottom: 44px; }
 .cta-desc strong { color: var(--white); }
-
-.cta-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
+.cta-actions { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; }
 .btn-big {
   display: inline-flex;
   align-items: center;
@@ -991,163 +877,74 @@ nav.scrolled {
   border-radius: 4px;
   text-decoration: none;
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 0 0 0 rgba(214,40,40,0.4);
 }
-.btn-big:hover {
-  background: var(--red-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(214,40,40,0.3);
-}
-
-.cta-note {
-  font-size: 12px;
-  color: var(--gray-dim);
-  margin-top: 20px;
-  letter-spacing: 0.5px;
-}
+.btn-big:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(214,40,40,0.3); }
+.cta-note { font-size: 12px; color: var(--gray-dim); margin-top: 20px; letter-spacing: 0.5px; }
 
 /* ===========================
    FOOTER
 =========================== */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 40px 0;
-}
-.footer-inner {
+footer { border-top: 1px solid var(--border); padding: 40px 0; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; }
+.footer-logo span { color: var(--red); }
+.footer-copy { font-size: 12px; color: var(--gray-dim); }
+.footer-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: var(--gray-dim); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+
+/* WhatsApp flotante */
+.wa-float {
+  position: fixed;
+  right: 20px; bottom: 20px;
+  z-index: 90;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #25D366;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+  transition: transform 0.2s;
 }
-.footer-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 3px;
-  color: var(--white);
-}
-.footer-logo span { color: var(--red); }
-.footer-copy {
-  font-size: 12px;
-  color: var(--gray-dim);
-}
-.footer-links {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-.footer-links a {
-  font-size: 12px;
-  color: var(--gray-dim);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--white); }
+.wa-float:hover { transform: scale(1.06); }
 
 /* ===========================
    RESPONSIVE
 =========================== */
+@media (max-width: 1000px) {
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .works-grid { grid-template-columns: 1fr 1fr; }
+  .armar-box { grid-template-columns: 1fr; gap: 40px; padding: 44px 36px; }
+}
+
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-inner { grid-template-columns: 1fr; }
   .hero-visual { display: none; }
-  .problem-grid { grid-template-columns: 1fr; gap: 48px; }
-  .services-grid { grid-template-columns: 1fr; }
+  .perfiles-grid { grid-template-columns: 1fr; }
   .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
   .process-steps::before { display: none; }
-  .works-grid { grid-template-columns: 1fr 1fr; }
-  .works-header { flex-direction: column; align-items: flex-start; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
 }
 
 @media (max-width: 600px) {
-  .container { padding: 0 20px; }
-  .hero { padding: 100px 0 60px; }
-  .hero-stats { gap: 20px; flex-wrap: wrap; }
-  .problem-stats { grid-template-columns: 1fr 1fr; }
-  .process-steps { grid-template-columns: 1fr; }
-  .works-grid { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex; }
+  .container { padding: 0 16px; }
+  .hero { padding: 104px 0 64px; min-height: auto; }
+  .perfiles, .services, .armar, .process, .works, .nosotros, .faq { padding: 80px 0; }
+  .cta-section { padding: 96px 0; }
+  .perfil-card { padding: 32px 24px; }
+  .services-grid, .works-grid, .process-steps { grid-template-columns: 1fr; }
+  .armar-box { padding: 32px 20px; }
+  .faq-item p { padding-right: 0; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
 
-
-.auto-scenarios {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 4px;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
 }
-.auto-scenario {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  padding: 16px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: border-color 0.2s, background 0.2s;
-}
-.auto-scenario:hover {
-  border-color: rgba(214,40,40,0.25);
-  background: rgba(214,40,40,0.04);
-}
-.auto-scenario-icon {
-  font-size: 20px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.auto-scenario-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 4px;
-}
-.auto-scenario-desc {
-  font-size: 12px;
-  color: var(--gray);
-  line-height: 1.55;
-}
-
-/* ===========================
-   NOSOTROS
-=========================== */
-.nosotros {
-  padding: 120px 0;
-  border-top: 1px solid var(--border);
-}
-
-.nosotros-inner {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.nosotros-text {
-  font-size: 17px;
-  line-height: 1.9;
-  color: var(--gray);
-  margin-bottom: 20px;
-}
-
-.nosotros-text strong { color: var(--white); }
-
-.nosotros-divider {
-  width: 48px;
-  height: 2px;
-  background: var(--red);
-  margin: 52px auto;
-  border-radius: 2px;
-}
-
-.nosotros-tagline {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(34px, 5vw, 54px);
-  letter-spacing: 2px;
-  line-height: 1.15;
-  color: var(--white);
-}
-
-.nosotros-tagline span { color: var(--red); }
 </style>
 </head>
 <body>
@@ -1158,8 +955,8 @@ footer {
 <nav id="navbar">
   <div class="container">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <svg viewBox="0 0 32 32" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+      <a href="#" class="nav-logo" aria-label="Huella Digital, inicio">
+        <svg viewBox="0 0 32 32" width="26" height="26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <circle cx="16" cy="16" r="3.5" fill="#D62828"/>
           <ellipse cx="16" cy="16" rx="8" ry="5.8" fill="none" stroke="white" stroke-width="2.2"/>
           <ellipse cx="16" cy="16" rx="13.5" ry="9.8" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8"/>
@@ -1167,78 +964,74 @@ footer {
         <span class="nav-logo-text">HUELLA<span>DIGITAL</span></span>
       </a>
       <ul class="nav-links">
+        <li><a href="#para-quien">Para quién</a></li>
         <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#proceso">Cómo funciona</a></li>
+        <li><a href="#proceso">Cómo trabajamos</a></li>
         <li><a href="#trabajos">Proyectos</a></li>
-        <li><a href="#contacto" class="nav-cta">Quiero más clientes</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+        <li><a href="#armar" class="nav-cta">Contame tu proyecto</a></li>
       </ul>
-      <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">
+      <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMobilePanel">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </nav>
 
-<!-- Mobile menu panel -->
 <div class="nav-mobile-panel" id="navMobilePanel">
+  <a href="#para-quien" class="nav-mobile-link">Para quién</a>
   <a href="#servicios" class="nav-mobile-link">Servicios</a>
-  <a href="#proceso" class="nav-mobile-link">Cómo funciona</a>
+  <a href="#proceso" class="nav-mobile-link">Cómo trabajamos</a>
   <a href="#trabajos" class="nav-mobile-link">Proyectos</a>
-  <a href="#contacto" class="nav-mobile-link nav-cta-mobile">Quiero más clientes</a>
+  <a href="#preguntas" class="nav-mobile-link">Preguntas</a>
+  <a href="#armar" class="nav-mobile-link nav-cta-mobile">Contame tu proyecto</a>
 </div>
+
+<main>
 
 <!-- ===========================
    HERO
 =========================== -->
 <section class="hero">
   <div class="hero-glow"></div>
-  <div class="hero-glow-2"></div>
   <div class="hero-grid"></div>
   <div class="container">
     <div class="hero-inner">
       <div class="hero-content">
         <div class="hero-badge">
           <span class="hero-badge-dot"></span>
-          Para negocios sin presencia digital · Argentina
+          Estudio digital · Argentina
         </div>
         <h1 class="hero-title">
-          <span class="line-dim">Estás perdiendo</span>
-          <span class="line-white">clientes por no</span>
-          <span class="line-white">responder</span>
-          <span class="line-red">a tiempo.</span>
+          <span class="line-dim">Tu negocio,</span>
+          <span>en internet,</span>
+          <span class="line-red">sin vueltas.</span>
         </h1>
         <p class="hero-desc">
-          Tu negocio tiene años, trabajo y clientes que te recomiendan. Pero si no estás en internet, <strong>estás invisible para todos los que te buscan y no te encuentran.</strong> Eso lo resolvemos en 7 días.
+          Desde tu primera landing hasta el bot que atiende WhatsApp por vos. <strong>Si recién arrancás, te acompañamos paso a paso. Si sos una agencia, sumamos manos que resuelven.</strong> Siempre hablás con una persona, no con un ticket.
         </p>
         <div class="hero-actions">
-          <a href="#contacto" class="btn-primary">
-            Quiero el sistema
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <a href="#armar" class="btn-primary">
+            Contame tu proyecto
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="#trabajos" class="btn-secondary">
-            Ver proyectos
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <a href="#servicios" class="btn-secondary">
+            Ver qué hacemos
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-number">7<span>días</span></div>
-            <div class="stat-label">De cero a sistema funcionando</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">24<span>/7</span></div>
-            <div class="stat-label">Respondiendo aunque no estés</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">0<span> consultas</span></div>
-            <div class="stat-label">Sin respuesta, nunca más</div>
-          </div>
-        </div>
+        <ul class="hero-chips" aria-label="Servicios">
+          <li>Landing pages</li>
+          <li>Sitios web</li>
+          <li>Tiendas online</li>
+          <li>Bots de WhatsApp e Instagram</li>
+          <li>Automatizaciones</li>
+          <li>Mantenimiento</li>
+        </ul>
       </div>
 
-      <div class="hero-visual">
+      <div class="hero-visual" aria-hidden="true">
         <div class="hero-fp-wrap">
-          <!-- Fingerprint SVG - rotating outer rings -->
           <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <radialGradient id="fpglow" cx="50%" cy="50%" r="50%">
@@ -1247,8 +1040,6 @@ footer {
               </radialGradient>
             </defs>
             <circle cx="210" cy="210" r="200" fill="url(#fpglow)"/>
-
-            <!-- Fingerprint rings -->
             <circle cx="210" cy="210" r="12" fill="#D62828"/>
             <ellipse cx="210" cy="210" rx="28" ry="20" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/>
             <ellipse cx="210" cy="210" rx="50" ry="36" fill="none" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="285 12" stroke-dashoffset="6"/>
@@ -1258,9 +1049,6 @@ footer {
             <ellipse cx="210" cy="210" rx="158" ry="115" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="898 20" stroke-dashoffset="10"/>
             <ellipse cx="210" cy="210" rx="190" ry="138" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" stroke-dasharray="1076 24" stroke-dashoffset="12"/>
           </svg>
-          <div class="hero-fp-center">
-            <span class="hero-fp-label">HUELLA DIGITAL</span>
-          </div>
         </div>
       </div>
     </div>
@@ -1268,63 +1056,46 @@ footer {
 </section>
 
 <!-- ===========================
-   PROBLEM
+   PARA QUIÉN
 =========================== -->
-<section class="problem" id="problema">
+<section class="perfiles" id="para-quien">
   <div class="container">
-    <div class="problem-grid">
-      <div class="problem-text reveal">
-        <span class="section-label">El problema</span>
-        <h2 class="section-title">Estás perdiendo ventas.<br>Todos los días. <span class="red">Y ni te enterás.</span></h2>
-        <p>Cada consulta sin respuesta es un cliente que se fue a la competencia. No porque no quieras atenderlos — <strong>sino porque no tenés un sistema que lo haga por vos cuando no estás.</strong></p>
-        <p>No es un problema de marketing. Es un problema de sistema. Y tiene solución en 7 días.</p>
-        <a href="#contacto" class="btn-secondary" style="font-size:15px; font-weight:700; color:var(--red);">
-          Quiero el sistema
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#D62828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-      <div class="problem-stats reveal reveal-delay-2">
-        <div class="pstat">
-          <div class="pstat-number">76%</div>
-          <div class="pstat-desc">de la gente busca online antes de contactar a cualquier negocio</div>
-        </div>
-        <div class="pstat">
-          <div class="pstat-number">+40%</div>
-          <div class="pstat-desc">más ventas cierran los negocios que responden en menos de 5 minutos</div>
-        </div>
-        <div class="pstat">
-          <div class="pstat-number">7</div>
-          <div class="pstat-desc">segundos tarda alguien en decidir si te contacta o busca otro</div>
-        </div>
-        <div class="pstat">
-          <div class="pstat-number">24/7</div>
-          <div class="pstat-desc">el sistema responde por vos aunque sean las 3 de la mañana</div>
-        </div>
-      </div>
+    <div class="section-head center reveal">
+      <span class="section-label">Para quién</span>
+      <h2 class="section-title">Arranques de cero<br>o vengas con equipo.</h2>
+      <p class="section-intro">Trabajamos con gente que recién empieza y con equipos que ya tienen camino. Cambia el punto de partida, no las ganas de hacerlo bien.</p>
     </div>
-  </div>
-</section>
-
-<!-- ===========================
-   AUDIT BANNER
-=========================== -->
-<section class="audit-banner">
-  <div class="container">
-    <div class="audit-banner-inner reveal">
-      <div class="audit-banner-text">
-        <div class="audit-banner-label">Análisis gratuito</div>
-        <h2 class="audit-banner-title">¿Cuántas consultas perdés<br>por no responder a tiempo?</h2>
-        <p class="audit-banner-desc">
-          Ingresá los datos de tu negocio y en 30 segundos te mostramos cuántas ventas estás dejando ir — y qué haría el sistema para no perder ninguna más.
-        </p>
-      </div>
-      <div class="audit-banner-action">
-        <a href="auditoria.html" class="btn-audit-main">
-          HACÉ TU ANÁLISIS
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    <div class="perfiles-grid">
+      <article class="perfil-card reveal reveal-delay-1">
+        <span class="perfil-tag">Emprendedor</span>
+        <h3 class="perfil-title">Recién arrancás</h3>
+        <p class="perfil-desc">Tenés un emprendimiento, un oficio o una idea y querés que te encuentren. Te explicamos todo en criollo, empezamos por lo que necesitás hoy y sumamos cuando tu negocio lo pida.</p>
+        <ul class="check-list">
+          <li>Tu primera landing o web, lista para recibir consultas</li>
+          <li>Presupuesto claro antes de empezar, sin letra chica</li>
+          <li>Te enseñamos a usar lo que armamos</li>
+          <li>Empezás con lo justo y crecés por etapas</li>
+        </ul>
+        <a href="#armar" class="btn-secondary" data-perfil="Recién arranco">
+          Quiero dar el primer paso
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <p class="audit-banner-free">Sin registro · 100% gratis</p>
-      </div>
+      </article>
+      <article class="perfil-card reveal reveal-delay-2">
+        <span class="perfil-tag">Agencia · Pyme</span>
+        <h3 class="perfil-title">Tenés equipo y poco tiempo</h3>
+        <p class="perfil-desc">Ya tenés clientes, procesos y una lista de pendientes que no baja. Sumamos desarrollo, bots e integraciones a tu equipo, con tu marca o la nuestra, en los plazos que acordamos.</p>
+        <ul class="check-list">
+          <li>Desarrollo en marca blanca para agencias</li>
+          <li>Bots e integraciones con tus herramientas: CRM, planillas, pagos</li>
+          <li>Un interlocutor técnico fijo, sin pasamanos</li>
+          <li>Mantenimiento y soporte mensual</li>
+        </ul>
+        <a href="#armar" class="btn-secondary" data-perfil="Soy agencia / tengo equipo">
+          Necesito una mano
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
     </div>
   </div>
 </section>
@@ -1334,70 +1105,131 @@ footer {
 =========================== -->
 <section class="services" id="servicios">
   <div class="container">
-    <div class="services-header reveal">
-      <span class="section-label">La solución</span>
-      <h2 class="section-title">Un sistema que<br>no te deja perder nada.</h2>
-      <p>Dos componentes que trabajan juntos: la web que te encuentra, y el sistema que responde, filtra y avisa por vos.</p>
+    <div class="section-head reveal">
+      <span class="section-label">Servicios</span>
+      <h2 class="section-title">Todo lo digital,<br>en un solo lugar.</h2>
+      <p class="section-intro">Podés pedir una sola pieza o armar el sistema completo. Todo se conecta entre sí, así no tenés que coordinar cinco proveedores distintos.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="3" width="20" height="14" rx="2" stroke="#D62828" stroke-width="1.8"/>
-            <path d="M8 21h8M12 17v4" stroke="#D62828" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
+
+      <article class="service-card reveal reveal-delay-1">
+        <div class="service-top">
+          <div class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h6M7 16h4"/></svg></div>
+          <span class="service-num">01</span>
         </div>
-        <div class="service-name">La web que<br>te encuentra</div>
-        <p class="service-desc">La primera pieza: donde tu cliente te encuentra y decide contactarte. <strong>Rápida, profesional y lista para capturar consultas</strong> desde el primer día que sale al aire.</p>
-        <ul class="service-features">
-          <li>Diseño adaptado a tu negocio y tu marca</li>
-          <li>Optimizada para aparecer en Google</li>
-          <li>Funciona en celular y escritorio</li>
-          <li>Dominio + hosting incluido</li>
-          <li>Botón de WhatsApp y formulario de captura integrados</li>
-        </ul>
-        <a href="generador.html" class="service-demo-btn">
-          Mirá cómo quedaría tu landing
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#D62828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <h3 class="service-name">Landing pages</h3>
+        <p class="service-desc">Una página enfocada en una sola cosa: que te escriban. Clara, rápida en el celular y con el botón de WhatsApp a mano.</p>
+        <p class="service-ideal"><strong>Ideal para:</strong> lanzar un producto, una promo o tu primer paso online.</p>
+      </article>
+
+      <article class="service-card reveal reveal-delay-2">
+        <div class="service-top">
+          <div class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <span class="service-num">02</span>
+        </div>
+        <h3 class="service-name">Sitios web</h3>
+        <p class="service-desc">Web institucional, portfolio o catálogo. Con dominio, hosting y lo necesario para aparecer en Google.</p>
+        <p class="service-ideal"><strong>Ideal para:</strong> negocios que quieren verse profesionales y contar todo lo que hacen.</p>
+      </article>
+
+      <article class="service-card reveal reveal-delay-3">
+        <div class="service-top">
+          <div class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6.2"/><circle cx="10" cy="20.5" r="1"/><circle cx="17" cy="20.5" r="1"/></svg></div>
+          <span class="service-num">03</span>
+        </div>
+        <h3 class="service-name">Tiendas online</h3>
+        <p class="service-desc">Catálogo, carrito, Mercado Pago y envíos. Vos cargás productos, la tienda vende aunque estés atendiendo el local.</p>
+        <p class="service-ideal"><strong>Ideal para:</strong> quien vende por Instagram y quiere dejar de pasar precios por DM.</p>
+      </article>
+
+      <article class="service-card reveal reveal-delay-1">
+        <div class="service-top">
+          <div class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8.5 8.5 0 01-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1121 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg></div>
+          <span class="service-num">04</span>
+        </div>
+        <h3 class="service-name">Bots para tu negocio</h3>
+        <p class="service-desc">Respuestas automáticas en WhatsApp e Instagram: horarios, precios, menú de opciones y toma de pedidos. Cuando hace falta, pasa la charla a una persona.</p>
+        <p class="service-ideal"><strong>Ideal para:</strong> quien responde las mismas diez preguntas todos los días.</p>
+      </article>
+
+      <article class="service-card reveal reveal-delay-2">
+        <div class="service-top">
+          <div class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+          <span class="service-num">05</span>
+        </div>
+        <h3 class="service-name">Automatizaciones</h3>
+        <p class="service-desc">Turnos con recordatorio, formularios que te llegan al WhatsApp, planillas y CRM conectados. Menos tareas repetidas, menos cosas que se pierden.</p>
+        <p class="service-ideal"><strong>Ideal para:</strong> equipos que copian y pegan datos entre tres apps.</p>
+      </article>
+
+      <article class="service-card reveal reveal-delay-3">
+        <div class="service-top">
+          <div class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.6-7 10-7 10z"/></svg></div>
+          <span class="service-num">06</span>
+        </div>
+        <h3 class="service-name">Acompañamiento</h3>
+        <p class="service-desc">Hosting, cambios, mantenimiento, perfil de Google y métricas simples. Publicar es el comienzo, no el final.</p>
+        <p class="service-ideal"><strong>Ideal para:</strong> quien quiere tener a alguien de confianza para lo digital.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+   ARMAR TU PEDIDO
+=========================== -->
+<section class="armar" id="armar">
+  <div class="container">
+    <div class="armar-box reveal">
+      <div class="armar-text">
+        <span class="section-label">Contame tu proyecto</span>
+        <h2 class="section-title">Armá tu pedido<br><span class="red">en 1 minuto.</span></h2>
+        <p class="section-intro">Marcá lo que necesitás y te armamos el mensaje para WhatsApp. Si no sabés bien qué pedir, no pasa nada: elegí "No sé, quiero que me asesoren" y lo charlamos.</p>
+        <p class="armar-note">No guardamos nada en esta página. El mensaje se abre en tu WhatsApp y lo podés editar antes de mandarlo.</p>
       </div>
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L8 6H4v4l-2 2 2 2v4h4l4 4 4-4h4v-4l2-2-2-2V6h-4L12 2z" stroke="#D62828" stroke-width="1.8" stroke-linejoin="round"/>
-            <circle cx="12" cy="12" r="2.5" stroke="#D62828" stroke-width="1.8"/>
-          </svg>
+
+      <form class="armar-form" id="armarForm" novalidate>
+        <fieldset>
+          <legend>¿En qué etapa estás?</legend>
+          <div class="opt-grid">
+            <label class="opt"><input type="radio" name="etapa" value="Recién arranco" checked><span>Recién arranco</span></label>
+            <label class="opt"><input type="radio" name="etapa" value="Ya tengo algo y quiero mejorarlo"><span>Ya tengo algo y quiero mejorarlo</span></label>
+            <label class="opt"><input type="radio" name="etapa" value="Soy agencia / tengo equipo"><span>Soy agencia / tengo equipo</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>¿Qué necesitás?</legend>
+          <div class="opt-grid">
+            <label class="opt"><input type="checkbox" name="servicio" value="Landing page"><span>Landing page</span></label>
+            <label class="opt"><input type="checkbox" name="servicio" value="Sitio web"><span>Sitio web</span></label>
+            <label class="opt"><input type="checkbox" name="servicio" value="Tienda online"><span>Tienda online</span></label>
+            <label class="opt"><input type="checkbox" name="servicio" value="Bot de WhatsApp / Instagram"><span>Bot de WhatsApp / Instagram</span></label>
+            <label class="opt"><input type="checkbox" name="servicio" value="Automatizaciones"><span>Automatizaciones</span></label>
+            <label class="opt"><input type="checkbox" name="servicio" value="Mantenimiento"><span>Mantenimiento</span></label>
+            <label class="opt"><input type="checkbox" name="servicio" value="No sé, quiero que me asesoren"><span>No sé, quiero que me asesoren</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><label for="armarRubro">Tu negocio en pocas palabras (opcional)</label></legend>
+          <input class="field-text" type="text" id="armarRubro" maxlength="120" placeholder="Ej: pastelería en Quilmes, agencia de marketing, taller mecánico…">
+        </fieldset>
+
+        <div class="armar-preview" aria-live="polite">
+          <span class="armar-preview-label">Vista previa del mensaje</span>
+          <span id="armarPreview"></span>
         </div>
-        <div class="service-name">El sistema que<br>responde por vos</div>
-        <p class="service-desc">La segunda pieza: responde consultas, confirma turnos y te avisa cuando alguien está listo para comprar. <strong>Sin que estés pendiente del celular. Sin perder ni una.</strong></p>
-        <div class="auto-scenarios">
-          <div class="auto-scenario">
-            <div class="auto-scenario-icon">💬</div>
-            <div>
-              <div class="auto-scenario-title">Responde solo a cualquier hora</div>
-              <div class="auto-scenario-desc">Son las 11 de la noche y alguien te escribe. Vos dormís. El sistema responde al instante con tus servicios, precios y cómo contactarte. A la mañana el cliente ya está listo para arrancar.</div>
-            </div>
-          </div>
-          <div class="auto-scenario">
-            <div class="auto-scenario-icon">📅</div>
-            <div>
-              <div class="auto-scenario-title">Confirma turnos sin que hagas nada</div>
-              <div class="auto-scenario-desc">24 horas antes de cada turno, tu cliente recibe un mensaje automático recordándoselo. Sin que llames a nadie. Cero ausencias.</div>
-            </div>
-          </div>
-          <div class="auto-scenario">
-            <div class="auto-scenario-icon">⚡</div>
-            <div>
-              <div class="auto-scenario-title">Te avisa cuando alguien quiere comprar</div>
-              <div class="auto-scenario-desc">Alguien completa el formulario a las 3pm. En ese segundo recibís un mensaje con todos sus datos. Nunca más perder una venta por no ver el email a tiempo.</div>
-            </div>
-          </div>
+
+        <div class="armar-actions">
+          <a href="#" class="btn-primary" id="armarSend" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9c0 1.32.35 2.56.95 3.64L1.5 16.5l3.96-.95A7.46 7.46 0 009 16.5c4.14 0 7.5-3.36 7.5-7.5S13.14 1.5 9 1.5z" stroke="white" stroke-width="1.5"/></svg>
+            Enviar por WhatsApp
+          </a>
+          <span class="armar-hint">Respondemos el mismo día hábil.</span>
         </div>
-        <a href="simulador.html" class="service-demo-btn">
-          Probá cómo responde tu bot
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#D62828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
+      </form>
     </div>
   </div>
 </section>
@@ -1407,34 +1239,30 @@ footer {
 =========================== -->
 <section class="process" id="proceso">
   <div class="container">
-    <div class="process-header reveal">
-      <span class="section-label">Cómo lo instalamos</span>
-      <h2 class="section-title">De cero a generando<br>clientes en 7 días.</h2>
+    <div class="section-head reveal">
+      <span class="section-label">Cómo trabajamos</span>
+      <h2 class="section-title">Simple, claro<br>y con vos en cada paso.</h2>
     </div>
     <div class="process-steps">
       <div class="step reveal reveal-delay-1">
         <div class="step-number">01</div>
-        <div class="step-title">Entendemos tu negocio</div>
-        <p class="step-desc">Hablamos de tus clientes, tus procesos y qué querés automatizar. Sin tecnicismos. Una conversación real de 30 minutos.</p>
-        <span class="step-time">Día 1</span>
+        <h3 class="step-title">Charlamos</h3>
+        <p class="step-desc">Una charla corta por WhatsApp o videollamada. Nos contás tu negocio y qué querés lograr. Sin tecnicismos.</p>
       </div>
       <div class="step reveal reveal-delay-2">
         <div class="step-number">02</div>
-        <div class="step-title">Construimos el sistema</div>
-        <p class="step-desc">Armamos la web y configuramos el sistema de respuesta automática según tu negocio. Todo conectado, todo funcionando.</p>
-        <span class="step-time">Días 2–3</span>
+        <h3 class="step-title">Propuesta clara</h3>
+        <p class="step-desc">Te pasamos qué incluye, cuánto cuesta y cuándo está listo. Si algo no te cierra, lo ajustamos antes de arrancar.</p>
       </div>
       <div class="step reveal reveal-delay-3">
         <div class="step-number">03</div>
-        <div class="step-title">Lo ajustamos juntos</div>
-        <p class="step-desc">Probamos cada pieza hasta que funcione exactamente como lo necesitás. Sin costo extra. El sistema tiene que ser tuyo.</p>
-        <span class="step-time">Días 4–5</span>
+        <h3 class="step-title">Construimos juntos</h3>
+        <p class="step-desc">Te mostramos avances reales, no promesas. Probamos todo con vos hasta que funcione como lo necesitás.</p>
       </div>
       <div class="step reveal reveal-delay-4">
         <div class="step-number">04</div>
-        <div class="step-title">Sistema en el aire</div>
-        <p class="step-desc">La web capturando leads, la IA respondiendo consultas, las automatizaciones trabajando por vos. Desde el día 1.</p>
-        <span class="step-time">Día 7</span>
+        <h3 class="step-title">Publicamos y seguimos</h3>
+        <p class="step-desc">Sale al aire y no desaparecemos. Te enseñamos a usarlo y quedamos a mano para cambios y mejoras.</p>
       </div>
     </div>
   </div>
@@ -1445,57 +1273,43 @@ footer {
 =========================== -->
 <section class="works" id="trabajos">
   <div class="container">
-    <div class="works-header reveal">
-      <div>
-        <span class="section-label">Sistemas activos</span>
-        <h2 class="section-title">Negocios que ya<br>trabajan en automático.</h2>
-      </div>
+    <div class="section-head reveal">
+      <span class="section-label">Proyectos</span>
+      <h2 class="section-title">Negocios reales<br>que ya dieron el paso.</h2>
     </div>
     <div class="works-grid">
-
-      <a href="http://agenciapaliza.com.ar/" target="_blank" class="work-card reveal reveal-delay-1">
-        <div class="work-thumb">
-          <img src="img/apa.webp" alt="Agencia Paliza">
-        </div>
+      <a href="http://agenciapaliza.com.ar/" target="_blank" rel="noopener" class="work-card reveal reveal-delay-1">
+        <div class="work-thumb"><img src="img/apa.webp" alt="Sitio de Agencia Paliza" loading="lazy"></div>
         <div class="work-info">
           <div class="work-category">Agencia · Marketing</div>
           <div class="work-name">Agencia Paliza</div>
-          <div class="work-desc">Sistema de captación digital para agencia boutique porteña</div>
+          <div class="work-desc">Sitio y captación de consultas para agencia boutique porteña</div>
         </div>
       </a>
-      <a href="https://forged-flow-commerce.vercel.app/" target="_blank" class="work-card reveal reveal-delay-1">
-        <div class="work-thumb">
-          <img src="img/santos.webp" alt="Santos herreria">
-        </div>
+      <a href="https://forged-flow-commerce.vercel.app/" target="_blank" rel="noopener" class="work-card reveal reveal-delay-2">
+        <div class="work-thumb"><img src="img/santos.webp" alt="Sitio de Herrería Santos" loading="lazy"></div>
         <div class="work-info">
-          <div class="work-category">herreria · taller</div>
-          <div class="work-name">Herreria Santos</div>
-          <div class="work-desc">E-commerce y sistema de gestión para taller de maquinaria</div>
+          <div class="work-category">Herrería · Taller</div>
+          <div class="work-name">Herrería Santos</div>
+          <div class="work-desc">Tienda online y gestión para taller de herrería</div>
         </div>
       </a>
-
-      <a href="https://satenclean.com.ar/" target="_blank" class="work-card reveal reveal-delay-2">
-        <div class="work-thumb">
-          <img src="img/saten.webp" alt="SatenClean"> 
-        </div>
+      <a href="https://satenclean.com.ar/" target="_blank" rel="noopener" class="work-card reveal reveal-delay-3">
+        <div class="work-thumb"><img src="img/saten.webp" alt="Sitio de SatenClean" loading="lazy"></div>
         <div class="work-info">
           <div class="work-category">Servicios · Limpieza</div>
           <div class="work-name">SatenClean</div>
-          <div class="work-desc">De boca en boca a sistema automatizado de captación</div>
+          <div class="work-desc">Del boca en boca a recibir consultas desde la web</div>
         </div>
       </a>
-
-      <a href="https://www.troncosotransfers.com.ar/" target="_blank" class="work-card reveal reveal-delay-3">
-        <div class="work-thumb">
-          <img src="img/tronco.webp" alt="troncoso transfers"> 
-        </div>
+      <a href="https://www.troncosotransfers.com.ar/" target="_blank" rel="noopener" class="work-card reveal reveal-delay-4">
+        <div class="work-thumb"><img src="img/tronco.webp" alt="Sitio de Troncoso Transfers" loading="lazy"></div>
         <div class="work-info">
           <div class="work-category">Transporte · Logística</div>
           <div class="work-name">Troncoso Transfers</div>
-          <div class="work-desc">Sistema web con captación activa para servicio de transfers</div>
+          <div class="work-desc">Web de reservas y contacto para servicio de transfers</div>
         </div>
       </a>
-
     </div>
   </div>
 </section>
@@ -1508,16 +1322,54 @@ footer {
     <div class="nosotros-inner">
       <span class="section-label reveal">Quiénes somos</span>
       <p class="nosotros-text reveal reveal-delay-1">
-        Hay miles de negocios reales, con años de trabajo, con clientes felices, con producto de calidad — que no existen en internet. No porque no quieran. Sino porque nadie les habló en su idioma, nadie les mostró que es posible, nadie se sentó con ellos.
+        Hay miles de negocios reales, con años de trabajo y clientes que los recomiendan, que todavía no existen en internet. Y hay agencias con buenas ideas que no tienen manos para ejecutarlas. A los dos les pasa lo mismo: nadie se sentó a resolverlo con ellos.
       </p>
       <p class="nosotros-text reveal reveal-delay-2">
-        <strong>Huella Digital</strong> existe para eso. Para llevar a esos negocios al mapa digital con presencia que funciona, que se ve profesional, y que consigue resultados reales.
+        <strong>Huella Digital</strong> es un estudio chico, y eso es a propósito. Hablás directo con quien hace el trabajo, entendemos tu negocio antes de tocar una línea de código y armamos solo lo que te sirve.
       </p>
       <div class="nosotros-divider reveal reveal-delay-3"></div>
       <p class="nosotros-tagline reveal reveal-delay-3">
-        No vendemos sitios web.<br>
-        <span>Vendemos existir en internet.</span>
+        Hecho a medida.<br>
+        <span>Hablado en criollo.</span>
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+   FAQ
+=========================== -->
+<section class="faq" id="preguntas">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="section-label">Preguntas frecuentes</span>
+      <h2 class="section-title">Lo que todos<br>nos preguntan.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>¿Necesito saber de tecnología?</summary>
+        <p>No. Vos sabés de tu negocio, nosotros de la parte digital. Te explicamos cada paso en simple y, cuando terminamos, te enseñamos a manejar lo que armamos.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cuánto tarda?</summary>
+        <p>Depende del proyecto. Una landing simple puede estar en pocos días; una tienda o un sistema con bots e integraciones se planifica por etapas. Siempre te damos una fecha concreta antes de arrancar.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cuánto cuesta?</summary>
+        <p>Cada negocio necesita algo distinto, así que armamos un presupuesto cerrado después de la primera charla. Sabés exactamente qué pagás y qué incluye antes de decidir. Si estás arrancando, podemos empezar por lo esencial y sumar después.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cómo funcionan los bots?</summary>
+        <p>Armamos con vos las respuestas y los caminos de la conversación: horarios, precios, menú de opciones, toma de pedidos o turnos. El bot responde al instante y, cuando la consulta lo necesita, te pasa la charla para que sigas vos.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Soy agencia, ¿trabajan en marca blanca?</summary>
+        <p>Sí. Podemos desarrollar para tus clientes con tu marca, sumarnos como parte de tu equipo técnico y respetar tus procesos y herramientas. Firmamos confidencialidad si lo necesitás.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Qué pasa después de publicar?</summary>
+        <p>Seguimos a mano. Podés contratar mantenimiento mensual para cambios, actualizaciones y soporte, o pedirnos ajustes puntuales cuando los necesites. El sitio y el dominio son tuyos.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -1530,29 +1382,31 @@ footer {
   <div class="container">
     <div class="cta-inner">
       <div class="reveal">
-        <span class="section-label" style="display:block; text-align:center; margin-bottom:20px;">¿Lo armamos?</span>
+        <span class="section-label">¿Lo charlamos?</span>
         <h2 class="cta-title">
-          No pierdas más consultas<br>
-          <span>por no responder a tiempo.</span>
+          El primer paso<br>
+          <span>es un mensaje.</span>
         </h2>
       </div>
       <p class="cta-desc reveal reveal-delay-1">
-        Sin formularios. Sin reuniones de una hora. Sin compromiso.<br>
-        <strong>Contame tu negocio por WhatsApp — te digo exactamente qué consultas estás perdiendo y cómo el sistema las recupera.</strong>
+        Sin formularios eternos ni reuniones de una hora.<br>
+        <strong>Contanos qué tenés en mente y te decimos, con honestidad, qué te conviene hacer.</strong>
       </p>
       <div class="cta-actions reveal reveal-delay-2">
-        <a href="https://wa.me/5491164115327?text=Hola%20Aaron%2C%20quiero%20saber%20si%20el%20sistema%20me%20sirve%20para%20mi%20negocio" target="_blank" class="btn-big">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9c0 1.32.35 2.56.95 3.64L1.5 16.5l3.96-.95A7.46 7.46 0 009 16.5c4.14 0 7.5-3.36 7.5-7.5S13.14 1.5 9 1.5z" stroke="white" stroke-width="1.5"/><path d="M6.5 7.5c.17.5.5 1.2 1.1 1.8.6.6 1.3.93 1.8 1.1.1.03.2.01.27-.06l.73-.73a.3.3 0 01.3-.07l2 .7a.3.3 0 01.2.28v1.48a.5.5 0 01-.5.5A8 8 0 015.5 5a.5.5 0 01.5-.5h1.48a.3.3 0 01.28.2l.7 2a.3.3 0 01-.07.3l-.73.73a.22.22 0 00-.06.27z" fill="white"/></svg>
-          Escribime por WhatsApp
+        <a href="https://wa.me/5491164115327?text=Hola%20Aaron%2C%20quiero%20charlar%20sobre%20un%20proyecto" target="_blank" rel="noopener" class="btn-big">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9c0 1.32.35 2.56.95 3.64L1.5 16.5l3.96-.95A7.46 7.46 0 009 16.5c4.14 0 7.5-3.36 7.5-7.5S13.14 1.5 9 1.5z" stroke="white" stroke-width="1.5"/></svg>
+          Escribinos por WhatsApp
         </a>
-        <a href="https://instagram.com/huelladigital.2026" target="_blank" class="btn-secondary" style="color:rgba(255,255,255,0.6); font-size:14px;">
+        <a href="https://instagram.com/huelladigital.2026" target="_blank" rel="noopener" class="btn-secondary">
           o por Instagram DM →
         </a>
       </div>
-      <p class="cta-note reveal reveal-delay-3">Sin presión · Sin compromiso · Respondo el mismo día</p>
+      <p class="cta-note reveal reveal-delay-3">Sin presión · Sin compromiso · Respondemos el mismo día hábil</p>
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ===========================
    FOOTER
@@ -1561,50 +1415,51 @@ footer {
   <div class="container">
     <div class="footer-inner">
       <div class="footer-logo">HUELLA<span>DIGITAL</span></div>
-      <p class="footer-copy">© 2026 Huella Digital · Argentina</p>
+      <p class="footer-copy">© <span id="year">2026</span> Huella Digital · Argentina</p>
       <ul class="footer-links">
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#trabajos">Proyectos</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </div>
   </div>
 </footer>
 
+<a href="https://wa.me/5491164115327?text=Hola%20Aaron%2C%20quiero%20charlar%20sobre%20un%20proyecto" class="wa-float" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8zM20.5 3.5C18.2 1.2 15.2 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.4z"/></svg>
+</a>
+
 <!-- ===========================
    JS
 =========================== -->
 <script>
-// Navbar hamburger menu
+const WHATSAPP = '5491164115327';
+
+// Menú mobile
 const navHamburger = document.getElementById('navHamburger');
 const navMobilePanel = document.getElementById('navMobilePanel');
 
-navHamburger.addEventListener('click', function() {
-  const isOpen = navMobilePanel.classList.toggle('open');
-  navHamburger.classList.toggle('open', isOpen);
-  navHamburger.setAttribute('aria-expanded', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
+function setMenu(open) {
+  navMobilePanel.classList.toggle('open', open);
+  navHamburger.classList.toggle('open', open);
+  navHamburger.setAttribute('aria-expanded', open);
+  navHamburger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  document.body.style.overflow = open ? 'hidden' : '';
+}
 
-// Close menu when clicking a link
-document.querySelectorAll('.nav-mobile-link').forEach(link => {
-  link.addEventListener('click', function() {
-    navMobilePanel.classList.remove('open');
-    navHamburger.classList.remove('open');
-    navHamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  });
-});
+navHamburger.addEventListener('click', () => setMenu(!navMobilePanel.classList.contains('open')));
+document.querySelectorAll('.nav-mobile-link').forEach(link => link.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
-// Navbar scroll
+// Navbar al scrollear
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 40);
-});
+}, { passive: true });
 
-// Reveal on scroll
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
+// Reveal al scrollear
+const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
@@ -1612,21 +1467,50 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-reveals.forEach(el => observer.observe(el));
+// Año del footer
+document.getElementById('year').textContent = new Date().getFullYear();
 
-// Smooth scroll for anchors
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+// Armá tu pedido → mensaje de WhatsApp
+const armarForm = document.getElementById('armarForm');
+const armarRubro = document.getElementById('armarRubro');
+const armarPreview = document.getElementById('armarPreview');
+const armarSend = document.getElementById('armarSend');
+
+function buildMessage() {
+  const etapa = armarForm.querySelector('input[name="etapa"]:checked').value;
+  const servicios = [...armarForm.querySelectorAll('input[name="servicio"]:checked')].map(i => i.value);
+  const rubro = armarRubro.value.trim();
+
+  let msg = 'Hola Aaron! Te escribo desde la web de Huella Digital.\n';
+  if (rubro) msg += `Mi negocio: ${rubro}.\n`;
+  msg += `Etapa: ${etapa}.\n`;
+  msg += servicios.length
+    ? `Me interesa: ${servicios.join(', ')}.`
+    : 'Todavía no sé bien qué necesito, ¿lo charlamos?';
+  return msg;
+}
+
+function updateArmar() {
+  const msg = buildMessage();
+  armarPreview.textContent = msg;
+  armarSend.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+}
+
+armarForm.addEventListener('input', updateArmar);
+armarForm.addEventListener('change', updateArmar);
+armarForm.addEventListener('submit', e => e.preventDefault());
+updateArmar();
+
+// Los botones de "Para quién" preseleccionan la etapa
+document.querySelectorAll('[data-perfil]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const radio = armarForm.querySelector(`input[name="etapa"][value="${btn.dataset.perfil}"]`);
+    if (radio) { radio.checked = true; updateArmar(); }
   });
 });
 </script>
 
 </body>
 </html>
-                                                                   
